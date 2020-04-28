@@ -1,0 +1,32 @@
+{
+  "name": "stedman.dev",
+  "version": "0.1.0",
+  "description": "Website for stedman.dev",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "node-sass _sass/main.scss assets/css/main.css --output-style compressed",
+    "build": "npm run clean && npm run build:css && eleventy",
+    "clean": "rm -rf ./_site",
+    "dev:css": "node-sass _sass/main.scss assets/css/main.css",
+    "deploy": "npm run build && gh-pages -d _site",
+    "lint:js": "npx eslint --fix .eleventy.js ./_includes/*.js",
+    "lint:md": "npx markdownlint --fix ./posts/*.md",
+    "lint": "npm run lint:js && npm run lint:md",
+    "start": "eleventy --serve --watch",
+    "test": "npm run lint",
+    "watch:css": "npm run dev:css -- --watch"
+  },
+  "author": "Steve Stedman <steve@stedman.dev>",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "0.11.0-beta.3",
+    "bulma": "^0.8.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "markdownlint": "^0.20.2",
+    "markdownlint-cli": "^0.22.0",
+    "node-sass": "^4.14.0",
+    "prettier": "2.0.5"
+  }
+}
