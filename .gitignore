@@ -4,8 +4,10 @@
 
 # IDE-generated
 #--------------------#
+.vscode
 
 # App-generated
 #--------------------#
 node_modules
+_site
 

@@ -4,10 +4,10 @@
   "description": "Website for stedman.dev",
   "main": "index.js",
   "scripts": {
-    "build:css": "node-sass _sass/main.scss assets/css/main.css --output-style compressed",
+    "build:css": "node-sass _sass/main.scss dist/css/main.css --output-style compressed",
     "build": "npm run clean && npm run build:css && eleventy",
     "clean": "rm -rf ./_site",
-    "dev:css": "node-sass _sass/main.scss assets/css/main.css",
+    "dev:css": "node-sass _sass/main.scss dist/css/main.css",
     "deploy": "npm run build && gh-pages -d _site",
     "lint:js": "npx eslint --fix .eleventy.js ./_includes/*.js",
     "lint:md": "npx markdownlint --fix ./posts/*.md",
