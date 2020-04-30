@@ -10,7 +10,7 @@ module.exports = function (eleventyConfig) {
 
   // COLLECTION: Create posts collection.
   eleventyConfig.addCollection('posts', async (collection) => {
-    const posts = collection.getFilteredByGlob('./src/posts/**.md');
+    const posts = collection.getFilteredByGlob('./src/_posts/**.md');
     const statPromise = (fileUrl) => new Promise((resolve, reject) => {
       fs.stat(
         fileUrl,

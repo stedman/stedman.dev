@@ -10,7 +10,7 @@
     "dev:css": "node-sass src/_sass/_main.scss dist/assets/css/main.css",
     "deploy": "npm run build && gh-pages -d dist",
     "lint:js": "npx eslint --fix .eleventy.js ./src/_includes/*.js",
-    "lint:md": "npx markdownlint --fix ./src/post/*.md",
+    "lint:md": "npx markdownlint --fix ./src/_posts/*.md",
     "lint": "npm run lint:js && npm run lint:md",
     "start": "eleventy --serve --watch",
     "test": "npm run lint",
