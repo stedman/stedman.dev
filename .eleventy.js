@@ -1,4 +1,5 @@
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const fs = require('fs');
+const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 
 module.exports = function (eleventyConfig) {
   // PASSTHRU: Copy the `assets` directory to the compiled site folder
@@ -7,12 +8,30 @@ module.exports = function (eleventyConfig) {
   // PLUGIN: PrismJS
   eleventyConfig.addPlugin(syntaxHighlight);
 
-  // COLLECTION: Create meetup posts collection.
-  // eslint-disable-next-line arrow-body-style
-  eleventyConfig.addCollection('posts', (collection) => {
+  // COLLECTION: Create posts collection.
+  eleventyConfig.addCollection('posts', async (collection) => {
+    const posts = collection.getFilteredByGlob('./src/posts/**.md');
+    const statPromise = (fileUrl) => new Promise((resolve, reject) => {
+      fs.stat(
+        fileUrl,
+        (err, stats) => {
+          if (err) reject(err);
+
+          resolve(stats.mtime);
+        },
+      );
+    });
+
+    // Add file lastModified property
+    for (let idx = 0; idx < posts.length; idx += 1) {
+      const post = posts[idx];
+
+      // eslint-disable-next-line no-await-in-loop
+      post.lastModified = await statPromise(post.inputPath);
+    }
+
     // Reverse the collection (to LIFO)
-    // so collections.posts[0] is always the upcoming|latest meetup.
-    return collection.getFilteredByGlob('./src/posts/**.md').reverse();
+    return posts.reverse();
   });
 
   // TRANSFORM: Add appropriate TARGET and REL to external links.
@@ -58,7 +77,7 @@ module.exports = function (eleventyConfig) {
       output: 'dist',
       includes: './_includes',
       layouts: './_layouts',
-      data: './_data'
+      data: './_data',
     },
     templateFormats: [
       'html',
