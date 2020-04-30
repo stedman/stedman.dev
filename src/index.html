@@ -1,0 +1,13 @@
+---
+layout: base
+title: Home
+---
+
+Home, is where I want to be.
+
+<h3>Posts</h3>
+<ul>
+  {% for post in collections.posts %}
+  <li><a href="{{ post.url | url }}">{{ post.data.title }} [{{ post.date.toDateString() }}]</a></li>
+  {% endfor %}
+</ul>

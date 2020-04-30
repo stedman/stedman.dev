@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+@import "../../node_modules/bulma/bulma.sass";
+
+/*
+ * Customization
+ */
+
+@media screen and (min-width: $desktop) {
+  .is-sr-only-desktop {
+    border: none !important;
+    clip: rect(0, 0, 0, 0) !important;
+    height: 0.01em !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 0.01em !important;
+  }
+}
+
+// Increase ion-icon size https://ionicons.com/usage
+ion-icon {
+  font-size: 2em;
+}
+
+// Add external link arrows
+.page-main .external-link {
+  &::after {
+    background: url('../icon/external-link-blue.svg') no-repeat;
+    content: '';
+    height: 1em;
+    opacity: 0;
+    position: absolute;
+    transform: translate(-1em, 0.9em) rotate(45deg);
+    transition: opacity 0.2s, transform 0.3s;
+    vertical-align: top;
+    width: 1em;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 1;
+      transform: translate(-0.05em, -0.05em);
+      transition: opacity 0.1s, transform 0.3s;
+    }
+  }
+}

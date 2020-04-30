@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ site.description }}">
-  <link rel="stylesheet" href="{{ '/css/main.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/prism-atom-dark.css' | url }}">
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </head>
 <body>
-  <header class="hero">
+  <header class="page-header hero">
     <div class="hero-body is-paddingless">
       <div class="container">
         <div class="navbar" role="navigation" aria-label="main navigation">
@@ -34,13 +35,16 @@
     </div>
   </header>
 
-  <main class="section has-background-white">
-    <div class="container">
-      {{ content | safe }}
+  <main class="page-main section has-background-white">
+    <div class="columns">
+      <div class="column is-three-fifths is-offset-one-fifth content is-size-5">
+
+        {{ content | safe }}
+      </div>
     </div>
   </main>
 
-  <footer class="footer has-background-white-ter has-offset-top">
+  <footer class="page-footer footer has-background-white-ter has-offset-top">
     <div class="container">
       <div class="navbar has-background-white-ter">
         <div class="navbar-menu is-active">

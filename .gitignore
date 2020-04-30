@@ -9,5 +9,4 @@
 # App-generated
 #--------------------#
 node_modules
-_site
-
+dist
