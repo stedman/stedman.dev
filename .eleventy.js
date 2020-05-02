@@ -1,10 +1,30 @@
 const fs = require('fs');
+const markdownIt = require('markdown-it');
+const markdownItAnchor = require('markdown-it-anchor');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const filters = require('./src/_includes/filters');
 
 module.exports = function (eleventyConfig) {
   // PLUGIN: PrismJS
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  const options = {
+    mdit: {
+      html: true,
+      linkify: true,
+      typographer: true,
+    },
+    mdita: {
+      permalink: true,
+      permalinkClass: 'anchor-link',
+      permalinkSymbol: '#',
+      level: [2, 3, 4],
+    },
+  };
+
+  // LIBRARY: markdown-it with markdown-it-anchor
+  eleventyConfig.setLibrary('md', markdownIt(options.mdit)
+    .use(markdownItAnchor, options.mdita));
 
   // PASSTHRU: Copy un-compiled files to the dist folder
   eleventyConfig.addPassthroughCopy('src/assets');
