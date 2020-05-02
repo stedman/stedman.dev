@@ -1,13 +1,13 @@
 ---
 layout: base
-title: Home
 ---
 
-Home, is where I want to be.
+Howdy folks.
 
-<h3>Posts</h3>
+<h2 class="is-size-4">Latest</h2>
+
 <ul>
-  {% for post in collections.posts %}
-  <li><a href="{{ post.url | url }}">{{ post.data.title }} [{{ post.date.toDateString() }}]</a></li>
+  {% for post in collections.posts | reverse %}
+  <li><a href="{{ post.url | url }}">{{ post.data.title }}</a></li>
   {% endfor %}
 </ul>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if title %}{{ title }}{% else %}{{ site.title }}{% endif %}</title>
+  <title>{%- if title -%}{{ title }} • {% endif -%}{{ site.title }}</title>
   <meta name="description" content="{{ site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
   <link rel="stylesheet" href="{{ '/assets/css/prism-atom-dark.css' | url }}">
@@ -25,9 +25,6 @@
               <a class="navbar-item" href="{{ '/' | url }}">
                 Home
               </a>
-              <a class="navbar-item" href="{{ '/resume/' | url }}">
-                Resume
-              </a>
             </div>
           </div>
         </div>
@@ -38,7 +35,6 @@
   <main class="page-main section has-background-white">
     <div class="columns">
       <div class="column is-three-fifths is-offset-one-fifth content is-size-5">
-
         {{ content | safe }}
       </div>
     </div>
@@ -52,30 +48,24 @@
             <a class="navbar-item" href="{{ '/' | url }}">
               &copy; {{ page.date.getFullYear() }} {{ site.name }}
             </a>
-            <a class="navbar-item is-hidden-desktop" href="{{ '/resume/' | url }}">
-              Resume
-            </a>
-            <a class="navbar-item" href="{{ '/colophon/' | url }}">
-              Colophon
-            </a>
           </div>
           <div class="navbar-end">
             <a class="navbar-item is-inline-block" href="https://linkedin.com/in/{{ site.linkedin }}">
               <span class="is-sr-only-desktop">LinkedIn: {{ site.linkedin }}</span>
               <span class="icon tooltip is-hidden-touch" title="&ldquo;@{{ site.linkedin }}&rdquo; on LinkedIn">
-                <ion-icon name="logo-linkedin"></ion-icon>
+                <ion-icon class="is-size-3" name="logo-linkedin"></ion-icon>
               </span>
             </a>
             <a class="navbar-item is-inline-block" href="https://twitter.com/{{ site.twitter }}">
               <span class="is-sr-only-desktop">Twitter: @{{ site.twitter }}</span>
               <span class="icon tooltip is-hidden-touch" title="&ldquo;@{{ site.twitter }}&rdquo; on Twitter">
-                <ion-icon name="logo-twitter"></ion-icon>
+                <ion-icon class="is-size-3" name="logo-twitter"></ion-icon>
               </span>
             </a>
             <a class="navbar-item is-inline-block-desktop" href="https://github.com/{{ site.github }}">
               <span class="is-hidden-desktop">GitHub: {{ site.github }}</span>
               <span class="icon tooltip is-hidden-touch" title="&ldquo;{{ site.github }}&rdquo; on GitHub">
-                <ion-icon name="logo-github"></ion-icon>
+                <ion-icon class="is-size-3" name="logo-github"></ion-icon>
               </span>
             </a>
           </div>

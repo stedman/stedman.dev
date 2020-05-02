@@ -3,5 +3,11 @@ layout: base
 ---
 
 <h1>{{ title }}</h1>
+<p class="has-text-grey">
+  <span class="has-text-grey-light is-inline-block" style="width: 0.9em">
+    <ion-icon class="is-size-6" name="today-outline"></ion-icon>
+  </span>
+  {{ page.date | fullDate }}
+</p>
 
 {{ content | safe }}

@@ -1,5 +1,5 @@
 /**
- * Bulma override
+ * Bulma overrides
  */
 code .number {
   align-items: initial;
@@ -14,6 +14,21 @@ code .number {
   padding: initial;
   text-align:initial;
   vertical-align:initial;
+}
+
+code .tag:not(body) {
+  align-items: initial;
+  background-color: initial;
+  border-radius: initial;
+  color: initial;
+  display: initial;
+  font-size: initial;
+  height: initial;
+  justify-content: initial;
+  line-height: initial;
+  padding-left: initial;
+  padding-right: initial;
+  white-space: initial;
 }
 
 /**

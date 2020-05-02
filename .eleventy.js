@@ -1,12 +1,14 @@
 const fs = require('fs');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+const filters = require('./src/_includes/filters');
 
 module.exports = function (eleventyConfig) {
-  // PASSTHRU: Copy the `assets` directory to the compiled site folder
-  eleventyConfig.addPassthroughCopy('src/assets');
-
   // PLUGIN: PrismJS
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  // PASSTHRU: Copy un-compiled files to the dist folder
+  eleventyConfig.addPassthroughCopy('src/assets');
+  eleventyConfig.addPassthroughCopy('src/robots.txt');
 
   // COLLECTION: Create posts collection.
   eleventyConfig.addCollection('posts', async (collection) => {
@@ -30,9 +32,11 @@ module.exports = function (eleventyConfig) {
       post.lastModified = await statPromise(post.inputPath);
     }
 
-    // Reverse the collection (to LIFO)
-    return posts.reverse();
+    return posts;
   });
+
+  // FILTERS
+  eleventyConfig.addFilter('fullDate', filters.fullDate);
 
   // TRANSFORM: Add appropriate TARGET and REL to external links.
   eleventyConfig.addTransform('external-link-rel', (content) => {
