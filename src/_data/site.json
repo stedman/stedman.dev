@@ -1,11 +1,13 @@
 {
   "title": "Steve Stedman",
   "description": "A web development site by @stedman",
-  "url": "https://stedman.dev",
-  "name": "Steve Stedman",
   "domain": "stedman.dev",
-  "linkedin": "sstedman",
-  "twitter": "stedman",
-  "github": "stedman",
-  "repo": "https://github.com/stedman/stedman.dev"
+  "url": "https://stedman.dev",
+  "repo": "https://github.com/stedman/stedman.dev",
+  "author": {
+    "name": "Steve Stedman",
+    "github": "stedman",
+    "linkedin": "sstedman",
+    "twitter": "stedman"
+  }
 }
