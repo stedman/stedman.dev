@@ -1,0 +1,35 @@
+/*
+ * Bulma overrides (for Prism code)
+ */
+
+code {
+  .number {
+    align-items: initial;
+    background-color: initial;
+    border-radius:initial;
+    display: initial;
+    font-size:initial;
+    height: initial;
+    justify-content:initial;
+    margin-right:initial;
+    min-width:initial;
+    padding: initial;
+    text-align:initial;
+    vertical-align:initial;
+  }
+
+  .tag:not(body) {
+    align-items: initial;
+    background-color: initial;
+    border-radius: initial;
+    color: initial;
+    display: initial;
+    font-size: initial;
+    height: initial;
+    justify-content: initial;
+    line-height: initial;
+    padding-left: initial;
+    padding-right: initial;
+    white-space: initial;
+  }
+}

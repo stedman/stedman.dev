@@ -4,7 +4,7 @@
   "description": "Website for stedman.dev",
   "main": "index.js",
   "scripts": {
-    "build:css": "node-sass src/src/_sass/_main.scss dist/assets/css/main.css --output-style compressed",
+    "build:css": "node-sass src/_sass/_main.scss dist/assets/css/main.css --output-style compressed",
     "build": "npm run clean && eleventy && npm run build:css",
     "clean": "rm -rf ./dist",
     "dev:css": "node-sass src/_sass/_main.scss dist/assets/css/main.css",
@@ -15,6 +15,10 @@
     "start": "eleventy --serve --watch",
     "test": "npm run lint",
     "watch:css": "npm run dev:css -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stedman/stedman.dev.git"
   },
   "author": "Steve Stedman <steve@stedman.dev>",
   "license": "MIT",

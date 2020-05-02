@@ -1,0 +1,22 @@
+// Add external link arrows
+.page-main .external-link {
+  &::after {
+    background: url('../icon/external-link-blue.svg') no-repeat;
+    content: '';
+    height: 1em;
+    opacity: 0;
+    position: absolute;
+    transform: translate(-1em, 0.9em) rotate(45deg);
+    transition: opacity 0.2s, transform 0.3s;
+    vertical-align: top;
+    width: 1em;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 1;
+      transform: translate(-0.05em, -0.05em);
+      transition: opacity 0.1s, transform 0.3s;
+    }
+  }
+}
