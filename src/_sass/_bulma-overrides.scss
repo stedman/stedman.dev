@@ -1,6 +1,23 @@
 /*
  * Bulma overrides
  */
+.content {
+  // fix nested list margins
+  li {
+    p {
+      & + ol,
+      & + ul {
+        margin-top: -0.5em;
+      }
+    }
+
+    ol,
+    ul {
+      margin-top: 0.5em;
+      margin-bottom: 0.75em;
+    }
+  }
+}
 
 code {
   // does not play well with content width
@@ -38,23 +55,5 @@ code {
     padding-left: initial;
     padding-right: initial;
     white-space: initial;
-  }
-}
-
-.content {
-  // fix nested list margins
-  li {
-    p {
-      & + ol,
-      & + ul {
-        margin-top: -0.5em;
-      }
-    }
-
-    ol,
-    ul {
-      margin-top: 0.5em;
-      margin-bottom: 0.75em;
-    }
   }
 }
