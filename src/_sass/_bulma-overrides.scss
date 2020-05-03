@@ -1,8 +1,14 @@
 /*
- * Bulma overrides (for Prism code)
+ * Bulma overrides
  */
 
 code {
+  // does not play well with content width
+  pre & {
+    white-space: pre-wrap;
+  }
+
+  // conflicts with Prism class name
   .number {
     align-items: initial;
     background-color: initial;
@@ -18,6 +24,7 @@ code {
     vertical-align:initial;
   }
 
+  // conflicts with Prism class name
   .tag:not(body) {
     align-items: initial;
     background-color: initial;
@@ -31,5 +38,23 @@ code {
     padding-left: initial;
     padding-right: initial;
     white-space: initial;
+  }
+}
+
+.content {
+  // fix nested list margins
+  li {
+    p {
+      & + ol,
+      & + ul {
+        margin-top: -0.5em;
+      }
+    }
+
+    ol,
+    ul {
+      margin-top: 0.5em;
+      margin-bottom: 0.75em;
+    }
   }
 }
