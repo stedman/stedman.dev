@@ -29,6 +29,7 @@ module.exports = function (eleventyConfig) {
   // PASSTHRU: Copy un-compiled files to the dist folder
   eleventyConfig.addPassthroughCopy('src/assets');
   eleventyConfig.addPassthroughCopy('src/robots.txt');
+  eleventyConfig.addPassthroughCopy('src/CNAME');
 
   // COLLECTION: Create posts collection.
   eleventyConfig.addCollection('posts', async (collection) => {
