@@ -15,7 +15,7 @@
       transform: translate(-1em, 0.9em) rotate(45deg);
       transition: opacity 0.2s, transform 0.3s;
       vertical-align: top;
-      width: 1em;
+      width: 11px;
     }
 
     &:hover {
@@ -30,11 +30,16 @@
 
 // Hide anchor links until parent is hovered
 a.anchor-link {
-  opacity: 0;
+  opacity: 0.4;
   text-decoration: none;
   transition: 0.3s;
 
   :hover > & {
     opacity: 1;
+  }
+
+  svg {
+    vertical-align: -1px;
+    width: 0.6em;
   }
 }
