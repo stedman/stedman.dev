@@ -6,8 +6,9 @@
   display: inline-block;
 
   /* del, ins, mark default styles */
-  text-decoration: none;
+  background-color: inherit;
   color: inherit;
+  text-decoration: none;
 }
 
 /* allow highlighting empty lines */
@@ -31,12 +32,24 @@
   background-color: #222;
 }
 .highlight-line-active {
-  background-color: #444;
-  background-color: hsla(0, 0%, 27%, .8);
+  // background-color: #444;
+  // background-color: hsla(0, 0%, 27%, .8);
+
+  .highlight-line:not(&) {
+    opacity: 0.3;
+  }
 }
 .highlight-line-add {
   background-color: #45844b;
+
+  &.highlight-line {
+    opacity: 1;
+  }
 }
 .highlight-line-remove {
   background-color: #902f2f;
+
+  &.highlight-line {
+    opacity: 1;
+  }
 }
