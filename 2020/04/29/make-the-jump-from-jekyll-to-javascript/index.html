@@ -73,22 +73,39 @@
 <p>If you haven’t already guessed, I’m smitten with Eleventy. It’s that multi-purpose knife that fits just perfectly in your pocket and makes you smile every time you use it.</p>
 <p>It also makes the transition from Jekyll to JavaScript almost completely seamless. So let’s roll with it.</p>
 <h4 id="install-and-configure">Install and configure <a class="anchor-link" href="#install-and-configure">#</a></h4>
-<p>Initialize npm and install Eleventy as a <code>devDependency</code>.</p>
-<pre class="language-shell"><code class="language-shell"><span class="token function">npm</span> init -y<br><span class="token function">npm</span> <span class="token function">install</span> --save-dev @11ty/eleventy</code></pre>
-<p>To keep things simple, we’ll assume a <a class="external-link" href="https://jekyllrb.com/docs/structure/" target="_blank" rel="nofollow noopener noreferrer">default Jekyll directory structure</a>.</p>
-<pre class="language-shell"><code class="language-shell"><span class="token punctuation">..</span><br>├── _layouts<br>│   ├── default.html<br>├── assets<br>│   ├── css<br>│   ├── images<br>│   └── js<br>├── index.html<br><span class="token punctuation">..</span>.</code></pre>
+<ol>
+<li>
+<p>Open a terminal and navigate to your repo.</p>
+</li>
+<li>
+<p>If you don’t already have a <code>package.json</code> file in the root directory, then take this moment to initialize npm.</p>
+<pre class="language-shell"><code class="language-shell"><span class="token function">npm</span> init</code></pre>
+</li>
+<li>
+<p>Install Eleventy as a <code>devDependency</code>.</p>
+<pre class="language-shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> --save-dev @11ty/eleventy</code></pre>
+</li>
+<li>
 <p>To the site root, add an empty <code>.nojekyll</code> file to <a class="external-link" href="https://help.github.com/en/github/working-with-github-pages/about-github-pages#static-site-generators" target="_blank" rel="nofollow noopener noreferrer">disable the default Jekyll build</a>.</p>
 <pre class="language-shell"><code class="language-shell"><span class="token function">touch</span> .nojekyll</code></pre>
-<p>To the site root, add a <code>.eleventy.js</code> config file with the following contents (for more details, see <a class="external-link" href="https://www.11ty.dev/docs/config/" target="_blank" rel="nofollow noopener noreferrer">Eleventy configuration docs</a>):</p>
+</li>
+<li>
+<p>Keeping things simple, we’ll assume a <a class="external-link" href="https://jekyllrb.com/docs/structure/" target="_blank" rel="nofollow noopener noreferrer">default Jekyll file structure</a>.</p>
+<pre class="language-shell"><code class="language-shell"><span class="token punctuation">..</span><br>├── _layouts<br>│   ├── default.html<br>├── assets<br>│   ├── css<br>│   ├── images<br>│   └── js<br>├── index.html<br><span class="token punctuation">..</span></code></pre>
+<p>To the site root, add a <code>.eleventy.js</code> config file with the following contents. For more details, see the <a class="external-link" href="https://www.11ty.dev/docs/config/" target="_blank" rel="nofollow noopener noreferrer">Eleventy configuration docs</a>.</p>
 <pre class="language-js"><code class="language-js">module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>  <span class="token comment">// Copy the "assets" directory to the compiled "_site" folder.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token string">'assets'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token keyword">return</span> <span class="token punctuation">{</span><br>    dir<span class="token operator">:</span> <span class="token punctuation">{</span><br>      input<span class="token operator">:</span> <span class="token string">'./'</span><span class="token punctuation">,</span><br>      output<span class="token operator">:</span> <span class="token string">'./_site'</span><span class="token punctuation">,</span><br>      layouts<span class="token operator">:</span> <span class="token string">'./_layouts'</span><span class="token punctuation">,</span><br>    <span class="token punctuation">}</span><span class="token punctuation">,</span><br>    templateFormats<span class="token operator">:</span> <span class="token punctuation">[</span><br>      <span class="token string">'html'</span><span class="token punctuation">,</span><br>      <span class="token string">'liquid'</span><span class="token punctuation">,</span><br>      <span class="token string">'md'</span><span class="token punctuation">,</span><br>      <span class="token string">'njk'</span><span class="token punctuation">,</span><br>    <span class="token punctuation">]</span><span class="token punctuation">,</span><br>  <span class="token punctuation">}</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Looking at the <code>dir.output</code> above, notice that we are maintaining parity with Jekyll’s deployment, using the <code>./_site</code> directory for our compiled code.</p>
-<p>Add the following <code>scripts</code> section to <code>package.json</code>. We’ll need the <code>build</code> script for our deployment later.</p>
+</li>
+<li>
+<p>To the <code>scripts</code> section of <code>package.json</code>, add the following. We’ll need the <code>build</code> script for our deployment later.</p>
 <pre class="language-json"><code class="language-json">  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>    <span class="token property">"clean"</span><span class="token operator">:</span> <span class="token string">"rm -rf ./_site"</span><span class="token punctuation">,</span><br>    <span class="token property">"build"</span><span class="token operator">:</span> <span class="token string">"npm run clean &amp;&amp; eleventy"</span><span class="token punctuation">,</span><br>    <span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"eleventy --serve --watch"</span><br>  <span class="token punctuation">}</span><span class="token punctuation">,</span></code></pre>
 <ul>
-<li><strong>clean</strong> empties out the deployment directory</li>
-<li><strong>build</strong> cleans the deploy directory and builds the site with Eleventy</li>
-<li><strong>start</strong> runs Eleventy in dev mode with live browser refreshes</li>
+<li><strong>clean</strong>: empties out the deployment directory</li>
+<li><strong>build</strong>: cleans the deploy directory and builds the site with Eleventy</li>
+<li><strong>start</strong>: runs Eleventy in developer mode with live browser refreshes</li>
 </ul>
+</li>
+</ol>
 <h2 id="the-deployment">The deployment <a class="anchor-link" href="#the-deployment">#</a></h2>
 <p>Now for the real magic sauce, <a class="external-link" href="https://docs.github.com/en/actions" target="_blank" rel="nofollow noopener noreferrer">GitHub Actions</a>-style.</p>
 <h3 id="set-up-workflow">Set up workflow <a class="anchor-link" href="#set-up-workflow">#</a></h3>
@@ -172,7 +189,7 @@
 <h2 id="the-custom-domain">The custom domain <a class="anchor-link" href="#the-custom-domain">#</a></h2>
 <p>If you haven’t already set up an apex domain (e.g., <code>example.com</code>) for this repo, then you will need to add it. Follow the <a class="external-link" href="https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site" target="_blank" rel="nofollow noopener noreferrer">GitHub instructions for managing a custom domain</a>.</p>
 <h2 id="conclusion">Conclusion <a class="anchor-link" href="#conclusion">#</a></h2>
-<p>For 12 years, GitHub teased us with a web hosting product that almost did everything we needed. Along the way, we came up with hacks and workarounds, employing one or more outside services to complete the task. But nothing quite combined source code versioning, site generation, and web hosting in one elegant package.</p>
+<p>For 12 years, GitHub teased us with a web hosting product that almost did everything we needed. We were grateful and we made due. Along the way, we came up with hacks and workarounds, employing one or more outside services to complete the task. But nothing quite combined source code versioning, flexible site generation, and web hosting in one elegant package.</p>
 <p>With Eleventy and GitHub Actions, we now have it all.</p>
 
 
