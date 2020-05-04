@@ -200,11 +200,11 @@
 <p>Open the <code>gh-pages</code> branch and copy the <code>CNAME</code> file.</p>
 </li>
 <li>
-<p>Go back to the <code>master</code> branch and add that <code>CNAME</code> file to the source directory (in this case, the root directory <code>./</code>).</p>
+<p>Go back to the <code>master</code> branch and add that <code>CNAME</code> file to the source directory (in this case, the root directory).</p>
 </li>
 <li>
 <p>Open the <code>.eleventy.js</code> config file and add the CNAME file to the list of pass-through copies.</p>
-<pre class="language-js"><code class="language-js"><span class="token punctuation">.</span><span class="token punctuation">.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token string">'src/CNAME'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
+<pre class="language-js"><code class="language-js"><span class="token punctuation">.</span><span class="token punctuation">.</span><br>  eleventyConfig<span class="token punctuation">.</span><span class="token function">addPassthroughCopy</span><span class="token punctuation">(</span><span class="token string">'CNAME'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
 </li>
 <li>
 <p>Save, commit, and push to origin.</p>
