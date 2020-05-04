@@ -12,7 +12,7 @@
     "lint:js": "npx eslint --fix .eleventy.js ./src/_includes/*.js",
     "lint:md": "npx markdownlint --fix ./src/_posts/*.md",
     "lint": "npm run lint:js && npm run lint:md",
-    "start": "eleventy --serve --watch",
+    "start": "ELEVENTY_ENV=dev eleventy --serve --watch",
     "test": "npm run lint",
     "watch:css": "npm run dev:css -- --watch"
   },

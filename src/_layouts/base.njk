@@ -78,6 +78,7 @@
       </div>
     </div>
   </footer>
+  {%- if app.environment != 'dev' -%}
   <!-- Begin Web-Stat code v 7.0 -->
   <span id="wts1975337"></span>
   <script>var wts7 = {invisible:'yes'};
@@ -88,5 +89,6 @@
   <img src="https://wts.one/7/1/1975337.png"
   alt="Web-Stat site statistics"></a></noscript>
   <!-- End Web-Stat code v 7.0 -->
+  {%- endif -%}
 </body>
 </html>
