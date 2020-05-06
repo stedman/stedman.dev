@@ -1,6 +1,12 @@
 /*
  * Bulma overrides
  */
+
+// This is more of a tweak.
+.icon {
+  vertical-align: bottom;
+}
+
 .content {
   // fix nested list margins
   li {
