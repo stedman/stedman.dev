@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{%- if title -%}{{ title }} • {% endif -%}{{ site.title }}</title>
-  <meta name="description" content="{{ site.description }}">
+  <meta name="description" content="{{ meta.description if meta.description else site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
   <link rel="stylesheet" href="{{ '/assets/css/prism-atom-dark.css' | url }}">
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>

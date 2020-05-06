@@ -4,6 +4,21 @@ const markdownItAnchor = require('markdown-it-anchor');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const filters = require('./src/_includes/filters');
 
+/**
+ * Add date properties to collections.
+ *
+ * @param  {object}   posts   Collection to add date properties to.
+ * @return {object}           Augmented posts collection.
+ */
+const addData = (posts) => posts.map((post) => {
+  const stat = fs.statSync(post.inputPath) || {};
+
+  post.dateCreated = stat.birthtime;
+  post.dateModified = stat.mtime;
+
+  return post;
+});
+
 module.exports = function (eleventyConfig) {
   // PLUGIN: PrismJS
   eleventyConfig.addPlugin(syntaxHighlight);
@@ -34,26 +49,8 @@ module.exports = function (eleventyConfig) {
   // COLLECTION: Create posts collection.
   eleventyConfig.addCollection('posts', async (collection) => {
     const posts = collection.getFilteredByGlob('./src/_posts/**.md');
-    const statPromise = (fileUrl) => new Promise((resolve, reject) => {
-      fs.stat(
-        fileUrl,
-        (err, stats) => {
-          if (err) reject(err);
 
-          resolve(stats.mtime);
-        },
-      );
-    });
-
-    // Add file lastModified property
-    for (let idx = 0; idx < posts.length; idx += 1) {
-      const post = posts[idx];
-
-      // eslint-disable-next-line no-await-in-loop
-      post.lastModified = await statPromise(post.inputPath);
-    }
-
-    return posts;
+    return addData(posts);
   });
 
   // FILTERS
