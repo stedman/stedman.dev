@@ -5,7 +5,7 @@
     text-decoration-color: hsl(187.1, 70%, 60%);
   }
 
-  .external-link {
+  a[href^='http'] {
     &::after {
       background: url('../icon/external-link-blue.svg') no-repeat;
       content: '';
