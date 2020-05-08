@@ -8,13 +8,11 @@
     "build": "npm run clean && eleventy && npm run build:css",
     "clean": "rm -rf ./dist",
     "dev:css": "node-sass src/_sass/_main.scss dist/assets/css/main.css",
-    "deploy": "npm run build && gh-pages -d dist",
     "lint:js": "npx eslint --fix .eleventy.js ./src/_includes/*.js",
     "lint:md": "npx markdownlint --fix ./src/_posts/*.md",
     "lint": "npm run lint:js && npm run lint:md",
     "start": "ELEVENTY_ENV=dev eleventy --serve --watch",
-    "test": "npm run lint",
-    "watch:css": "npm run dev:css -- --watch"
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -24,6 +22,7 @@
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "0.11.0-beta.3",
+    "@11ty/eleventy-plugin-rss": "^1.0.7",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "bulma": "^0.8.2",
     "eslint": "^6.8.0",
