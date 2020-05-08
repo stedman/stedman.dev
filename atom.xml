@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>stedman.dev</title>
+  <subtitle>The @stedman home range.</subtitle>
+  <link rel="self" href=""/>
+  <link href="https://stedman.dev"/>
+  <updated>2020-05-08T21:38:01.763-00:00</updated>
+  <id>https://stedman.dev</id>
+  <author>
+    <name>Steve Stedman</name>
+  </author>
+  <entry>
+    <title>Make the Jump from Jekyll to JavaScript</title>
+    <link href="https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/"/>
+    <id>https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/</id>
+    <published>2020-04-29T00:00:00-00:00</published>
+    <updated>2020-05-08T21:38:01.763-00:00</updated>
+    <content type="html">&lt;p&gt;With the recent addition of &lt;a href=&quot;https://github.com/features/actions&quot;&gt;Actions&lt;/a&gt; to GitHub’s product lineup, we now have the ability to create a &lt;em&gt;100% Pure, Unfiltered™&lt;/em&gt; JavaScript alternative to Jekyll (and Ruby) in GitHub Pages. This is a big deal. Really.&lt;/p&gt;
+&lt;h2 id=&quot;back-story&quot;&gt;Back story &lt;a class=&quot;anchor-link&quot; href=&quot;#back-story&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;, for the uninitiated, allows you to create websites from the source code stored in a GitHub repo. There are no databases to set up, no servers to provision, and no file transfers (at least not in the traditional sense). Better yet, it allows you to transform plain text into static websites and blogs with the help of Jekyll.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a pretty sweet static site generator. It’s been around quite awhile, is battle tested, and is backed by a huge community. It’s also simple enough for beginners and yet powerful enough for advanced users. Unfortunately, customizing it requires running it locally and this is where things get sticky. Jekyll is based on Ruby. For casual users, Ruby is a challenge to set up and maintain—especially on Windows. Scaling is also an issue for Jekyll/Ruby as bigger builds are notorious for taking a long time to compile.&lt;/p&gt;
+&lt;p&gt;While there are plenty of competitive static site generators out there, the one piece that was missing was the integrated of build and deploy to GitHub’s web server. Pages+Jekyll took care of that build and deploy mumbo-jumbo for you, automagically. Just commit to the &lt;code&gt;gh-pages&lt;/code&gt; branch and &lt;strong&gt;poof&lt;/strong&gt;, your site is updated.&lt;/p&gt;
+&lt;p&gt;More recently, workarounds from &lt;a href=&quot;https://netlify.com/&quot;&gt;Netlify&lt;/a&gt; and others have popped up. They handle build/deploy and offer additional features worth considering, but at the end of the day they are yet another dependency to maintain.&lt;/p&gt;
+&lt;p&gt;If only we could run a static site generator on Pages with all the hooks and privileges of Jekyll but with the ease-of-setup and performance provided by more modern alternatives.&lt;/p&gt;
+&lt;p&gt;Well, now you can. All the pieces have finally fallen into place.&lt;/p&gt;
+&lt;h2 id=&quot;the-build&quot;&gt;The build &lt;a class=&quot;anchor-link&quot; href=&quot;#the-build&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;This brief tutorial will cover the essentials of migrating from Jekyll to JavaScript. The following are required to get started:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/&quot;&gt;GitHub account&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://nodejs.org/&quot;&gt;NodeJS&lt;/a&gt; set up locally&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Of course, it would also make sense to already have an existing Jekyll repo. If not, then &lt;a href=&quot;https://github.com/new/&quot;&gt;create a new GitHub repo&lt;/a&gt; (public or private) with a README initialized. Follow the follow-up instructions to clone and set it up locally.&lt;/p&gt;
+&lt;h3 id=&quot;set-up-the-static-site-generator&quot;&gt;Set up the static site generator &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-the-static-site-generator&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;It took awhile for someone to distill the essence of Jekyll into JavaScript. With &lt;a href=&quot;https://11ty.dev/&quot;&gt;Eleventy&lt;/a&gt;, Zach Leatherman (&lt;a href=&quot;https://twitter.com/zachleat&quot;&gt;@zachleat&lt;/a&gt;) has really distilled, bottled, and shipped it. Oh, and did I mention that it’s fast? I’ll skip the rest of the sales pitch here and let the experts do the talking.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://daverupert.com/2019/08/what-i-like-about-eleventy/&quot;&gt;Dave Rupert: What I Like About Eleventy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://iandroid.eu/why-im-digging-eleventy/&quot;&gt;iandroid: Why I’m Digging Eleventy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://24ways.org/2018/turn-jekyll-up-to-eleventy/&quot;&gt;Paul Lloyd: Turn Jekyll Up to Eleventy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you haven’t already guessed, I’m smitten with Eleventy. It’s that multi-purpose knife that fits just perfectly in your pocket and makes you smile every time you use it.&lt;/p&gt;
+&lt;p&gt;It also makes the transition from Jekyll to JavaScript almost completely seamless. So let’s roll with it.&lt;/p&gt;
+&lt;h4 id=&quot;install-and-configure&quot;&gt;Install and configure &lt;a class=&quot;anchor-link&quot; href=&quot;#install-and-configure&quot;&gt;permalink&lt;/a&gt;&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open a terminal and navigate to your repo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you don’t already have a &lt;code&gt;package.json&lt;/code&gt; file in the root directory, then take this moment to initialize npm.&lt;/p&gt;
+&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; init&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install Eleventy as a &lt;code&gt;devDependency&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;npm&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;install&lt;/span&gt; --save-dev @11ty/eleventy&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To the site root, add an empty &lt;code&gt;.nojekyll&lt;/code&gt; file to &lt;a href=&quot;https://help.github.com/en/github/working-with-github-pages/about-github-pages#static-site-generators&quot;&gt;disable the default Jekyll build&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token function&quot;&gt;touch&lt;/span&gt; .nojekyll&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Keeping things simple, we’ll assume a &lt;a href=&quot;https://jekyllrb.com/docs/structure/&quot;&gt;default Jekyll file structure&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;..&lt;/span&gt;&lt;br&gt;├── _layouts&lt;br&gt;│   ├── default.html&lt;br&gt;├── assets&lt;br&gt;│   ├── css&lt;br&gt;│   ├── images&lt;br&gt;│   └── js&lt;br&gt;├── index.html&lt;br&gt;&lt;span class=&quot;token punctuation&quot;&gt;..&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To the site root, add a &lt;code&gt;.eleventy.js&lt;/code&gt; config file with the following contents. For more details, see the &lt;a href=&quot;https://www.11ty.dev/docs/config/&quot;&gt;Eleventy configuration docs&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;module&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function-variable function&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;eleventyConfig&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;token comment&quot;&gt;// Copy the &quot;assets&quot; directory to the compiled &quot;_site&quot; folder.&lt;/span&gt;&lt;br&gt;  eleventyConfig&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addPassthroughCopy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;assets&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br&gt;&lt;br&gt;  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br&gt;    dir&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br&gt;      input&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;./&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;      output&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;./_site&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;      layouts&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&#39;./_layouts&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;    templateFormats&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;br&gt;      &lt;span class=&quot;token string&quot;&gt;&#39;html&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;      &lt;span class=&quot;token string&quot;&gt;&#39;liquid&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;      &lt;span class=&quot;token string&quot;&gt;&#39;md&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;      &lt;span class=&quot;token string&quot;&gt;&#39;njk&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Looking at the &lt;code&gt;dir.output&lt;/code&gt; above, notice that we are maintaining parity with Jekyll’s deployment, using the &lt;code&gt;./_site&lt;/code&gt; directory for our compiled code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To the &lt;code&gt;scripts&lt;/code&gt; section of &lt;code&gt;package.json&lt;/code&gt;, add the following. We’ll need the &lt;code&gt;build&lt;/code&gt; script for our deployment later.&lt;/p&gt;
+&lt;pre class=&quot;language-json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;  &lt;span class=&quot;token property&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token property&quot;&gt;&quot;clean&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;rm -rf ./_site&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token property&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;npm run clean &amp;amp;&amp;amp; eleventy&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token property&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;eleventy --serve --watch&quot;&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;clean&lt;/strong&gt;: empties out the deployment directory&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;build&lt;/strong&gt;: cleans the deploy directory and builds the site with Eleventy&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;start&lt;/strong&gt;: runs Eleventy in developer mode with live browser refreshes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;the-deployment&quot;&gt;The deployment &lt;a class=&quot;anchor-link&quot; href=&quot;#the-deployment&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Now for the real magic sauce, &lt;a href=&quot;https://docs.github.com/en/actions&quot;&gt;GitHub Actions&lt;/a&gt;-style.&lt;/p&gt;
+&lt;h3 id=&quot;set-up-workflow&quot;&gt;Set up workflow &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-workflow&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open a browser to your GitHub repo and then select the &lt;strong&gt;Actions&lt;/strong&gt; tab.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tap on the &lt;strong&gt;New workflow&lt;/strong&gt; button.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tap on the &lt;strong&gt;Set up a workflow yourself&lt;/strong&gt; button.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the &lt;strong&gt;{repo_name}/.github/workflows/&lt;code&gt;main.yml&lt;/code&gt;&lt;/strong&gt; field, enter “&lt;code&gt;eleventy_build.yml&lt;/code&gt;”.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Into the &lt;strong&gt;Edit new file&lt;/strong&gt; textarea, cut and paste the following:&lt;/p&gt;
+&lt;pre class=&quot;language-yaml&quot;&gt;&lt;code class=&quot;language-yaml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Eleventy Build&lt;br&gt;&lt;br&gt;&lt;span class=&quot;token comment&quot;&gt;# Controls when the action will run. Triggers the workflow on push or pull request&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token comment&quot;&gt;# events but only for the master branch&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token key atrule&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;token key atrule&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token key atrule&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt; master &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;br&gt;&lt;br&gt;&lt;span class=&quot;token comment&quot;&gt;# A workflow run is made up of one or more jobs that can run sequentially or in parallel&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token key atrule&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;token comment&quot;&gt;# This workflow contains a single job called &quot;build&quot;&lt;/span&gt;&lt;br&gt;  &lt;span class=&quot;token key atrule&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token comment&quot;&gt;# The type of runner that the job will run on&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token key atrule&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ubuntu&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;latest&lt;br&gt;&lt;br&gt;    &lt;span class=&quot;token comment&quot;&gt;# Steps represent a sequence of tasks that will be executed as part of the job&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token comment&quot;&gt;# Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it&lt;/span&gt;&lt;br&gt;    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; actions/checkout@v2&lt;br&gt;&lt;br&gt;    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Setup Node.js environment&lt;br&gt;      &lt;span class=&quot;token key atrule&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; actions/setup&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;node@v1.4.1&lt;br&gt;&lt;br&gt;    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Install packages&lt;br&gt;      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; npm ci&lt;br&gt;&lt;br&gt;    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Run npm build&lt;br&gt;      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; npm run build&lt;br&gt;&lt;br&gt;    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Deploy to gh&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;pages&lt;br&gt;      &lt;span class=&quot;token key atrule&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; peaceiris/actions&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;gh&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;pages@v3&lt;br&gt;      &lt;span class=&quot;token key atrule&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;br&gt;        &lt;span class=&quot;token key atrule&quot;&gt;deploy_key&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; secrets.ACTIONS_DEPLOY_KEY &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;br&gt;        &lt;span class=&quot;token key atrule&quot;&gt;publish_dir&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ./_site&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tap the &lt;strong&gt;Start commit&lt;/strong&gt; button.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Complete the &lt;strong&gt;Commit new file&lt;/strong&gt; form and select &lt;strong&gt;Commit directly to the &lt;code&gt;master&lt;/code&gt; branch&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The workflow script should be fairly self-descriptive. See that &lt;code&gt;${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/code&gt; line near the end of the workflow? We need to add deploy keys to GitHub before attempting a deployment.&lt;/p&gt;
+&lt;h3 id=&quot;set-up-deployment-keys&quot;&gt;Set up deployment keys &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-deployment-keys&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;The following instructions were cribbed from a third-party &lt;a href=&quot;https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-create-ssh-deploy-key&quot;&gt;GitHub Actions for GitHub Pages&lt;/a&gt; page. Please check that site for updates before proceeding as these instructions may have changed.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Generate a SSH key locally to use as your deploy key.&lt;/p&gt;
+&lt;pre class=&quot;language-shell&quot;&gt;&lt;code class=&quot;language-shell&quot;&gt;ssh-keygen -t rsa -b &lt;span class=&quot;token number&quot;&gt;4096&lt;/span&gt; -C &lt;span class=&quot;token string&quot;&gt;&quot;&lt;span class=&quot;token variable&quot;&gt;&lt;span class=&quot;token variable&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; config user.email&lt;span class=&quot;token variable&quot;&gt;)&lt;/span&gt;&lt;/span&gt;&quot;&lt;/span&gt; -f gh-pages -N &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token comment&quot;&gt;# You will get 2 files:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token comment&quot;&gt;#   gh-pages.pub (public key)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token comment&quot;&gt;#   gh-pages     (private key)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open a browser to your repo and select the &lt;strong&gt;Settings&lt;/strong&gt; tab.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select &lt;strong&gt;Deploy keys&lt;/strong&gt; from the left menu.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tap the &lt;strong&gt;Add deploy key&lt;/strong&gt; button.&lt;/li&gt;
+&lt;li&gt;In the &lt;strong&gt;Title&lt;/strong&gt; field, enter “&lt;code&gt;Public key of ACTIONS_DEPLOY_KEY&lt;/code&gt;”.&lt;/li&gt;
+&lt;li&gt;In the &lt;strong&gt;Key&lt;/strong&gt; field, cut and paste the contents of your &lt;code&gt;gh-pages.pub&lt;/code&gt; SSH key file made in step 1 above.&lt;/li&gt;
+&lt;li&gt;Check the &lt;strong&gt;Allow write access&lt;/strong&gt; box.&lt;/li&gt;
+&lt;li&gt;Tap the &lt;strong&gt;Add key&lt;/strong&gt; button.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select &lt;strong&gt;Secrets&lt;/strong&gt; from the left menu.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tap the &lt;strong&gt;Add a new secret&lt;/strong&gt; link.&lt;/li&gt;
+&lt;li&gt;In the &lt;strong&gt;Name&lt;/strong&gt; field, enter “&lt;code&gt;ACTIONS_DEPLOY_KEY&lt;/code&gt;”.&lt;/li&gt;
+&lt;li&gt;In the &lt;strong&gt;Value&lt;/strong&gt; field, cut and paste the contents of your &lt;code&gt;gh-pages&lt;/code&gt; SSH key file from step 1 above.&lt;/li&gt;
+&lt;li&gt;Tap the &lt;strong&gt;Add secret&lt;/strong&gt; button.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;IMPORTANT: Delete the local &lt;code&gt;gh-pages&lt;/code&gt; keys at this point. You certainly do not want to add them to your version control (for all to see).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To initiate a deployment, commit/merge to the &lt;code&gt;master&lt;/code&gt; branch. The first deploy will fail (because the &lt;code&gt;gh-pages&lt;/code&gt; branch has not been created yet).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Go back to the &lt;strong&gt;Settings&lt;/strong&gt; tab.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Scroll down to the &lt;strong&gt;GitHub Pages&lt;/strong&gt; section.&lt;/li&gt;
+&lt;li&gt;From the &lt;strong&gt;Source&lt;/strong&gt; options, select &lt;code&gt;gh-pages branch&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Merge some more code into &lt;code&gt;master&lt;/code&gt; to initiate another deploy.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Congrats. You’re done! From here on out, you should be able to trigger a fresh build and deploy by:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;working/saving locally, committing, and pushing to &lt;code&gt;origin master&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;editing your code at &lt;a href=&quot;http://github.com/&quot;&gt;github.com&lt;/a&gt; and saving to &lt;code&gt;master&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Your updates will deploy to live in mere seconds. All of this takes place within the ecosystem that you version your code in. There are no additional dependencies, no additional accounts, nada. How cool is that?&lt;/p&gt;
+&lt;h2 id=&quot;the-custom-domain&quot;&gt;The custom domain &lt;a class=&quot;anchor-link&quot; href=&quot;#the-custom-domain&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;GitHub provides &lt;a href=&quot;https://help.github.com/en/github/working-with-github-pages/about-github-pages#types-of-github-pages-sites&quot;&gt;default user sites&lt;/a&gt; that may suit you just fine. If, however, you want to use a custom domain, there’s a bit more work involved.&lt;/p&gt;
+&lt;h3 id=&quot;set-up-a-custom-domain&quot;&gt;Set up a custom domain &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-a-custom-domain&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you haven’t already set up an apex domain (e.g., &lt;code&gt;example.com&lt;/code&gt;) for this repo, then you will need to add it. Follow the &lt;a href=&quot;https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site&quot;&gt;GitHub instructions for managing a custom domain&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;CNAME&lt;/code&gt; file created when you entered your domain in the &lt;strong&gt;Custom domain&lt;/strong&gt; field (above) needs to be included in our distribution directory.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the &lt;code&gt;gh-pages&lt;/code&gt; branch and copy the &lt;code&gt;CNAME&lt;/code&gt; file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Go back to the &lt;code&gt;master&lt;/code&gt; branch and add that &lt;code&gt;CNAME&lt;/code&gt; file to the source directory (in this case, the root directory).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open the &lt;code&gt;.eleventy.js&lt;/code&gt; config file and add the CNAME file to the list of pass-through copies.&lt;/p&gt;
+&lt;pre class=&quot;language-js&quot;&gt;&lt;code class=&quot;language-js&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;br&gt;  eleventyConfig&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addPassthroughCopy&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&#39;CNAME&#39;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Save, commit, and push to origin.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion &lt;a class=&quot;anchor-link&quot; href=&quot;#conclusion&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;For 12 years, GitHub teased us with a web hosting product that almost did everything we needed. We were grateful and we made due. Along the way, we came up with hacks and workarounds, employing one or more outside services to complete the task. But nothing quite combined source code versioning, flexible site generation, and web hosting in one elegant package.&lt;/p&gt;
+&lt;p&gt;With Eleventy and GitHub Actions, we now have it all.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

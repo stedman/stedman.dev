@@ -28,6 +28,12 @@
               <a class="navbar-item" href="/about/">
                 About
               </a>
+              <a class="navbar-item" href="/atom.xml">
+                <span class="is-sr-only">Atom feed</span>
+                <span class="icon tooltip" title="Atom feed">
+                  <ion-icon class="is-size-5" name="logo-rss"></ion-icon>
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -49,21 +55,21 @@
 </p>
 
 <p>With the recent addition of <a href="https://github.com/features/actions">Actions</a> to GitHub’s product lineup, we now have the ability to create a <em>100% Pure, Unfiltered™</em> JavaScript alternative to Jekyll (and Ruby) in GitHub Pages. This is a big deal. Really.</p>
-<h2 id="back-story">Back story <a class="anchor-link" href="#back-story"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h2>
+<h2 id="back-story">Back story <a class="anchor-link" href="#back-story">permalink</a></h2>
 <p><a href="https://pages.github.com/">GitHub Pages</a>, for the uninitiated, allows you to create websites from the source code stored in a GitHub repo. There are no databases to set up, no servers to provision, and no file transfers (at least not in the traditional sense). Better yet, it allows you to transform plain text into static websites and blogs with the help of Jekyll.</p>
 <p><a href="https://jekyllrb.com/">Jekyll</a> is a pretty sweet static site generator. It’s been around quite awhile, is battle tested, and is backed by a huge community. It’s also simple enough for beginners and yet powerful enough for advanced users. Unfortunately, customizing it requires running it locally and this is where things get sticky. Jekyll is based on Ruby. For casual users, Ruby is a challenge to set up and maintain—especially on Windows. Scaling is also an issue for Jekyll/Ruby as bigger builds are notorious for taking a long time to compile.</p>
 <p>While there are plenty of competitive static site generators out there, the one piece that was missing was the integrated of build and deploy to GitHub’s web server. Pages+Jekyll took care of that build and deploy mumbo-jumbo for you, automagically. Just commit to the <code>gh-pages</code> branch and <strong>poof</strong>, your site is updated.</p>
 <p>More recently, workarounds from <a href="https://netlify.com/">Netlify</a> and others have popped up. They handle build/deploy and offer additional features worth considering, but at the end of the day they are yet another dependency to maintain.</p>
 <p>If only we could run a static site generator on Pages with all the hooks and privileges of Jekyll but with the ease-of-setup and performance provided by more modern alternatives.</p>
 <p>Well, now you can. All the pieces have finally fallen into place.</p>
-<h2 id="the-build">The build <a class="anchor-link" href="#the-build"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h2>
+<h2 id="the-build">The build <a class="anchor-link" href="#the-build">permalink</a></h2>
 <p>This brief tutorial will cover the essentials of migrating from Jekyll to JavaScript. The following are required to get started:</p>
 <ul>
 <li><a href="https://github.com/">GitHub account</a></li>
 <li><a href="https://nodejs.org/">NodeJS</a> set up locally</li>
 </ul>
 <p>Of course, it would also make sense to already have an existing Jekyll repo. If not, then <a href="https://github.com/new/">create a new GitHub repo</a> (public or private) with a README initialized. Follow the follow-up instructions to clone and set it up locally.</p>
-<h3 id="set-up-the-static-site-generator">Set up the static site generator <a class="anchor-link" href="#set-up-the-static-site-generator"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h3>
+<h3 id="set-up-the-static-site-generator">Set up the static site generator <a class="anchor-link" href="#set-up-the-static-site-generator">permalink</a></h3>
 <p>It took awhile for someone to distill the essence of Jekyll into JavaScript. With <a href="https://11ty.dev">Eleventy</a>, Zach Leatherman (<a href="https://twitter.com/zachleat">@zachleat</a>) has really distilled, bottled, and shipped it. Oh, and did I mention that it’s fast? I’ll skip the rest of the sales pitch here and let the experts do the talking.</p>
 <ul>
 <li><a href="https://daverupert.com/2019/08/what-i-like-about-eleventy/">Dave Rupert: What I Like About Eleventy</a></li>
@@ -72,7 +78,7 @@
 </ul>
 <p>If you haven’t already guessed, I’m smitten with Eleventy. It’s that multi-purpose knife that fits just perfectly in your pocket and makes you smile every time you use it.</p>
 <p>It also makes the transition from Jekyll to JavaScript almost completely seamless. So let’s roll with it.</p>
-<h4 id="install-and-configure">Install and configure <a class="anchor-link" href="#install-and-configure"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h4>
+<h4 id="install-and-configure">Install and configure <a class="anchor-link" href="#install-and-configure">permalink</a></h4>
 <ol>
 <li>
 <p>Open a terminal and navigate to your repo.</p>
@@ -106,9 +112,9 @@
 </ul>
 </li>
 </ol>
-<h2 id="the-deployment">The deployment <a class="anchor-link" href="#the-deployment"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h2>
+<h2 id="the-deployment">The deployment <a class="anchor-link" href="#the-deployment">permalink</a></h2>
 <p>Now for the real magic sauce, <a href="https://docs.github.com/en/actions">GitHub Actions</a>-style.</p>
-<h3 id="set-up-workflow">Set up workflow <a class="anchor-link" href="#set-up-workflow"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h3>
+<h3 id="set-up-workflow">Set up workflow <a class="anchor-link" href="#set-up-workflow">permalink</a></h3>
 <ol>
 <li>
 <p>Open a browser to your GitHub repo and then select the <strong>Actions</strong> tab.</p>
@@ -134,7 +140,7 @@
 </li>
 </ol>
 <p>The workflow script should be fairly self-descriptive. See that <code>${{ secrets.ACTIONS_DEPLOY_KEY }}</code> line near the end of the workflow? We need to add deploy keys to GitHub before attempting a deployment.</p>
-<h3 id="set-up-deployment-keys">Set up deployment keys <a class="anchor-link" href="#set-up-deployment-keys"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h3>
+<h3 id="set-up-deployment-keys">Set up deployment keys <a class="anchor-link" href="#set-up-deployment-keys">permalink</a></h3>
 <p>The following instructions were cribbed from a third-party <a href="https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-create-ssh-deploy-key">GitHub Actions for GitHub Pages</a> page. Please check that site for updates before proceeding as these instructions may have changed.</p>
 <ol>
 <li>
@@ -186,9 +192,9 @@
 <li>editing your code at <a href="http://github.com">github.com</a> and saving to <code>master</code>.</li>
 </ul>
 <p>Your updates will deploy to live in mere seconds. All of this takes place within the ecosystem that you version your code in. There are no additional dependencies, no additional accounts, nada. How cool is that?</p>
-<h2 id="the-custom-domain">The custom domain <a class="anchor-link" href="#the-custom-domain"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h2>
+<h2 id="the-custom-domain">The custom domain <a class="anchor-link" href="#the-custom-domain">permalink</a></h2>
 <p>GitHub provides <a href="https://help.github.com/en/github/working-with-github-pages/about-github-pages#types-of-github-pages-sites">default user sites</a> that may suit you just fine. If, however, you want to use a custom domain, there’s a bit more work involved.</p>
-<h3 id="set-up-a-custom-domain">Set up a custom domain <a class="anchor-link" href="#set-up-a-custom-domain"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h3>
+<h3 id="set-up-a-custom-domain">Set up a custom domain <a class="anchor-link" href="#set-up-a-custom-domain">permalink</a></h3>
 <ol>
 <li>
 <p>If you haven’t already set up an apex domain (e.g., <code>example.com</code>) for this repo, then you will need to add it. Follow the <a href="https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site">GitHub instructions for managing a custom domain</a>.</p>
@@ -212,7 +218,7 @@
 </ol>
 </li>
 </ol>
-<h2 id="conclusion">Conclusion <a class="anchor-link" href="#conclusion"><i class="is-sr-only">permalink</i><svg viewBox="0 0 512 512"><path d="M459.7 233.4L369 324c-49.8 50-131 50-181 0-7.8-8-14-16.8-19.3-26l42-42c2-2 4.5-3.2 7-4.5 2.8 10 8 19.3 15.7 27 25 25 65.5 25 90.5 0l90.4-90.4c25-24.8 25-65.4 0-90.4s-65.6-25-90.5 0l-32.3 32.2c-26-10-54.3-13-81.7-9l68.6-68.4c50-50 131-50 181 0s50 131 0 181zM220.3 382.2L188 414.4c-24.8 25-65.4 25-90.4 0s-25-65.6 0-90.5l90.5-90.6c25-25 65.7-25 90.6 0 7.8 7.8 13 17.2 15.8 27 2.4-1.3 4.8-2.4 6.8-4.4l42-42c-5.3-9.2-11.5-18-19.3-26-50-50-131.2-50-181 0l-90.6 90.6c-50 50-50 131 0 181s131 50 181 0l68.6-68.5c-27.4 4-55.6 1.3-81.7-8.8z"/></svg></a></h2>
+<h2 id="conclusion">Conclusion <a class="anchor-link" href="#conclusion">permalink</a></h2>
 <p>For 12 years, GitHub teased us with a web hosting product that almost did everything we needed. We were grateful and we made due. Along the way, we came up with hacks and workarounds, employing one or more outside services to complete the task. But nothing quite combined source code versioning, flexible site generation, and web hosting in one elegant package.</p>
 <p>With Eleventy and GitHub Actions, we now have it all.</p>
 
@@ -226,8 +232,11 @@
       <div class="navbar has-background-white-ter">
         <div class="navbar-menu is-active">
           <div class="navbar-start">
-            <a class="navbar-item" href="/">
+            <a class="navbar-item is-inline-block-tablet" href="/">
               &copy; 2020 Steve Stedman
+            </a>
+            <a class="navbar-item is-sr-only-desktop is-inline-block-tablet" href="/about/">
+              About
             </a>
           </div>
           <div class="navbar-end">
@@ -249,6 +258,7 @@
               </span>
               <span class="is-hidden-desktop">GitHub: stedman</span>
             </a>
+            <a class="navbar-item is-sr-only-desktop" href="https://github.com/stedman/stedman.dev/blob/master/./src/_posts/2020-04-29-post.md">Edit this page on GitHub</a>
           </div>
         </div>
       </div>
