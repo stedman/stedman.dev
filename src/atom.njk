@@ -7,9 +7,9 @@ eleventyExcludeFromCollections: true
   <title>{{ site.title }}</title>
   <subtitle>{{ site.description }}</subtitle>
   <link rel="self" href="{{ site.feedUrl }}"/>
-  <link href="{{ site.url }}"/>
+  <link href="{{ site.url }}/"/>
   <updated>{{ (collections.posts | last).dateModified | rssDate }}</updated>
-  <id>{{ site.url }}</id>
+  <id>{{ site.url }}/</id>
   <author>
     <name>{{ site.author.name }}</name>
   </author>
@@ -21,7 +21,7 @@ eleventyExcludeFromCollections: true
     <id>{{ absolutePostUrl }}</id>
     <published>{{ post.date | rssDate }}</published>
     <updated>{{ post.dateModified | rssDate }}</updated>
-    <content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) }}</content>
+    <content type="html">{{ post.templateContent | htmlToAbsoluteUrls(absolutePostUrl) | regexReplace ('<a class="anchor-link".+?<\/a>', '') }}</content>
   </entry>
   {%- endfor %}
 </feed>

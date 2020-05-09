@@ -3,6 +3,7 @@
   "description": "The @stedman home range.",
   "domain": "stedman.dev",
   "url": "https://stedman.dev",
+  "feedUrl": "https://stedman.dev/atom.xml",
   "repo": "https://github.com/stedman/stedman.dev",
   "author": {
     "name": "Steve Stedman",

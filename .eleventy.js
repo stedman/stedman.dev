@@ -58,6 +58,7 @@ module.exports = function (eleventyConfig) {
 
   // FILTERS
   eleventyConfig.addFilter('fullDate', filters.fullDate);
+  eleventyConfig.addFilter('regexReplace', filters.regexReplace);
 
   return {
     dir: {
