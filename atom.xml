@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>stedman.dev</title>
   <subtitle>The @stedman home range.</subtitle>
-  <link rel="self" href=""/>
-  <link href="https://stedman.dev"/>
-  <updated>2020-05-08T21:38:01.763-00:00</updated>
-  <id>https://stedman.dev</id>
+  <link rel="self" href="https://stedman.dev/atom.xml"/>
+  <link href="https://stedman.dev/"/>
+  <updated>2020-05-09T12:55:16.473-00:00</updated>
+  <id>https://stedman.dev/</id>
   <author>
     <name>Steve Stedman</name>
   </author>
@@ -14,23 +14,23 @@
     <link href="https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/"/>
     <id>https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/</id>
     <published>2020-04-29T00:00:00-00:00</published>
-    <updated>2020-05-08T21:38:01.763-00:00</updated>
+    <updated>2020-05-09T12:55:16.473-00:00</updated>
     <content type="html">&lt;p&gt;With the recent addition of &lt;a href=&quot;https://github.com/features/actions&quot;&gt;Actions&lt;/a&gt; to GitHub’s product lineup, we now have the ability to create a &lt;em&gt;100% Pure, Unfiltered™&lt;/em&gt; JavaScript alternative to Jekyll (and Ruby) in GitHub Pages. This is a big deal. Really.&lt;/p&gt;
-&lt;h2 id=&quot;back-story&quot;&gt;Back story &lt;a class=&quot;anchor-link&quot; href=&quot;#back-story&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;back-story&quot;&gt;Back story &lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;, for the uninitiated, allows you to create websites from the source code stored in a GitHub repo. There are no databases to set up, no servers to provision, and no file transfers (at least not in the traditional sense). Better yet, it allows you to transform plain text into static websites and blogs with the help of Jekyll.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; is a pretty sweet static site generator. It’s been around quite awhile, is battle tested, and is backed by a huge community. It’s also simple enough for beginners and yet powerful enough for advanced users. Unfortunately, customizing it requires running it locally and this is where things get sticky. Jekyll is based on Ruby. For casual users, Ruby is a challenge to set up and maintain—especially on Windows. Scaling is also an issue for Jekyll/Ruby as bigger builds are notorious for taking a long time to compile.&lt;/p&gt;
 &lt;p&gt;While there are plenty of competitive static site generators out there, the one piece that was missing was the integrated of build and deploy to GitHub’s web server. Pages+Jekyll took care of that build and deploy mumbo-jumbo for you, automagically. Just commit to the &lt;code&gt;gh-pages&lt;/code&gt; branch and &lt;strong&gt;poof&lt;/strong&gt;, your site is updated.&lt;/p&gt;
 &lt;p&gt;More recently, workarounds from &lt;a href=&quot;https://netlify.com/&quot;&gt;Netlify&lt;/a&gt; and others have popped up. They handle build/deploy and offer additional features worth considering, but at the end of the day they are yet another dependency to maintain.&lt;/p&gt;
 &lt;p&gt;If only we could run a static site generator on Pages with all the hooks and privileges of Jekyll but with the ease-of-setup and performance provided by more modern alternatives.&lt;/p&gt;
 &lt;p&gt;Well, now you can. All the pieces have finally fallen into place.&lt;/p&gt;
-&lt;h2 id=&quot;the-build&quot;&gt;The build &lt;a class=&quot;anchor-link&quot; href=&quot;#the-build&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;the-build&quot;&gt;The build &lt;/h2&gt;
 &lt;p&gt;This brief tutorial will cover the essentials of migrating from Jekyll to JavaScript. The following are required to get started:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://github.com/&quot;&gt;GitHub account&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://nodejs.org/&quot;&gt;NodeJS&lt;/a&gt; set up locally&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Of course, it would also make sense to already have an existing Jekyll repo. If not, then &lt;a href=&quot;https://github.com/new/&quot;&gt;create a new GitHub repo&lt;/a&gt; (public or private) with a README initialized. Follow the follow-up instructions to clone and set it up locally.&lt;/p&gt;
-&lt;h3 id=&quot;set-up-the-static-site-generator&quot;&gt;Set up the static site generator &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-the-static-site-generator&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;set-up-the-static-site-generator&quot;&gt;Set up the static site generator &lt;/h3&gt;
 &lt;p&gt;It took awhile for someone to distill the essence of Jekyll into JavaScript. With &lt;a href=&quot;https://11ty.dev/&quot;&gt;Eleventy&lt;/a&gt;, Zach Leatherman (&lt;a href=&quot;https://twitter.com/zachleat&quot;&gt;@zachleat&lt;/a&gt;) has really distilled, bottled, and shipped it. Oh, and did I mention that it’s fast? I’ll skip the rest of the sales pitch here and let the experts do the talking.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://daverupert.com/2019/08/what-i-like-about-eleventy/&quot;&gt;Dave Rupert: What I Like About Eleventy&lt;/a&gt;&lt;/li&gt;
@@ -39,7 +39,7 @@
 &lt;/ul&gt;
 &lt;p&gt;If you haven’t already guessed, I’m smitten with Eleventy. It’s that multi-purpose knife that fits just perfectly in your pocket and makes you smile every time you use it.&lt;/p&gt;
 &lt;p&gt;It also makes the transition from Jekyll to JavaScript almost completely seamless. So let’s roll with it.&lt;/p&gt;
-&lt;h4 id=&quot;install-and-configure&quot;&gt;Install and configure &lt;a class=&quot;anchor-link&quot; href=&quot;#install-and-configure&quot;&gt;permalink&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;install-and-configure&quot;&gt;Install and configure &lt;/h4&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Open a terminal and navigate to your repo.&lt;/p&gt;
@@ -73,9 +73,9 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;the-deployment&quot;&gt;The deployment &lt;a class=&quot;anchor-link&quot; href=&quot;#the-deployment&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;the-deployment&quot;&gt;The deployment &lt;/h2&gt;
 &lt;p&gt;Now for the real magic sauce, &lt;a href=&quot;https://docs.github.com/en/actions&quot;&gt;GitHub Actions&lt;/a&gt;-style.&lt;/p&gt;
-&lt;h3 id=&quot;set-up-workflow&quot;&gt;Set up workflow &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-workflow&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;set-up-workflow&quot;&gt;Set up workflow &lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Open a browser to your GitHub repo and then select the &lt;strong&gt;Actions&lt;/strong&gt; tab.&lt;/p&gt;
@@ -101,7 +101,7 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;The workflow script should be fairly self-descriptive. See that &lt;code&gt;${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/code&gt; line near the end of the workflow? We need to add deploy keys to GitHub before attempting a deployment.&lt;/p&gt;
-&lt;h3 id=&quot;set-up-deployment-keys&quot;&gt;Set up deployment keys &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-deployment-keys&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;set-up-deployment-keys&quot;&gt;Set up deployment keys &lt;/h3&gt;
 &lt;p&gt;The following instructions were cribbed from a third-party &lt;a href=&quot;https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-create-ssh-deploy-key&quot;&gt;GitHub Actions for GitHub Pages&lt;/a&gt; page. Please check that site for updates before proceeding as these instructions may have changed.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -153,9 +153,9 @@
 &lt;li&gt;editing your code at &lt;a href=&quot;http://github.com/&quot;&gt;github.com&lt;/a&gt; and saving to &lt;code&gt;master&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Your updates will deploy to live in mere seconds. All of this takes place within the ecosystem that you version your code in. There are no additional dependencies, no additional accounts, nada. How cool is that?&lt;/p&gt;
-&lt;h2 id=&quot;the-custom-domain&quot;&gt;The custom domain &lt;a class=&quot;anchor-link&quot; href=&quot;#the-custom-domain&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;the-custom-domain&quot;&gt;The custom domain &lt;/h2&gt;
 &lt;p&gt;GitHub provides &lt;a href=&quot;https://help.github.com/en/github/working-with-github-pages/about-github-pages#types-of-github-pages-sites&quot;&gt;default user sites&lt;/a&gt; that may suit you just fine. If, however, you want to use a custom domain, there’s a bit more work involved.&lt;/p&gt;
-&lt;h3 id=&quot;set-up-a-custom-domain&quot;&gt;Set up a custom domain &lt;a class=&quot;anchor-link&quot; href=&quot;#set-up-a-custom-domain&quot;&gt;permalink&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&quot;set-up-a-custom-domain&quot;&gt;Set up a custom domain &lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;If you haven’t already set up an apex domain (e.g., &lt;code&gt;example.com&lt;/code&gt;) for this repo, then you will need to add it. Follow the &lt;a href=&quot;https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site&quot;&gt;GitHub instructions for managing a custom domain&lt;/a&gt;.&lt;/p&gt;
@@ -179,7 +179,7 @@
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion &lt;a class=&quot;anchor-link&quot; href=&quot;#conclusion&quot;&gt;permalink&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion &lt;/h2&gt;
 &lt;p&gt;For 12 years, GitHub teased us with a web hosting product that almost did everything we needed. We were grateful and we made due. Along the way, we came up with hacks and workarounds, employing one or more outside services to complete the task. But nothing quite combined source code versioning, flexible site generation, and web hosting in one elegant package.&lt;/p&gt;
 &lt;p&gt;With Eleventy and GitHub Actions, we now have it all.&lt;/p&gt;
 </content>
