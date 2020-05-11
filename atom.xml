@@ -4,7 +4,7 @@
   <subtitle>The @stedman home range.</subtitle>
   <link rel="self" href="https://stedman.dev/atom.xml"/>
   <link href="https://stedman.dev/"/>
-  <updated>2020-05-11T20:44:57.577-00:00</updated>
+  <updated>2020-05-11T20:51:22.105-00:00</updated>
   <id>https://stedman.dev/</id>
   <author>
     <name>Steve Stedman</name>
@@ -14,7 +14,7 @@
     <link href="https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/"/>
     <id>https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/</id>
     <published>2020-04-29T00:00:00-00:00</published>
-    <updated>2020-05-11T20:44:57.577-00:00</updated>
+    <updated>2020-05-11T20:51:22.105-00:00</updated>
     <content type="html">&lt;p&gt;With the recent addition of &lt;a href=&quot;https://github.com/features/actions&quot;&gt;Actions&lt;/a&gt; to GitHub’s product lineup, we now have the ability to create a &lt;em&gt;100% Pure, Unfiltered™&lt;/em&gt; JavaScript alternative to Jekyll (and Ruby) in GitHub Pages. This is a big deal. Really.&lt;/p&gt;
 &lt;h2 id=&quot;back-story&quot;&gt;Back story &lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;, for the uninitiated, allows you to create websites from the source code stored in a GitHub repo. There are no databases to set up, no servers to provision, and no file transfers (at least not in the traditional sense). Better yet, it allows you to transform plain text into static websites and blogs with the help of Jekyll.&lt;/p&gt;
@@ -189,7 +189,7 @@
     <link href="https://stedman.dev/2020/05/11/improving-sass-watch-in-eleventy/"/>
     <id>https://stedman.dev/2020/05/11/improving-sass-watch-in-eleventy/</id>
     <published>2020-05-11T00:00:00-00:00</published>
-    <updated>2020-05-11T20:44:57.577-00:00</updated>
+    <updated>2020-05-11T20:51:22.105-00:00</updated>
     <content type="html">&lt;p&gt;I’ve been using &lt;a href=&quot;https://github.com/sass/node-sass&quot;&gt;node-sass&lt;/a&gt; in my &lt;a href=&quot;https://11ty.dev/&quot;&gt;11ty&lt;/a&gt; workflow for awhile now but for whatever reason couldn’t quite ever get the &lt;code&gt;--watch&lt;/code&gt; flag to work. This meant that, for any SCSS update, I’d have to run back to the command line and manually run &lt;code&gt;npx node-sass src/_sass/_main.scss dist/css/main.css&lt;/code&gt; or an npm script shortcut for the same.&lt;/p&gt;
 &lt;p&gt;Well, I finally had enough and came up with something that works for me. It might just work for you so I’m sharing the details here.&lt;/p&gt;
 &lt;ol&gt;
