@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Make the Jump from Jekyll to JavaScript
 meta:
   description: Standing up a website with GitHub Pages was always pretty quick and easy. Now it's even easier and more enjoyable with Eleventy (11ty) and GitHub Actions.
