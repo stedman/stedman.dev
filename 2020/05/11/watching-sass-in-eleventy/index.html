@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Improving Sass Watch in Eleventy • stedman.dev</title>
-  <meta name="description" content="An alternative Sass Watch workflow that works in 11ty.">
+  <title>Watching Sass in Eleventy • stedman.dev</title>
+  <meta name="description" content="Automatically kick-off Sass builds in 11ty with this workflow.">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/prism-atom-dark.css">
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
@@ -44,7 +44,7 @@
   <main class="page-main section has-background-white">
     <div class="columns">
       <div class="column is-three-fifths-desktop is-offset-one-fifth-desktop content is-size-5">
-        <h1>Improving Sass Watch in Eleventy</h1>
+        <h1>Watching Sass in Eleventy</h1>
 
         
 <p class="has-text-grey is-size-6">
@@ -54,7 +54,7 @@
   May 11, 2020
 </p>
 
-<p>I’ve been using <a href="https://github.com/sass/node-sass">node-sass</a> in my <a href="https://11ty.dev/">11ty</a> workflow for awhile now but for whatever reason couldn’t quite ever get the <code>--watch</code> flag to work. This meant that, for any SCSS update, I’d have to run back to the command line and manually run <code>npx node-sass src/_sass/_main.scss dist/css/main.css</code> or an npm script shortcut for the same.</p>
+<p>I’ve been using <a href="https://github.com/sass/node-sass">node-sass</a> in my <a href="https://11ty.dev/">11ty</a> workflow for awhile now but, for whatever reason, couldn’t get the <code>--watch</code> flag to work. This meant that, for any SCSS update, I’d have to toggle back to the command line and manually run <code>npx node-sass src/_sass/_main.scss dist/css/main.css</code> or an npm script shortcut for the same.</p>
 <p>Well, I finally had enough and came up with something that works for me. It might just work for you so I’m sharing the details here.</p>
 <ol>
 <li>
@@ -125,7 +125,7 @@
               </span>
               <span class="is-hidden-desktop">GitHub: stedman</span>
             </a>
-            <a class="navbar-item is-sr-only-desktop" href="https://github.com/stedman/stedman.dev/blob/master/./src/_posts/2020-05-11-improving-sass-watch-in-11ty.md">Edit this page on GitHub</a>
+            <a class="navbar-item is-sr-only-desktop" href="https://github.com/stedman/stedman.dev/blob/master/./src/_posts/2020-05-11-watching-sass-in-11ty.md">Edit this page on GitHub</a>
           </div>
         </div>
       </div>
