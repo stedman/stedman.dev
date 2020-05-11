@@ -7,11 +7,10 @@
     "build:css": "node-sass src/_sass/_main.scss dist/assets/css/main.css --output-style compressed",
     "build": "npm run clean && eleventy && npm run build:css",
     "clean": "rm -rf ./dist",
-    "dev:css": "node-sass src/_sass/_main.scss dist/assets/css/main.css",
     "lint:js": "npx eslint --fix .eleventy.js ./src/_includes/*.js",
     "lint:md": "npx markdownlint --fix ./src/_posts/*.md",
     "lint": "npm run lint:js && npm run lint:md",
-    "start": "ELEVENTY_ENV=dev eleventy --serve --watch",
+    "start": "eleventy --serve --watch",
     "test": "npm run lint"
   },
   "repository": {

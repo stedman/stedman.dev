@@ -11,6 +11,7 @@ layout: base
   </div>
 </div>
 
+{% if collections.posts | length %}
 <section class="section">
   <h2 class="is-size-4">Latest posts</h2>
   <ul>
@@ -19,3 +20,4 @@ layout: base
     {% endfor %}
   </ul>
 </section>
+{% endif %}

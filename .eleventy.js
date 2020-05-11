@@ -3,6 +3,7 @@ const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
+const sassWatch = require('./lib/sass-watch');
 const filters = require('./src/_includes/filters');
 
 /**
@@ -21,6 +22,12 @@ const addData = (posts) => posts.map((post) => {
 });
 
 module.exports = function (eleventyConfig) {
+  // Watch Sass directory for styling changes.
+  // Works only in dev mode. Though it throws and error and then continues on.
+  if (process.env.ELEVENTY_ENV === 'dev') {
+    sassWatch('./src/_sass/_main.scss', './dist/assets/css/main.css');
+  }
+
   // PLUGIN: PrismJS
   eleventyConfig.addPlugin(syntaxHighlight);
   // PLUGIN: RSS feed

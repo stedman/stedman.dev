@@ -30,8 +30,8 @@
               </a>
               <a class="navbar-item" href="{{ '/atom.xml' | url }}">
                 <span class="is-sr-only">Atom feed</span>
-                <span class="icon tooltip" title="Atom feed">
-                  <ion-icon class="is-size-5" name="logo-rss"></ion-icon>
+                <span class="icon" title="Atom feed">
+                  <ion-icon class="is-size-5" src="{{ '/assets/icon/logo-rss.svg' | url }}"></ion-icon>
                 </span>
               </a>
             </div>
@@ -66,19 +66,19 @@
           <div class="navbar-end">
             <a class="navbar-item is-inline-block-tablet" href="https://linkedin.com/in/{{ site.author.linkedin }}">
               <span class="icon tooltip" title="&ldquo;{{ site.author.linkedin }}&rdquo; on LinkedIn">
-                <ion-icon class="is-size-3" name="logo-linkedin"></ion-icon>
+                <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-linkedin.svg' | url }}"></ion-icon>
               </span>
               <span class="is-sr-only-desktop">LinkedIn: {{ site.author.linkedin }}</span>
             </a>
             <a class="navbar-item is-inline-block-tablet" href="https://twitter.com/{{ site.author.twitter }}">
               <span class="icon tooltip" title="&ldquo;@{{ site.author.twitter }}&rdquo; on Twitter">
-                <ion-icon class="is-size-3" name="logo-twitter"></ion-icon>
+                <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-twitter.svg' | url }}"></ion-icon>
               </span>
               <span class="is-sr-only-desktop">Twitter: @{{ site.author.twitter }}</span>
             </a>
             <a class="navbar-item is-inline-block-tablet" href="https://github.com/{{ site.author.github }}">
               <span class="icon tooltip" title="&ldquo;{{ site.author.github }}&rdquo; on GitHub">
-                <ion-icon class="is-size-3" name="logo-github"></ion-icon>
+                <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-github.svg' | url }}"></ion-icon>
               </span>
               <span class="is-hidden-desktop">GitHub: {{ site.author.github }}</span>
             </a>
