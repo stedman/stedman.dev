@@ -1,14 +1,14 @@
 ---
-title: Improving Sass Watch in Eleventy
+title: Watching Sass in Eleventy
 meta:
-  description: An alternative Sass Watch workflow that works in 11ty.
+  description: Automatically kick-off Sass builds in 11ty with this workflow.
 tags:
   - tutorial
   - 11ty
   - sass
 ---
 
-I've been using [node-sass](https://github.com/sass/node-sass) in my [11ty](https://11ty.dev/) workflow for awhile now but for whatever reason couldn't quite ever get the `--watch` flag to work. This meant that, for any SCSS update, I'd have to run back to the command line and manually run `npx node-sass src/_sass/_main.scss dist/css/main.css` or an npm script shortcut for the same.
+I've been using [node-sass](https://github.com/sass/node-sass) in my [11ty](https://11ty.dev/) workflow for awhile now but, for whatever reason, couldn't get the `--watch` flag to work. This meant that, for any SCSS update, I'd have to toggle back to the command line and manually run `npx node-sass src/_sass/_main.scss dist/css/main.css` or an npm script shortcut for the same.
 
 Well, I finally had enough and came up with something that works for me. It might just work for you so I'm sharing the details here.
 
