@@ -1,8 +1,154 @@
 @charset "utf-8";
 
-@import "../../node_modules/bulma/bulma.sass";
-@import "bulma-extends";
-@import "bulma-overrides";
+$grey: hsl(0, 0%, 46%);
+$red: hsl(348, 86%, 47%);
+
+// @import "../../node_modules/bulma/bulma.sass";
+
+@import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
+@import "../../node_modules/bulma/sass/utilities/functions.sass";
+@import "../../node_modules/bulma/sass/utilities/derived-variables.sass";
+// @import "../../node_modules/bulma/sass/utilities/animations.sass";
+@import "../../node_modules/bulma/sass/utilities/mixins.sass";
+@import "../../node_modules/bulma/sass/utilities/controls.sass";
+
+@import "../../node_modules/bulma/sass/base/minireset.sass";
+@import "../../node_modules/bulma/sass/base/generic.sass";
+@import "../../node_modules/bulma/sass/base/helpers.sass";
+
+@import "../../node_modules/bulma/sass/elements/box.sass";
+// @import "../../node_modules/bulma/sass/elements/button.sass";
+@import "../../node_modules/bulma/sass/elements/container.sass";
+@import "../../node_modules/bulma/sass/elements/content.sass";
+@import "../../node_modules/bulma/sass/elements/icon.sass";
+@import "../../node_modules/bulma/sass/elements/image.sass";
+@import "../../node_modules/bulma/sass/elements/notification.sass";
+// @import "../../node_modules/bulma/sass/elements/progress.sass";
+// @import "../../node_modules/bulma/sass/elements/table.sass";
+// @import "../../node_modules/bulma/sass/elements/tag.sass";
+@import "../../node_modules/bulma/sass/elements/title.sass";
+// @import "../../node_modules/bulma/sass/elements/other.sass";
+
+// @import "../../node_modules/bulma/sass/form/shared.sass";
+// @import "../../node_modules/bulma/sass/form/input-textarea.sass";
+// @import "../../node_modules/bulma/sass/form/checkbox-radio";
+// @import "../../node_modules/bulma/sass/form/select.sass";
+// @import "../../node_modules/bulma/sass/form/file.sass";
+// @import "../../node_modules/bulma/sass/form/tools.sass";
+
+// @import "../../node_modules/bulma/sass/components/breadcrumb.sass";
+@import "../../node_modules/bulma/sass/components/card.sass";
+// @import "../../node_modules/bulma/sass/components/dropdown.sass";
+@import "../../node_modules/bulma/sass/components/level.sass";
+@import "../../node_modules/bulma/sass/components/list.sass";
+@import "../../node_modules/bulma/sass/components/media.sass";
+// @import "../../node_modules/bulma/sass/components/menu.sass";
+@import "../../node_modules/bulma/sass/components/message.sass";
+// @import "../../node_modules/bulma/sass/components/modal.sass";
+@import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/components/pagination.sass";
+@import "../../node_modules/bulma/sass/components/panel.sass";
+// @import "../../node_modules/bulma/sass/components/tabs.sass";
+
+@import "../../node_modules/bulma/sass/grid/_all.sass";
+// @import "../../node_modules/bulma/sass/grid/columns.sass";
+// @import "../../node_modules/bulma/sass/grid/tiles.sass";
+
+@import "../../node_modules/bulma/sass/layout/_all.sass";
+// @import "../../node_modules/bulma/sass/layout/hero.sass";
+// @import "../../node_modules/bulma/sass/layout/section.sass";
+// @import "../../node_modules/bulma/sass/layout/footer.sass";
+
+/*
+ * Bulma overrides
+ */
+
+// This is more of a tweak.
+.icon {
+  vertical-align: bottom;
+}
+
+.content {
+  // fix nested list margins
+  li {
+    p {
+      & + ol,
+      & + ul {
+        margin-top: -0.5em;
+      }
+    }
+
+    ol,
+    ul {
+      margin-top: 0.5em;
+      margin-bottom: 0.75em;
+    }
+  }
+}
+
+code {
+  // does not play well with content width
+  pre & {
+    white-space: pre-wrap;
+  }
+
+  // conflicts with Prism class name
+  // comes from /elements/other.sass
+  // .number {
+  //   align-items: inherit;
+  //   background-color: inherit;
+  //   border-radius:inherit;
+  //   display: inherit;
+  //   font-size:inherit;
+  //   height: inherit;
+  //   justify-content:inherit;
+  //   margin-right:inherit;
+  //   min-width:inherit;
+  //   padding: inherit;
+  //   text-align:inherit;
+  //   vertical-align:inherit;
+  // }
+
+  // conflicts with Prism class name
+  // comes from /elements/tag.sass
+  // .tag:not(body) {
+  //   align-items: inherit;
+  //   background-color: inherit;
+  //   border-radius: inherit;
+  //   color: inherit;
+  //   display: inherit;
+  //   font-size: inherit;
+  //   height: inherit;
+  //   justify-content: inherit;
+  //   line-height: inherit;
+  //   padding-left: inherit;
+  //   padding-right: inherit;
+  //   white-space: inherit;
+  // }
+}
+
+/*
+ * Extend Bulma
+ */
+
+ @media screen and (min-width: $desktop) {
+  // This class does not exist in Bulma, but seemed useful to hide things on desktop
+  .is-sr-only-desktop {
+    border: none !important;
+    clip: rect(0, 0, 0, 0) !important;
+    height: 0.01em !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 0.01em !important;
+  }
+}
+
+/*
+ * THE REST
+ */
+
 @import "links";
 @import "tooltips";
 @import "prism-syntax-highlighting";
