@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="has-background-white-ter" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Improving Sass Watch in Eleventy • stedman.dev</title>
+  <meta name="description" content="An alternative Sass Watch workflow that works in 11ty.">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/prism-atom-dark.css">
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</head>
+<body>
+  <header class="page-header hero">
+    <div class="hero-body is-paddingless">
+      <div class="container">
+        <div class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item title is-size-4-tablet" href="/">
+              stedman.dev
+            </a>
+          </div>
+
+          <div class="navbar-menu is-size-5">
+            <div class="navbar-end">
+              <a class="navbar-item" href="/">
+                Home
+              </a>
+              <a class="navbar-item" href="/about/">
+                About
+              </a>
+              <a class="navbar-item" href="/atom.xml">
+                <span class="is-sr-only">Atom feed</span>
+                <span class="icon" title="Atom feed">
+                  <ion-icon class="is-size-5" src="/assets/icon/logo-rss.svg"></ion-icon>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main section has-background-white">
+    <div class="columns">
+      <div class="column is-three-fifths-desktop is-offset-one-fifth-desktop content is-size-5">
+        <h1>Improving Sass Watch in Eleventy</h1>
+
+        
+<p class="has-text-grey is-size-6">
+  <span class="is-inline-block" style="width: 0.9em">
+    <ion-icon class="is-size-6" style="fill: #b5b5b5" src="/assets/icon/today-outline.svg"></ion-icon>
+  </span>
+  May 11, 2020
+</p>
+
+<p>I’ve been using <a href="https://github.com/sass/node-sass">node-sass</a> in my <a href="https://11ty.dev/">11ty</a> workflow for awhile now but for whatever reason couldn’t quite ever get the <code>--watch</code> flag to work. This meant that, for any SCSS update, I’d have to run back to the command line and manually run <code>npx node-sass src/_sass/_main.scss dist/css/main.css</code> or an npm script shortcut for the same.</p>
+<p>Well, I finally had enough and came up with something that works for me. It might just work for you so I’m sharing the details here.</p>
+<ol>
+<li>
+<p>Make sure <code>node-sass</code> is installed.</p>
+<pre class="language-shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> --save-dev node-sass</code></pre>
+</li>
+<li>
+<p>Open a new file, name it <code>/lib/sass-watch.js</code>, and drop in the following code.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> sass <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'node-sass'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// Generate and save CSS.</span><br><span class="token keyword">const</span> <span class="token function-variable function">generateCss</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">_scssPath<span class="token punctuation">,</span> _cssPath</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>  <span class="token comment">// Encapsulate rendered css from _scssPath into renderedCss variable</span><br>  <span class="token keyword">const</span> renderedCss <span class="token operator">=</span> sass<span class="token punctuation">.</span><span class="token function">renderSync</span><span class="token punctuation">(</span><span class="token punctuation">{</span> file<span class="token operator">:</span> _scssPath <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Then write result css string to _cssPath file</span><br>  fs<span class="token punctuation">.</span><span class="token function">writeFile</span><span class="token punctuation">(</span>_cssPath<span class="token punctuation">,</span> renderedCss<span class="token punctuation">.</span>css<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">writeErr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span>writeErr<span class="token punctuation">)</span> <span class="token keyword">throw</span> writeErr<span class="token punctuation">;</span><br><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">CSS file saved: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>_cssPath<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span><br><br>module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">scssPath<span class="token punctuation">,</span> cssPath</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>  <span class="token comment">// If cssPath directory doesn't already exist, add it...</span><br>  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fs<span class="token punctuation">.</span><span class="token function">existsSync</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>cssPath<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Creating new CSS directory: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>cssPath<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token comment">// Create cssPath directory recursively</span><br>    fs<span class="token punctuation">.</span><span class="token function">mkdir</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>cssPath<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">{</span> recursive<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">mkdirErr</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>      <span class="token keyword">if</span> <span class="token punctuation">(</span>mkdirErr<span class="token punctuation">)</span> <span class="token keyword">throw</span> mkdirErr<span class="token punctuation">;</span><br><br>      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'CSS directory created.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>      <span class="token function">generateCss</span><span class="token punctuation">(</span>scssPath<span class="token punctuation">,</span> cssPath<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br><br>  <span class="token comment">// Generate CSS on startup</span><br>  <span class="token function">generateCss</span><span class="token punctuation">(</span>scssPath<span class="token punctuation">,</span> cssPath<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token comment">// Use Node's fs.watch to catch subsequent changes to scssPath directory</span><br>  fs<span class="token punctuation">.</span><span class="token function">watch</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>scssPath<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">evType<span class="token punctuation">,</span> filename</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span><br>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">SCSS file changed: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>path<span class="token punctuation">.</span><span class="token function">dirname</span><span class="token punctuation">(</span>scssPath<span class="token punctuation">)</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">/</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>    <span class="token function">generateCss</span><span class="token punctuation">(</span>scssPath<span class="token punctuation">,</span> cssPath<span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+</li>
+<li>
+<p>Edit <code>.eleventy.js</code> so that it now includes the following <code>sass-watch</code> bits.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">const</span> sassWatch <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./lib/sass-watch'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token comment">// Watch Sass directory for styling changes.</span><br>  <span class="token comment">// Works only if you set the ELEVENTY_ENV to 'dev'.</span><br>  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">ELEVENTY_ENV</span> <span class="token operator">===</span> <span class="token string">'dev'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token function">sassWatch</span><span class="token punctuation">(</span><span class="token string">'./src/_sass/_main.scss'</span><span class="token punctuation">,</span> <span class="token string">'./dist/css/main.css'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br>  <span class="token punctuation">.</span><span class="token punctuation">.</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Sharp-eyed folks will notice that the script above won’t run unless there’s an <code>ELEVENTY_ENV</code> environment variable set. This is to prevent sass-watch from running in production where it isn’t needed and might just cause mischief.</p>
+<p>I set the <code>ELEVENTY_ENV</code> variable to <code>dev</code> in two places for local development:</p>
+<ol>
+<li>
+<p>Command line: <code>package.json</code> start script:</p>
+<pre class="language-json"><code class="language-json"><span class="token property">"start"</span><span class="token operator">:</span> <span class="token string">"ELEVENTY_ENV=dev eleventy --serve --watch"</span></code></pre>
+</li>
+<li>
+<p>VSCode: <code>.vscode/launch.json</code> script:</p>
+<pre class="language-json"><code class="language-json"><span class="token punctuation">{</span><br>  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"0.2.0"</span><span class="token punctuation">,</span><br>  <span class="token property">"configurations"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><br>      <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"node"</span><span class="token punctuation">,</span><br>      <span class="token property">"request"</span><span class="token operator">:</span> <span class="token string">"launch"</span><span class="token punctuation">,</span><br>      <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Launch 11ty"</span><span class="token punctuation">,</span><br>      <span class="token property">"program"</span><span class="token operator">:</span> <span class="token string">"${workspaceFolder}/node_modules/@11ty/eleventy/cmd.js"</span><span class="token punctuation">,</span><br>      <span class="token property">"args"</span><span class="token operator">:</span> <span class="token punctuation">[</span><br>        <span class="token string">"--serve"</span><span class="token punctuation">,</span><br>        <span class="token string">"--watch"</span><br>      <span class="token punctuation">]</span><span class="token punctuation">,</span><br>      <span class="token property">"env"</span><span class="token operator">:</span> <span class="token punctuation">{</span><br>        <span class="token property">"ELEVENTY_ENV"</span><span class="token operator">:</span> <span class="token string">"dev"</span><br>      <span class="token punctuation">}</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">]</span><br><span class="token punctuation">}</span></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>Start Eleventy again via command line (<code>npm start</code>) or VSCode via the Debugger, all subsequent changes to Sass files should initiate an automatic build and the browser should refresh with the changes.</p>
+</li>
+</ol>
+<h2 id="conclusion">Conclusion <a class="anchor-link" href="#conclusion">permalink</a></h2>
+<p>I sincerely hope there’s a better solution for kicking-off Sass builds from file changes. If you can enlighten me, please reach out on <a href="https://twitter.com/stedman">Twitter @stedman</a>.</p>
+<p>Until then, I’ll be happily updating Sass and watching the changes show up in my browser.</p>
+
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer footer has-background-white-ter has-offset-top">
+    <div class="container">
+      <div class="navbar has-background-white-ter">
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <a class="navbar-item is-inline-block-tablet" href="/">
+              &copy; 2020 Steve Stedman
+            </a>
+            <a class="navbar-item is-sr-only-desktop is-inline-block-tablet" href="/about/">
+              About
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item is-inline-block-tablet" href="https://linkedin.com/in/sstedman">
+              <span class="icon tooltip" title="&ldquo;sstedman&rdquo; on LinkedIn">
+                <ion-icon class="is-size-3" src="/assets/icon/logo-linkedin.svg"></ion-icon>
+              </span>
+              <span class="is-sr-only-desktop">LinkedIn: sstedman</span>
+            </a>
+            <a class="navbar-item is-inline-block-tablet" href="https://twitter.com/stedman">
+              <span class="icon tooltip" title="&ldquo;@stedman&rdquo; on Twitter">
+                <ion-icon class="is-size-3" src="/assets/icon/logo-twitter.svg"></ion-icon>
+              </span>
+              <span class="is-sr-only-desktop">Twitter: @stedman</span>
+            </a>
+            <a class="navbar-item is-inline-block-tablet" href="https://github.com/stedman">
+              <span class="icon tooltip" title="&ldquo;stedman&rdquo; on GitHub">
+                <ion-icon class="is-size-3" src="/assets/icon/logo-github.svg"></ion-icon>
+              </span>
+              <span class="is-hidden-desktop">GitHub: stedman</span>
+            </a>
+            <a class="navbar-item is-sr-only-desktop" href="https://github.com/stedman/stedman.dev/blob/master/./src/_posts/2020-05-11-improving-sass-watch-in-11ty.md">Edit this page on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer><!-- Begin Web-Stat code v 7.0 -->
+  <span id="wts1975337"></span>
+  <script>var wts7 = {invisible:'yes'};
+  var wts=document.createElement('script');wts.async=true;
+  wts.src='https://wts.one/log7.js';document.head.appendChild(wts);
+  wts.onload = function(){ wtslog7(1975337,1); };
+  </script><noscript><a href="https://www.web-stat.com">
+  <img src="https://wts.one/7/1/1975337.png"
+  alt="Web-Stat site statistics"></a></noscript>
+  <!-- End Web-Stat code v 7.0 --></body>
+</html>
