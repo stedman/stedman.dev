@@ -18,7 +18,7 @@ Well, I finally had enough and came up with something that works for me. It migh
     npm install --save-dev node-sass
     ```
 
-2. Open a new file, name it `/lib/sass-watch.js`, and drop in the following code.
+2. Open a new file, name it `/_includes/sass-watch.js`, and drop in the following code.
 
     ```js
     const fs = require('fs');
@@ -68,7 +68,7 @@ Well, I finally had enough and came up with something that works for me. It migh
 3. Edit `.eleventy.js` so that it now includes the following `sass-watch` bits.
 
     ```js
-    const sassWatch = require('./lib/sass-watch');
+    const sassWatch = require('./_includes/sass-watch');
 
     module.exports = function (eleventyConfig) {
       // Watch Sass directory for styling changes.

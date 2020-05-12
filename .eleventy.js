@@ -3,7 +3,7 @@ const markdownIt = require('markdown-it');
 const markdownItAnchor = require('markdown-it-anchor');
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const pluginRss = require('@11ty/eleventy-plugin-rss');
-const sassWatch = require('./lib/sass-watch');
+const sassWatch = require('./src/_includes/sass-watch');
 const filters = require('./src/_includes/filters');
 
 /**

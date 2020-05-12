@@ -3,28 +3,26 @@ const path = require('path');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sass = require('node-sass');
 
+/**
+ * Generate and save CSS.
+ *
+ * @param {string} _scssPath Path to SCSS src file.
+ * @param {string} _cssPath  Path to CSS dist files.
+ */
+const generateCss = (_scssPath, _cssPath) => {
+  // Encapsulate rendered css from _scssPath into renderedCss variable
+  const renderedCss = sass.renderSync({ file: _scssPath });
+
+  // Then write result css string to _cssPath file
+  fs.writeFile(_cssPath, renderedCss.css.toString(), (writeErr) => {
+    if (writeErr) throw writeErr;
+
+    // eslint-disable-next-line no-console
+    console.log(`CSS file saved: ${_cssPath}`);
+  });
+};
+
 module.exports = (scssPath, cssPath) => {
-  /**
-   * Generate and save CSS.
-   *
-   * @param {string} _scssPath Path to SCSS src file.
-   * @param {string} _cssPath  Path to CSS dist files.
-   */
-  const generateCss = (_scssPath, _cssPath) => {
-    // Encapsulate rendered css from _scssPath into renderedCss variable
-    const renderedCss = sass.renderSync({ file: _scssPath });
-
-    // Then write result css string to _cssPath file
-    fs.writeFile(_cssPath, renderedCss.css.toString(), (writeErr) => {
-      if (writeErr) throw writeErr;
-
-      // eslint-disable-next-line no-console
-      console.log(`CSS file saved: ${_cssPath}`);
-    });
-
-    return undefined;
-  };
-
   // If cssPath directory doesn't exist...
   if (!fs.existsSync(path.dirname(cssPath))) {
     // eslint-disable-next-line no-console
