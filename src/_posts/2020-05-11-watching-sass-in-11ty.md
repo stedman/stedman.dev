@@ -18,7 +18,7 @@ Well, I finally had enough and came up with something that works for me. It migh
     npm install --save-dev node-sass
     ```
 
-2. Open a new file, name it `/_includes/sass-watch.js`, and drop in the following code.
+2. Open a new file, name it `_includes/sass-watch.js`, and drop in the following code.
 
     ```js
     const fs = require('fs');

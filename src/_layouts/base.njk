@@ -7,6 +7,7 @@
   <meta name="description" content="{{ meta.description if meta.description else site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
   <link rel="stylesheet" href="{{ '/assets/css/prism-atom-dark.css' | url }}">
+  <link rel="alternate" type="application/atom+xml" href="{{ site.feedUrl | url }}" title="{{ site.title }} Atom feed">
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </head>
 <body>
@@ -64,19 +65,19 @@
             </a>
           </div>
           <div class="navbar-end">
-            <a class="navbar-item is-inline-block-tablet" href="https://linkedin.com/in/{{ site.author.linkedin }}">
+            <a class="navbar-item is-inline-block-tablet" href="https://linkedin.com/in/{{ site.author.linkedin }}" rel="me">
               <span class="icon tooltip" title="&ldquo;{{ site.author.linkedin }}&rdquo; on LinkedIn">
                 <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-linkedin.svg' | url }}"></ion-icon>
               </span>
               <span class="is-sr-only-desktop">LinkedIn: {{ site.author.linkedin }}</span>
             </a>
-            <a class="navbar-item is-inline-block-tablet" href="https://twitter.com/{{ site.author.twitter }}">
+            <a class="navbar-item is-inline-block-tablet" href="https://twitter.com/{{ site.author.twitter }}" rel="me">
               <span class="icon tooltip" title="&ldquo;@{{ site.author.twitter }}&rdquo; on Twitter">
                 <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-twitter.svg' | url }}"></ion-icon>
               </span>
               <span class="is-sr-only-desktop">Twitter: @{{ site.author.twitter }}</span>
             </a>
-            <a class="navbar-item is-inline-block-tablet" href="https://github.com/{{ site.author.github }}">
+            <a class="navbar-item is-inline-block-tablet" href="https://github.com/{{ site.author.github }}" rel="me authn">
               <span class="icon tooltip" title="&ldquo;{{ site.author.github }}&rdquo; on GitHub">
                 <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-github.svg' | url }}"></ion-icon>
               </span>
