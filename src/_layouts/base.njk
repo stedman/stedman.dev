@@ -7,8 +7,8 @@
   <meta name="description" content="{{ meta.description if meta.description else site.description }}">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
   <link rel="stylesheet" href="{{ '/assets/css/prism-atom-dark.css' | url }}">
+  <link rel=canonical href="{{ site.url }}{{ page.url | url }}">
   <link rel="alternate" type="application/atom+xml" href="{{ site.feedUrl | url }}" title="{{ site.title }} Atom feed">
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </head>
 <body>
   <header class="page-header hero">
@@ -101,5 +101,6 @@
   alt="Web-Stat site statistics"></a></noscript>
   <!-- End Web-Stat code v 7.0 -->
   {%- endif -%}
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </body>
 </html>

@@ -82,7 +82,7 @@ Well, I finally had enough and came up with something that works for me. It migh
 
     Sharp-eyed folks will notice that the script above won't run unless there's an `ELEVENTY_ENV` environment variable set. This is to prevent sass-watch from running in production where it isn't needed and might just cause mischief.
 
-    I set the `ELEVENTY_ENV` variable to `dev` in two places for local development:
+    For local development, I set the `ELEVENTY_ENV` variable to `dev` in two places but mostly rely on the VSCode debugger for daily use.
 
     1. Command line: `package.json` start script:
 
