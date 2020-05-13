@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Make the Jump from Jekyll to JavaScript • stedman.dev</title>
   <meta name="description" content="Standing up a website with GitHub Pages was always pretty quick and easy. Now it&#39;s even easier and more enjoyable with Eleventy (11ty) and GitHub Actions.">
+  <link rel=canonical href="https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/">
+  <link rel="alternate" type="application/atom+xml" href="https://stedman.dev/atom.xml" title="stedman.dev Atom feed">
+  <link rel="webmention" href="https://webmention.io/stedman.dev/webmention">
+  <link rel="pingback" href="https://webmention.io/stedman.dev/xmlrpc">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/prism-atom-dark.css">
-  <link rel="alternate" type="application/atom+xml" href="https://stedman.dev/atom.xml" title="stedman.dev Atom feed">
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </head>
 <body>
   <header class="page-header hero">
@@ -45,17 +47,23 @@
   <main class="page-main section has-background-white">
     <div class="columns">
       <div class="column is-three-fifths-desktop is-offset-one-fifth-desktop content is-size-5">
-        <h1>Make the Jump from Jekyll to JavaScript</h1>
-
         
-<p class="has-text-grey is-size-6">
-  <span class="is-inline-block" style="width: 0.9em">
-    <ion-icon class="is-size-6" style="fill: #b5b5b5" src="/assets/icon/today-outline.svg"></ion-icon>
-  </span>
-  April 29, 2020
-</p>
+<article class="h-entry">
+  <h1 class="p-name">Make the Jump from Jekyll to JavaScript</h1>
 
-<p>With the recent addition of <a href="https://github.com/features/actions">Actions</a> to GitHub’s product lineup, we now have the ability to create a <em>100% Pure, Unfiltered™</em> JavaScript alternative to Jekyll (and Ruby) in GitHub Pages. This is a big deal. Really.</p>
+  <p class="is-sr-only">By <em class="p-author">Steve Stedman</em></p>
+
+  <p class="has-text-grey is-size-6">
+    <span class="is-inline-block" style="vertical-align:middle">
+      <ion-icon class="is-size-6" style="fill: #b5b5b5" src="/assets/icon/today-outline.svg"></ion-icon>
+    </span>
+    <time class="dt-published" datetime="2020-04-29T00:00:00-00:00">
+      April 29, 2020
+    </time>
+  </p>
+
+  <div class="e-content">
+    <p>With the recent addition of <a href="https://github.com/features/actions">Actions</a> to GitHub’s product lineup, we now have the ability to create a <em>100% Pure, Unfiltered™</em> JavaScript alternative to Jekyll (and Ruby) in GitHub Pages. This is a big deal. Really.</p>
 <h2 id="back-story">Back story <a class="anchor-link" href="#back-story">permalink</a></h2>
 <p><a href="https://pages.github.com/">GitHub Pages</a>, for the uninitiated, allows you to create websites from the source code stored in a GitHub repo. There are no databases to set up, no servers to provision, and no file transfers (at least not in the traditional sense). Better yet, it allows you to transform plain text into static websites and blogs with the help of Jekyll.</p>
 <p><a href="https://jekyllrb.com/">Jekyll</a> is a pretty sweet static site generator. It’s been around quite awhile, is battle tested, and is backed by a huge community. It’s also simple enough for beginners and yet powerful enough for advanced users. Unfortunately, customizing it requires running it locally and this is where things get sticky. Jekyll is based on Ruby. For casual users, Ruby is a challenge to set up and maintain—especially on Windows. Scaling is also an issue for Jekyll/Ruby as bigger builds are notorious for taking a long time to compile.</p>
@@ -223,6 +231,8 @@
 <p>For 12 years, GitHub teased us with a web hosting product that almost did everything we needed. We were grateful and we made due. Along the way, we came up with hacks and workarounds, employing one or more outside services to complete the task. But nothing quite combined source code versioning, flexible site generation, and web hosting in one elegant package.</p>
 <p>With Eleventy and GitHub Actions, we now have it all.</p>
 
+  </div>
+</article>
 
       </div>
     </div>
@@ -233,9 +243,12 @@
       <div class="navbar has-background-white-ter">
         <div class="navbar-menu is-active">
           <div class="navbar-start">
-            <a class="navbar-item is-inline-block-tablet" href="/">
-              &copy; 2020 Steve Stedman
-            </a>
+            <span class="navbar-item is-inline-block-tablet">
+              &copy; 2020
+              <a class="h-card" rel="me" href="https://stedman.dev/">
+                Steve Stedman
+              </a>
+            </span>
             <a class="navbar-item is-sr-only-desktop is-inline-block-tablet" href="/about/">
               About
             </a>
@@ -273,5 +286,6 @@
   </script><noscript><a href="https://www.web-stat.com">
   <img src="https://wts.one/7/1/1975337.png"
   alt="Web-Stat site statistics"></a></noscript>
-  <!-- End Web-Stat code v 7.0 --></body>
+  <!-- End Web-Stat code v 7.0 --><script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</body>
 </html>

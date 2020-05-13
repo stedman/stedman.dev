@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Watching Sass in Eleventy • stedman.dev</title>
   <meta name="description" content="Automatically kick-off Sass builds in 11ty with this workflow.">
+  <link rel=canonical href="https://stedman.dev/2020/05/11/watching-sass-in-eleventy/">
+  <link rel="alternate" type="application/atom+xml" href="https://stedman.dev/atom.xml" title="stedman.dev Atom feed">
+  <link rel="webmention" href="https://webmention.io/stedman.dev/webmention">
+  <link rel="pingback" href="https://webmention.io/stedman.dev/xmlrpc">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/prism-atom-dark.css">
-  <link rel="alternate" type="application/atom+xml" href="https://stedman.dev/atom.xml" title="stedman.dev Atom feed">
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </head>
 <body>
   <header class="page-header hero">
@@ -45,17 +47,23 @@
   <main class="page-main section has-background-white">
     <div class="columns">
       <div class="column is-three-fifths-desktop is-offset-one-fifth-desktop content is-size-5">
-        <h1>Watching Sass in Eleventy</h1>
-
         
-<p class="has-text-grey is-size-6">
-  <span class="is-inline-block" style="width: 0.9em">
-    <ion-icon class="is-size-6" style="fill: #b5b5b5" src="/assets/icon/today-outline.svg"></ion-icon>
-  </span>
-  May 11, 2020
-</p>
+<article class="h-entry">
+  <h1 class="p-name">Watching Sass in Eleventy</h1>
 
-<p>I’ve been using <a href="https://github.com/sass/node-sass">node-sass</a> in my <a href="https://11ty.dev/">11ty</a> workflow for awhile now but, for whatever reason, couldn’t get the <code>--watch</code> flag to work. This meant that, for any SCSS update, I’d have to toggle back to the command line and manually run <code>npx node-sass src/_sass/_main.scss dist/css/main.css</code> or an npm script shortcut for the same.</p>
+  <p class="is-sr-only">By <em class="p-author">Steve Stedman</em></p>
+
+  <p class="has-text-grey is-size-6">
+    <span class="is-inline-block" style="vertical-align:middle">
+      <ion-icon class="is-size-6" style="fill: #b5b5b5" src="/assets/icon/today-outline.svg"></ion-icon>
+    </span>
+    <time class="dt-published" datetime="2020-05-11T00:00:00-00:00">
+      May 11, 2020
+    </time>
+  </p>
+
+  <div class="e-content">
+    <p>I’ve been using <a href="https://github.com/sass/node-sass">node-sass</a> in my <a href="https://11ty.dev/">11ty</a> workflow for awhile now but, for whatever reason, couldn’t get the <code>--watch</code> flag to work. This meant that, for any SCSS update, I’d have to toggle back to the command line and manually run <code>npx node-sass src/_sass/_main.scss dist/css/main.css</code> or an npm script shortcut for the same.</p>
 <p>Well, I finally had enough and came up with something that works for me. It might just work for you so I’m sharing the details here.</p>
 <ol>
 <li>
@@ -70,7 +78,7 @@
 <p>Edit <code>.eleventy.js</code> so that it now includes the following <code>sass-watch</code> bits.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">const</span> sassWatch <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./_includes/sass-watch'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>module<span class="token punctuation">.</span><span class="token function-variable function">exports</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">eleventyConfig</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token comment">// Watch Sass directory for styling changes.</span><br>  <span class="token comment">// Works only if you set the ELEVENTY_ENV to 'dev'.</span><br>  <span class="token keyword">if</span> <span class="token punctuation">(</span>process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">ELEVENTY_ENV</span> <span class="token operator">===</span> <span class="token string">'dev'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token function">sassWatch</span><span class="token punctuation">(</span><span class="token string">'./src/_sass/_main.scss'</span><span class="token punctuation">,</span> <span class="token string">'./dist/css/main.css'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br>  <span class="token punctuation">.</span><span class="token punctuation">.</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
 <p>Sharp-eyed folks will notice that the script above won’t run unless there’s an <code>ELEVENTY_ENV</code> environment variable set. This is to prevent sass-watch from running in production where it isn’t needed and might just cause mischief.</p>
-<p>I set the <code>ELEVENTY_ENV</code> variable to <code>dev</code> in two places for local development:</p>
+<p>For local development, I set the <code>ELEVENTY_ENV</code> variable to <code>dev</code> in two places but mostly rely on the VSCode debugger for daily use.</p>
 <ol>
 <li>
 <p>Command line: <code>package.json</code> start script:</p>
@@ -90,6 +98,8 @@
 <p>I sincerely hope there’s a better solution for kicking-off Sass builds from file changes. If you can enlighten me, please reach out on <a href="https://twitter.com/stedman">Twitter @stedman</a>.</p>
 <p>Until then, I’ll be happily updating Sass and watching the changes show up in my browser.</p>
 
+  </div>
+</article>
 
       </div>
     </div>
@@ -100,9 +110,12 @@
       <div class="navbar has-background-white-ter">
         <div class="navbar-menu is-active">
           <div class="navbar-start">
-            <a class="navbar-item is-inline-block-tablet" href="/">
-              &copy; 2020 Steve Stedman
-            </a>
+            <span class="navbar-item is-inline-block-tablet">
+              &copy; 2020
+              <a class="h-card" rel="me" href="https://stedman.dev/">
+                Steve Stedman
+              </a>
+            </span>
             <a class="navbar-item is-sr-only-desktop is-inline-block-tablet" href="/about/">
               About
             </a>
@@ -140,5 +153,6 @@
   </script><noscript><a href="https://www.web-stat.com">
   <img src="https://wts.one/7/1/1975337.png"
   alt="Web-Stat site statistics"></a></noscript>
-  <!-- End Web-Stat code v 7.0 --></body>
+  <!-- End Web-Stat code v 7.0 --><script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</body>
 </html>
