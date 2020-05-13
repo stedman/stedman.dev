@@ -2,11 +2,21 @@
 layout: base
 ---
 
-<p class="has-text-grey is-size-6">
-  <span class="is-inline-block" style="width: 0.9em">
-    <ion-icon class="is-size-6" style="fill: #b5b5b5" src="{{ '/assets/icon/today-outline.svg' | url }}"></ion-icon>
-  </span>
-  {{ page.date | fullDate }}
-</p>
+<article class="h-entry">
+  <h1 class="p-name">{{ title }}</h1>
 
-{{ content | safe }}
+  <p class="is-sr-only">By <em class="p-author">Steve Stedman</em></p>
+
+  <p class="has-text-grey is-size-6">
+    <span class="is-inline-block" style="vertical-align:middle">
+      <ion-icon class="is-size-6" style="fill: #b5b5b5" src="{{ '/assets/icon/today-outline.svg' | url }}"></ion-icon>
+    </span>
+    <time class="dt-published" datetime="{{ page.date | rssDate }}">
+      {{ page.date | fullDate }}
+    </time>
+  </p>
+
+  <div class="e-content">
+    {{ content | safe }}
+  </div>
+</article>

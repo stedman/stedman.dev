@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{%- if title -%}{{ title }} • {% endif -%}{{ site.title }}</title>
   <meta name="description" content="{{ meta.description if meta.description else site.description }}">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/prism-atom-dark.css' | url }}">
   <link rel=canonical href="{{ site.url }}{{ page.url | url }}">
   <link rel="alternate" type="application/atom+xml" href="{{ site.feedUrl | url }}" title="{{ site.title }} Atom feed">
+  <link rel="webmention" href="https://webmention.io/stedman.dev/webmention">
+  <link rel="pingback" href="https://webmention.io/stedman.dev/xmlrpc">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/prism-atom-dark.css' | url }}">
 </head>
 <body>
   <header class="page-header hero">
@@ -45,8 +47,6 @@
   <main class="page-main section has-background-white">
     <div class="columns">
       <div class="column is-three-fifths-desktop is-offset-one-fifth-desktop content is-size-5">
-        <h1>{{ title }}</h1>
-
         {{ content | safe }}
       </div>
     </div>
@@ -57,9 +57,12 @@
       <div class="navbar has-background-white-ter">
         <div class="navbar-menu is-active">
           <div class="navbar-start">
-            <a class="navbar-item is-inline-block-tablet" href="{{ '/' | url }}">
-              &copy; {{ page.date.getFullYear() }} {{ site.author.name }}
-            </a>
+            <span class="navbar-item is-inline-block-tablet">
+              &copy; {{ page.date.getFullYear() }}
+              <a class="h-card" rel="me" href="{{ site.url | url }}/">
+                {{ site.author.name }}
+              </a>
+            </span>
             <a class="navbar-item is-sr-only-desktop is-inline-block-tablet" href="{{ '/about/' | url }}">
               About
             </a>
