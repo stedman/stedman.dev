@@ -3,17 +3,16 @@ layout: base
 ---
 
 <p class="title">
-  Howdy folks. I'm Steve Stedman.<br>
-  I lead teams that design and develop great experiences.
+  Howdy folks. I'm Steve Stedman.<br class="is-hidden-mobile">
+  I lead teams that design and develop<br class="is-hidden-mobile">
+  great web experiences.
 </p>
 
-{% if collections.posts | length %}
 <section class="section">
   <h2 class="is-size-4">Latest posts</h2>
   <ul>
-    {% for post in collections.posts | reverse %}
+    {% for post in collections.posts reversed %}
     <li><a href="{{ post.url | url }}">{{ post.data.title }}</a></li>
     {% endfor %}
   </ul>
 </section>
-{% endif %}

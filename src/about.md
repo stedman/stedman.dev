@@ -16,7 +16,7 @@ I am an avid learner, deeply involved with the Austin tech community, and eager 
 The current tech stack has me pretty excited. I'll dive into more details soon. Until then, here's the spec sheet.
 
 * Static site generator: [Eleventy (11ty)](https://11ty.dev/)
-* Templating language: [Nunjucks](https://mozilla.github.io/nunjucks/)
+* Templating language: [LiquidJS](https://liquidjs.com/)
 * Syntax highlighting: [Prism](https://prismjs.com), [Atom Dark theme](https://github.com/PrismJS/prism-themes/blob/master/themes/prism-atom-dark.css)
 * Icons: [Ionicons](https://ionicons.com/)
 * CSS framework: [Bulma](https://bulma.io/)

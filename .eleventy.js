@@ -12,7 +12,7 @@ const filters = require('./src/_includes/filters');
  * @param  {object}   posts   Collection to add date properties to.
  * @return {object}           Augmented posts collection.
  */
-const addData = (posts) => posts.map((post) => {
+const addFileDates = (posts) => posts.map((post) => {
   const stat = fs.statSync(post.inputPath) || {};
 
   post.dateCreated = stat.birthtime;
@@ -33,13 +33,13 @@ module.exports = function (eleventyConfig) {
   // PLUGIN: RSS feed
   eleventyConfig.addPlugin(pluginRss);
 
-  const options = {
-    mdit: {
+  const mdItOptions = {
+    main: {
       html: true,
       linkify: true,
       typographer: true,
     },
-    mdita: {
+    anchor: {
       permalink: true,
       permalinkClass: 'anchor-link',
       permalinkSymbol: 'permalink',
@@ -48,8 +48,8 @@ module.exports = function (eleventyConfig) {
   };
 
   // LIBRARY: markdown-it with markdown-it-anchor
-  eleventyConfig.setLibrary('md', markdownIt(options.mdit)
-    .use(markdownItAnchor, options.mdita));
+  eleventyConfig.setLibrary('md', markdownIt(mdItOptions.main)
+    .use(markdownItAnchor, mdItOptions.anchor));
 
   // PASSTHRU: Copy un-compiled files to the dist folder
   eleventyConfig.addPassthroughCopy('src/assets');
@@ -60,11 +60,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection('posts', async (collection) => {
     const posts = collection.getFilteredByGlob('./src/_posts/**.md');
 
-    return addData(posts);
+    return addFileDates(posts);
   });
 
   // FILTERS
-  eleventyConfig.addFilter('fullDate', filters.fullDate);
   eleventyConfig.addFilter('regexReplace', filters.regexReplace);
 
   return {
@@ -76,12 +75,12 @@ module.exports = function (eleventyConfig) {
       data: './_data',
     },
     templateFormats: [
-      'html',
+      'liquid',
       'njk',
       'md',
-      'liquid',
+      'html',
     ],
-    htmlTemplateEngine: 'njk',
-    dataTemplateEngine: 'njk',
+    htmlTemplateEngine: 'liquid',
+    dataTemplateEngine: 'liquid',
   };
 };

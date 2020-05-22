@@ -12,7 +12,7 @@ layout: base
       <ion-icon class="is-size-6" style="fill: #b5b5b5" src="{{ '/assets/icon/today-outline.svg' | url }}"></ion-icon>
     </span>
     <time class="dt-published" datetime="{{ page.date | rssDate }}">
-      {{ page.date | fullDate }}
+      {{ page.date | date: '%B %d, %Y' }}
     </time>
   </p>
 

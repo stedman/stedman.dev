@@ -1,11 +1,18 @@
 @charset "utf-8";
 
+// Make more accessible
 $grey: hsl(0, 0%, 46%);
 $red: hsl(348, 86%, 47%);
+$primary: hsl(12, 70%, 45%);
 
 // @import "../../node_modules/bulma/bulma.sass";
 
 @import "../../node_modules/bulma/sass/utilities/initial-variables.sass";
+
+$scheme-main: $white-ter;
+$footer-background-color: $white-ter;
+$code: hsl(0, 70%, 50%);
+
 @import "../../node_modules/bulma/sass/utilities/functions.sass";
 @import "../../node_modules/bulma/sass/utilities/derived-variables.sass";
 // @import "../../node_modules/bulma/sass/utilities/animations.sass";
@@ -64,10 +71,6 @@ $red: hsl(348, 86%, 47%);
  */
 
 // This is more of a tweak.
-.icon {
-  vertical-align: bottom;
-}
-
 .content {
   // fix nested list margins
   li {
@@ -86,45 +89,15 @@ $red: hsl(348, 86%, 47%);
   }
 }
 
+.icon {
+  vertical-align: bottom;
+}
+
 code {
   // does not play well with content width
   pre & {
     white-space: pre-wrap;
   }
-
-  // conflicts with Prism class name
-  // comes from /elements/other.sass
-  // .number {
-  //   align-items: inherit;
-  //   background-color: inherit;
-  //   border-radius:inherit;
-  //   display: inherit;
-  //   font-size:inherit;
-  //   height: inherit;
-  //   justify-content:inherit;
-  //   margin-right:inherit;
-  //   min-width:inherit;
-  //   padding: inherit;
-  //   text-align:inherit;
-  //   vertical-align:inherit;
-  // }
-
-  // conflicts with Prism class name
-  // comes from /elements/tag.sass
-  // .tag:not(body) {
-  //   align-items: inherit;
-  //   background-color: inherit;
-  //   border-radius: inherit;
-  //   color: inherit;
-  //   display: inherit;
-  //   font-size: inherit;
-  //   height: inherit;
-  //   justify-content: inherit;
-  //   line-height: inherit;
-  //   padding-left: inherit;
-  //   padding-right: inherit;
-  //   white-space: inherit;
-  // }
 }
 
 /*
@@ -148,6 +121,11 @@ code {
 /*
  * THE REST
  */
+
+.site-logo {
+  color: $primary;
+  margin-right: 0.4em !important;
+}
 
 @import "links";
 @import "tooltips";
