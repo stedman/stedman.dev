@@ -24,6 +24,12 @@ If only we could run a static site generator on Pages with all the hooks and pri
 
 Well, now you can. All the pieces have finally fallen into place.
 
+> **UPDATE:** If you're working with GitHub **user** or **organization** sites, you can only [publish from the `master` branch](https://help.github.com/en/github/working-with-github-pages/about-github-pages#publishing-sources-for-github-pages-sites). This effectively prevents alternative GitHub Pages deployments such as the one described below for those types of sites.
+>
+> What are **user** or **organization** sites? Those are the sites that publish from repos named `<user>.github.io` (or `<organization>.github.io`) and have URLs that look like `https://<user>.github.io/`.
+>
+> All other repos are considered **project** sites. The deploy steps defined in this tutorial will work with those sites since they can [publish from the `gh-pages` branch](https://help.github.com/en/github/working-with-github-pages/about-github-pages#publishing-sources-for-github-pages-sites).
+
 ## The build
 
 This brief tutorial will cover the essentials of migrating from Jekyll to JavaScript. The following are required to get started:
@@ -100,13 +106,16 @@ It also makes the transition from Jekyll to JavaScript almost completely seamles
           'md',
           'njk',
         ],
+        pathPrefix: '/<repo_name>/', // omit this line if using custom domain
       };
     };
     ```
 
     Looking at the `dir.output` above, notice that we are maintaining parity with Jekyll's deployment, using the `./_site` directory for our compiled code.
 
-7. To the `scripts` section of `package.json`, add the following. We'll need the `build` script for our deployment later.
+    Also note that, unless you're using a [custom domain](#the-custom-domain), you'll need to add a [path prefix](https://www.11ty.dev/docs/config/#deploy-to-a-subdirectory-with-a-path-prefix) (`/<repo_name>/`) to the config options. This is because [project sites](https://help.github.com/en/github/working-with-github-pages/about-github-pages#types-of-github-pages-sites) are hosted on subdirectory URLs that look like `https://<user>.github.io/<repo_name>/`.
+
+6. To the `scripts` section of `package.json`, add the following. We'll need the `build` script for our deployment later.
 
     ```json
       "scripts": {
@@ -124,7 +133,7 @@ It also makes the transition from Jekyll to JavaScript almost completely seamles
 
 Now for the real magic sauce, [GitHub Actions](https://docs.github.com/en/actions)-style.
 
-### Set up workflow
+### Set up a workflow
 
 1. Open a browser to your GitHub repo and then select the **Actions** tab.
 2. Tap on the **New workflow** button.
@@ -229,7 +238,7 @@ Your updates will deploy to live in mere seconds. All of this takes place within
 
 ## The custom domain
 
-GitHub provides [default user sites](https://help.github.com/en/github/working-with-github-pages/about-github-pages#types-of-github-pages-sites) that may suit you just fine. If, however, you want to use a custom domain, there's a bit more work involved.
+GitHub provides [project sites](https://help.github.com/en/github/working-with-github-pages/about-github-pages#types-of-github-pages-sites) (e.g., `https://<user>.github.io/<repo_name>/`) that may suit you just fine. If, however, you want to use a custom domain (e.g., `https://example.com/`), there's a bit more work involved.
 
 ### Set up a custom domain
 
