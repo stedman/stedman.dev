@@ -22,5 +22,5 @@ The current tech stack has me pretty excited. I'll dive into more details soon. 
 * CSS framework: [Bulma](https://bulma.io/)
 * Stylesheet preprocessor: [Sass](https://sass-lang.com/), [node-sass](https://github.com/sass/node-sass)
 * JavaScript linting: [ESLint](https://eslint.org), [Airbnb config](https://www.npmjs.com/package/eslint-config-airbnb-base)
-* Source code, hosting: [GitHub](https://github.com/stedman/stedman.dev/)
+* Source code repository and hosting: [GitHub](https://github.com/stedman/stedman.dev/)
 * Deployment (CI/CD): [GitHub](https://github.com/stedman/stedman.dev/actions)

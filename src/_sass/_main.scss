@@ -11,7 +11,12 @@ $primary: hsl(12, 70%, 45%);
 
 $scheme-main: $white-ter;
 $footer-background-color: $white-ter;
-$code: hsl(0, 70%, 50%);
+$code: $black-ter;
+$code-background: transparent;
+$code-padding: 0.1em 0.3em;
+
+$widescreen-enabled: false;
+$fullhd-enabled: false;
 
 @import "../../node_modules/bulma/sass/utilities/functions.sass";
 @import "../../node_modules/bulma/sass/utilities/derived-variables.sass";
@@ -93,9 +98,27 @@ $code: hsl(0, 70%, 50%);
   vertical-align: bottom;
 }
 
+a {
+  .footer & {
+    color: currentColor;
+    font-weight: bold;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 code {
-  // does not play well with content width
+  border-radius: $radius;
+
+  &:not([class*='language-']) {
+    border: 1px solid #ddd;
+  }
+
   pre & {
+    // does not play well with content width
     white-space: pre-wrap;
   }
 }
@@ -125,6 +148,54 @@ code {
 .site-logo {
   color: $primary;
   margin-right: 0.4em !important;
+}
+
+/*
+ * FAUX BROWSER CHROME FOR SCREENCAPS
+ */
+
+.browser-chrome {
+  background-color: #bbb;
+  border-radius: 5px;
+  margin-bottom: 3rem !important;
+  padding: 1.25rem 0.5rem 0.1rem;
+
+  figcaption {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    position: absolute;
+    right: 0;
+  }
+}
+
+.browser-parts {
+  &,
+  &:before,
+  &:after {
+    background-color: #ff5f55;
+    border-radius: 1rem;
+    height: 0.5rem;
+    position: absolute;
+    top: 0.35rem;
+    width: 0.5rem;
+  }
+
+  & {
+    left: 0.5rem;
+  }
+
+  &:before,
+  &:after {
+    background-color: #ffc332;
+    content: '';
+    left: 0.75rem;
+    top: 0;
+  }
+
+  &:after {
+    background-color: #28c841;
+    left: 1.5rem;
+  }
 }
 
 @import "links";
