@@ -2,12 +2,12 @@
 layout: base
 title: About me
 meta:
-  description: Steve Stedman is an experienced web developer who takes pride in leading innovative teams and inspiring passion for the craft.
+  description: More about Steve Stedman, a technology leader with 18+ years experience building diverse teams and championing elegant, empowering, and engaging web experiences.
 ---
 
-<h1>{{ title }}</h1>
+# {{ title }}
 
-I'm Steve Stedman, a web developer with 20+ years of experience leading cross-functional teams and driving all phases of the software development life cycle. I take pride in crafting well-designed, innovative, and accessible experiences.
+I'm Steve Stedman, a technology leader with 18+ years experience empowering diverse cross-functional teams and driving all phases of the software development life cycle. I take pride in crafting elegant, empowering, and engaging customer-focused web experiences.
 
 I am an avid learner, deeply involved with the Austin tech community, and eager to inspire that enthusiasm in others.
 

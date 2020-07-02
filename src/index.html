@@ -1,7 +1,7 @@
 ---
 layout: base
 meta:
-  description: I'm Steve Stedman. I bring great web experiences to life.
+  description: Steve Stedman — a technology leader with 18+ years experience building diverse teams and championing elegant, empowering, and engaging web experiences.
 ---
 
 <p class="title">
@@ -14,7 +14,11 @@ meta:
   <h2 class="is-size-4">Latest posts</h2>
   <ul>
     {% for post in collections.posts reversed %}
-    <li><a href="{{ post.url | url }}">{{ post.data.title }}</a></li>
+    <li><a href="{{ post.url | url }}">{{ post.data.title }}</a> <em class="small">- {{ post.date | date: "%b %d, %Y" }}</em></li>
     {% endfor %}
+  </ul>
+  <h2 class="is-size-4">Recent projects</h2>
+  <ul>
+    <li><a href="https://austinjavascript.com/">Austin JavaScript</a> <em class="small">- May 10, 2020</em></li>
   </ul>
 </section>
