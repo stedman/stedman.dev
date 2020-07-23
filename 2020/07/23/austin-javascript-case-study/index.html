@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/assets/img/sd-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" type="image/png" href="/assets/img/sd-180.png" sizes="180x180">
+  <link rel="icon" type="image/png" href="/assets/img/sd-192.png" sizes="192x192">
+  <link rel=canonical href="https://stedman.dev/2020/07/23/austin-javascript-case-study/">
+  <meta name="description" content="Case study: Migrating Austin JavaScript from Jekyll to Eleventy.">
+  <meta property="og:url" content="https://stedman.dev/2020/07/23/austin-javascript-case-study/">
+  <meta property="og:title" content="Austin JavaScript Case Study • stedman.dev">
+  <meta property="og:description" content="Case study: Migrating Austin JavaScript from Jekyll to Eleventy.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:creator" content="@stedman">
+  <title>Austin JavaScript Case Study • stedman.dev</title>
+  <link rel="alternate" type="application/atom+xml" href="https://stedman.dev/atom.xml" title="stedman.dev Atom feed">
+  <link rel="webmention" href="https://webmention.io/stedman.dev/webmention">
+  <link rel="pingback" href="https://webmention.io/stedman.dev/xmlrpc">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/prism-atom-dark.css">
+  <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-173235145-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-173235145-1');
+  </script></head>
+<body>
+  <header class="page-header hero">
+    <div class="hero-body is-paddingless">
+      <div class="container">
+        <div class="navbar" role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item title is-size-4-tablet" href="/">
+              <i class="icon site-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 442 500" width="24" height="27">
+                  <g fill="currentColor">
+                  <path transform="rotate(180 233.39 309.77)" d="m25 2.4e2c0 1.1e2 1.9e2 2.6e2 2.5e2 2.6e2 9 0 11-5.5 11-12 0-29-1.8e2 -1.4e2 -1.8e2 -2.5e2 0-36 38-55 97-55 59 0 1.4e2 20 1.6e2 41s-2.7 66 10 74c4.7 2.6 13 5.2 20 5.2 17 0 46-71 46-1e2 0-50-1.8e2 -81-2.5e2 -81-72 0-1.7e2 16-1.7e2 1.2e2z"/>
+                  <path d="m0 1.2e2c0 1.1e2 1.9e2 2.6e2 2.5e2 2.6e2 9 0 11-5.5 11-12 0-29-1.8e2 -1.4e2 -1.8e2 -2.5e2 0-36 38-55 97-55 59 0 1.4e2 20 1.6e2 41 11 21-2.7 66 10 74 4.7 2.6 13 5.2 20 5.2 17 0 46-71 46-1e2 0-50-1.8e2 -81-2.5e2 -81-72 0-1.7e2 16-1.7e2 1.2e2z"/>
+                  </g>
+                  </svg>
+              </i>
+              stedman.dev
+            </a>
+          </div>
+
+          <div class="navbar-menu is-size-5">
+            <div class="navbar-end">
+              <a class="navbar-item" href="/">
+                Home
+              </a>
+              <a class="navbar-item" href="/about/">
+                About
+              </a>
+              <a class="navbar-item" href="/atom.xml">
+                <span class="is-sr-only">Atom feed</span>
+                <span class="icon" title="Atom feed">
+                  <ion-icon class="is-size-5" src="/assets/icon/logo-rss.svg"></ion-icon>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main section has-background-white">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-10 is-offset-1 content is-size-5">
+          
+<article class="h-entry">
+  <h1 class="p-name">Austin JavaScript Case Study</h1>
+
+  <p class="is-sr-only">By <em class="p-author">Steve Stedman</em></p>
+
+  <p class="has-text-grey is-size-6">
+    <span class="is-inline-block" style="vertical-align:middle">
+      <ion-icon class="is-size-6" style="fill: #b5b5b5" src="/assets/icon/today-outline.svg"></ion-icon>
+    </span>
+    <time class="dt-published" datetime="Thu Jul 23 2020 00:00:00 GMT+0000 (Coordinated Universal Time)">
+      July 23, 2020
+    </time>
+  </p>
+
+  <div class="e-content">
+    <p><a href="https://austinjavascript.com/">Austin JavaScript</a> (AustinJS) is a tech meetup organization with a proud history of involvement from local hackers to JavaScript industry giants. For over ten years, it’s provided timely and relevant JavaScript knowledge while serving as a key social network for the Austin web development community. If it has <em>anything</em> to do with JavaScript, it’s being talked about at AustinJS.</p>
+<p>So it was always a bit ironic that JavaScript as a technology didn’t play a bigger role in the AustinJS website. Granted, a key consideration was performance on mobile devices and client-side JavaScript can degrade rendering speeds and battery life if not crafted properly. But even on the server-side, there wasn’t a contribution model in the <a href="https://nodejs.org/">Node</a> world that quite fit AustinJS’s needs. This volunteer organization’s content management system needed to be simple, deployments needed to be effortless, and whatever was chosen needed to be free.</p>
+<figure class="image browser-chrome">
+  <img src="/assets/img/posts/austinjs-2013.png" alt="Austin JavaScript (WordPress), 2013">
+  <figcaption>AustinJavaScript.com, circa 2013</figcaption>
+  <i class="browser-parts"></i>
+</figure>
+<p>The site was initially set up in 2010 on <a href="https://wordpress.org/">WordPress</a> (PHP) and then moved to <a href="https://pages.github.com/">GitHub Pages</a> and <a href="https://jekyllrb.com/">Jekyll</a> (Ruby) in 2015. As a publishing platform, the GitHub Pages + Jekyll duo is a hard combination to beat. It’s rock-solid, easy to update (even with a mobile device), deployments are invisible, and it’s free.</p>
+<p>But it’s not JavaScript. Worse, Jekyll runs on Ruby which is a challenging ecosystem for the uninitiated to set up locally. This impeded layout and design contributions, so not much evolved on the site beyond 2015.</p>
+<figure class="image browser-chrome">
+  <img src="/assets/img/posts/austinjs-2016.png" alt="Austin JavaScript (Jekyll), 2016">
+  <figcaption>AustinJavaScript.com, circa 2016</figcaption>
+  <i class="browser-parts"></i>
+</figure>
+<p>Fast-forward to 2020. The JavaScript community now has a wide variety of capable Jekyll alternatives. Better yet, the automated build and deploy process that Jekyll enjoys on GitHub Pages can be replicated with the recently released <a href="https://github.com/features/actions">GitHub Actions</a>.</p>
+<p>It was time to rebuild AustinJS on JavaScript.</p>
+<blockquote>
+<p>On this page: <a href="#1-the-prep">The prep</a> &gt; <a href="#2-the-pitch">The pitch</a> &gt; <a href="#3-the-pivot">The pivot</a> &gt; <a href="#4-the-launch">The launch</a> &gt; <a href="#conclusion">Conclusion</a></p>
+</blockquote>
+<h2 id="1.-the-prep">1. The prep <a class="anchor-link" href="#1.-the-prep">permalink</a></h2>
+<p>Before approaching the AustinJS organizers, I wanted to have a decent proof of concept to share. I figured I’d push some of the current content through a JavaScript engine, throw a fresh coat of paint on it, and see what folks thought.</p>
+<h3 id="discovery">Discovery <a class="anchor-link" href="#discovery">permalink</a></h3>
+<p>Before starting, I put on my project management hat and did some fieldwork. Their GitHub repo had been up for five years, so there was plenty of material to research:</p>
+<ol>
+<li>Content: patterns of use (and evolutions in those patterns)</li>
+<li>GitHub Pull Requests: issues that need to be addressed by code change</li>
+<li>GitHub Issues: issues that need to be addressed</li>
+<li>Templates/other code: comments, FIXMEs, and TODOs</li>
+</ol>
+<h3 id="goals">Goals <a class="anchor-link" href="#goals">permalink</a></h3>
+<p>After the research, my initial goals were simple:</p>
+<ol>
+<li>maintain content parity (while the engine and the design might change, the content should remain the same)</li>
+<li>keep all of Jekyll’s ease of use (e.g., YAML front matter for meta data, Markdown content, straightforward templating)</li>
+<li>keep the lightweight and responsive static pages</li>
+<li>keep GitHub Pages’ auto build and deploy functionality</li>
+<li>improve the contributor experience (e.g., meetup posts, site templates)</li>
+<li>improve the user experience with a visual design refresh</li>
+<li>reduce dependencies (especially those requiring additional services and logins; Travis and Cloudflare, for example)</li>
+</ol>
+<h3 id="proof-of-concept">Proof of concept <a class="anchor-link" href="#proof-of-concept">permalink</a></h3>
+<h4>Generator</h4>
+<p><a href="https://gatsbyjs.com/">Gatsby</a> seemed like a solid JavaScript static site generator (SSG) choice. Based on ReactJS, it has tons of documentation, a good Jekyll migration path, and a supportive community.</p>
+<h4>Style</h4>
+<p>I also decided to give the CSS framework <a href="https://bulma.io/">Bulma</a> a shot as it is lightweight, flexible, and well-documented. For this community project, I figured that it’s also important to make design contribution as frictionless as possible. Bulma impressed me as hitting that sweet spot of capability and ease of use.</p>
+<h4>Content</h4>
+<p>Keeping Jekyll’s YAML front matter + Markdown content layout was never a question. It’s a tried and true system that’s been adopted by all the Jekyll alternatives. The home page, about page, etc. migrated without a hitch.</p>
+<p>I took a closer look at the 100+ meetup posts from the past ten years. Details such as speaker names, bios, avatars, sponsor names, and venue locations in the Markdown could be standardized and moved up into the YAML front matter. This front matter data can then be used in the current page or elsewhere on the site. Standardizing the data format also makes linting and/or pre-flight field checks possible before allowing pull requests to be opened.</p>
+<p>Thus, a <a href="https://github.com/austinjavascript/austinjavascript.com/blob/v2-eol/_posts/2020-02-16-meetup.md">typical original meetup (<code>2020-02-16-meetup.md</code>)</a> file:</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">---</span><br><span class="token key atrule">title</span><span class="token punctuation">:</span> Absolute Unit Tests with Jest and Enzyme<br><span class="token key atrule">author</span><span class="token punctuation">:</span> kevin<br><span class="token key atrule">layout</span><span class="token punctuation">:</span> post<br><span class="token key atrule">categories</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> posts<br>  <span class="token punctuation">-</span> meetups<br><span class="token key atrule">when</span><span class="token punctuation">:</span> <span class="token datetime number">2020-02-18T19:30:00-06:00</span><br><span class="token punctuation">---</span><br><br><span class="token punctuation">{</span>% assign speakr = 'Nick Gottschlich' %<span class="token punctuation">}</span><br><span class="token punctuation">{</span>% assign twiturl = 'https<span class="token punctuation">:</span>//twitter.com/nickgottschlich/' %<span class="token punctuation">}</span><br><span class="token punctuation">{</span>% assign huburl = 'https<span class="token punctuation">:</span>//github.com/nick<span class="token punctuation">-</span>gottschlich/' %<span class="token punctuation">}</span><br><span class="token punctuation">{</span>% assign website = 'http<span class="token punctuation">:</span>//nickpgott.com' %<span class="token punctuation">}</span><br><br><br>Everything you wanted to know about testing React components with Jest and Enzyme<span class="token tag">!</span> Learn what a unit test is<span class="token punctuation">,</span> why its useful<span class="token punctuation">,</span> and how to test things like<span class="token punctuation">:</span> existence of react components<span class="token punctuation">,</span> simulated clicks and other events<span class="token punctuation">,</span> mocking data<span class="token punctuation">,</span> snapshots and more<span class="token tag">!</span><br><br><span class="token comment">### Our speaker</span><br><br>&lt;div class="media<span class="token punctuation">-</span>object speaker<span class="token punctuation">-</span>bio"<span class="token punctuation">></span><br>  &lt;a href="<span class="token punctuation">{</span><span class="token punctuation">{</span> twiturl <span class="token punctuation">}</span><span class="token punctuation">}</span>"<span class="token punctuation">></span><br>    &lt;img alt="<span class="token punctuation">{</span><span class="token punctuation">{</span> speakr <span class="token punctuation">}</span><span class="token punctuation">}</span> @NickGottschlich on Twitter"<br>      src="https<span class="token punctuation">:</span>//pbs.twimg.com/profile_images/1029847332781740032/Gp54dk3Z_400x400.jpg" /<span class="token punctuation">></span><br>  &lt;/a<span class="token punctuation">></span><br>  &lt;div<span class="token punctuation">></span><br>  &lt;a href="<span class="token punctuation">{</span><span class="token punctuation">{</span> twiturl <span class="token punctuation">}</span><span class="token punctuation">}</span>"<span class="token punctuation">></span>&lt;strong<span class="token punctuation">></span><span class="token punctuation">{</span><span class="token punctuation">{</span> speakr <span class="token punctuation">}</span><span class="token punctuation">}</span>&lt;/strong<span class="token punctuation">></span>&lt;/a<span class="token punctuation">></span><span class="token punctuation">,</span> Software Engineer at Procore Technologies<br>  &lt;p<span class="token punctuation">></span><br>    <span class="token key atrule">Twitter</span><span class="token punctuation">:</span> &lt;a href="<span class="token punctuation">{</span><span class="token punctuation">{</span> twiturl <span class="token punctuation">}</span><span class="token punctuation">}</span>"<span class="token punctuation">></span>@NickGottschlich&lt;/a<span class="token punctuation">></span><br>  &lt;/p<span class="token punctuation">></span><br>  &lt;p<span class="token punctuation">></span><br>    <span class="token key atrule">Website</span><span class="token punctuation">:</span> &lt;a href="<span class="token punctuation">{</span><span class="token punctuation">{</span> website <span class="token punctuation">}</span><span class="token punctuation">}</span>"<span class="token punctuation">></span>http<span class="token punctuation">:</span>//nickpgott.com/&lt;/a<span class="token punctuation">></span><br>  &lt;/p<span class="token punctuation">></span><br>  &lt;p<span class="token punctuation">></span><br>    <span class="token key atrule">Github</span><span class="token punctuation">:</span> &lt;a href="<span class="token punctuation">{</span><span class="token punctuation">{</span> huburl <span class="token punctuation">}</span><span class="token punctuation">}</span>"<span class="token punctuation">></span>nick<span class="token punctuation">-</span>gottschlich&lt;/a<span class="token punctuation">></span><br>  &lt;/p<span class="token punctuation">></span><br>  &lt;/div<span class="token punctuation">></span><br>&lt;/div<span class="token punctuation">></span><br><br>Make sure to thank our gracious host <span class="token punctuation">[</span>Cloudflare<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span>.<br><br><span class="token punctuation">{</span>% include give<span class="token punctuation">-</span>em<span class="token punctuation">-</span>the<span class="token punctuation">-</span>business.html location='cloudflare' %<span class="token punctuation">}</span><br><br>Check back here or &lt;a href="<span class="token punctuation">{</span><span class="token punctuation">{</span> site.twitter.url <span class="token punctuation">}</span><span class="token punctuation">}</span>"<span class="token punctuation">></span>follow us on Twitter&lt;/a<span class="token punctuation">></span><br>for updates.<br><br><span class="token punctuation">[</span>cloudflare<span class="token punctuation">]</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//www.cloudflare.com/</code></pre>
+<p>…was transformed into the following concise post:</p>
+<pre class="language-yaml"><code class="language-yaml"><span class="token punctuation">---</span><br><span class="token key atrule">layout</span><span class="token punctuation">:</span> meetup<br><span class="token key atrule">title</span><span class="token punctuation">:</span> Absolute Unit Tests with Jest and Enzyme<br><span class="token key atrule">speakers</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Nick Gottschlich<br>    <span class="token key atrule">title</span><span class="token punctuation">:</span> Software Engineer at Procore Technologies<br>    <span class="token key atrule">avatar</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//pbs.twimg.com/profile_images/1029847332781740032/Gp54dk3Z_400x400.jpg<br>    <span class="token key atrule">bio</span><span class="token punctuation">:</span><br>    <span class="token key atrule">email</span><span class="token punctuation">:</span><br>    <span class="token key atrule">homepage</span><span class="token punctuation">:</span> http<span class="token punctuation">:</span>//nickpgott.com<br>    <span class="token key atrule">twitter</span><span class="token punctuation">:</span> NickGottschlich<br>    <span class="token key atrule">github</span><span class="token punctuation">:</span> nick<span class="token punctuation">-</span>gottschlich<br>    <span class="token key atrule">linkedin</span><span class="token punctuation">:</span><br><span class="token key atrule">sponsor</span><span class="token punctuation">:</span> cloudflare<br><span class="token key atrule">venue</span><span class="token punctuation">:</span> cloudflare<br><span class="token key atrule">after</span><span class="token punctuation">:</span> lavaca<br><span class="token key atrule">organizers</span><span class="token punctuation">:</span><br>  <span class="token punctuation">-</span> lingram<br>  <span class="token punctuation">-</span> astacy<br><span class="token punctuation">---</span><br><br>Everything you wanted to know about testing React components with <span class="token punctuation">[</span>Jest<span class="token punctuation">]</span>(https<span class="token punctuation">:</span>//jestjs.io/) and <span class="token punctuation">[</span>Enzyme<span class="token punctuation">]</span>(https<span class="token punctuation">:</span>//enzymejs.github.io/enzyme/) Learn what a unit test is<span class="token punctuation">,</span> why its useful<span class="token punctuation">,</span> and how to test things like<span class="token punctuation">:</span> existence of react components<span class="token punctuation">,</span> simulated clicks and other events<span class="token punctuation">,</span> mocking data<span class="token punctuation">,</span> snapshots and more<span class="token tag">!</span></code></pre>
+<blockquote>
+<p>Note: To help contributors, I created a <a href="https://github.com/austinjavascript/austinjavascript.com/blob/master/CONTRIBUTING-POSTS.md">how to contribute to posts</a> document that provides more details about each field. The mechanics of how it all works is a bit more involved and would be a great topic for another blog post.</p>
+</blockquote>
+<p>You may have noticed that the <code>when</code> and <code>categories</code> fields were omitted in the new version above.</p>
+<h5>When</h5>
+<p>In Jekyll-land, the first part of the post file name (e.g., <code>2020-02-18-meetup.md</code>) contains the publish date. AustinJS organizers were unable to use future publish dates because Jekyll throws an error. So organizers added the <code>when</code> front matter field to represent the meetup date in the future. Unfortunately they also used it for the meeting <strong>time</strong> as well. While analyzing past pull requests, I noticed all sorts of Daylight Saving Time snafus that required subsequent PRs to remedy.</p>
+<p>Gatsby didn’t throw errors if file names had future dates so I was able to dispose of the <code>when</code> field. Oh, and since almost every one of the 100 or so meetups started at 7:30pm and ended at 9pm, I was able to hardwire that into the template as well.</p>
+<h5>Categories</h5>
+<p>The <code>categories</code> front matter field generates the site sub-folders—at least in the AustinJS Jekyll setup. Using our example from above, the output file path looks like:</p>
+<pre class="language-html"><code class="language-html">/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cat-1</span><span class="token punctuation">></span></span>/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cat-2</span><span class="token punctuation">></span></span>/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>date</span><span class="token punctuation">></span></span>/    # format<br>/posts/meetups/2020/02/18/  # actual</code></pre>
+<p>With Gatsby, the permalink format is defined in the <code>gatsby-node.js</code> file, so the <code>categories</code> front matter fields are completely unnecessary.</p>
+<h2 id="2.-the-pitch">2. The pitch <a class="anchor-link" href="#2.-the-pitch">permalink</a></h2>
+<p>After wrangling Gatsby, Bulma, and a sample of content for a few days, I soon had a <a href="https://github.com/austinjavascript/austinjavascript.com/issues/105">proof of concept</a> to share with AustinJS leadership.</p>
+<p>Aaron Stacey, long-time AustinJS organizer and developer of the second gen site, was pleased with the idea of it all but added that an MVP (minimal viable product) would include the following:</p>
+<ol>
+<li>Deploy on push</li>
+<li>Have a low page weight</li>
+<li>Look good on mobile</li>
+</ol>
+<p>Hooray! We agreed on goals. But then Aaron pointed out the page weight. My Gatsby-powered home page had ballooned to 30 times the size of the Jekyll-powered version. It now weighed-in at over 3GB. What the heck? Sure it was speedy on my desktop, but there were valid concerns about load times for mobile devices.</p>
+<p>Gatsby hydrates the initial page after the static bits load and subsequent page loads are routed through ReactJS. So, as you can imagine, you’re getting a large upfront JS payload followed by smaller GraphQL data transfers to navigate additional pages. For a site that typically only experiences one page view per session (to view details about an upcoming meetup), it’s important to maintain a trim initial page weight.</p>
+<p>Aaron kindly mentioned that <a href="https://11ty.dev/">Eleventy (11ty)</a> might be a better fit.</p>
+<h2 id="3.-the-pivot">3. The pivot <a class="anchor-link" href="#3.-the-pivot">permalink</a></h2>
+<p>Changing horses from Gatsby to Eleventy was relatively uneventful. I quickly ported over the Bulma CSS and the posts with the newly standardized YAML front matter. Migrating the Gatsby guts was a bit more delicate but once on Eleventy, everything was gravy.</p>
+<blockquote>
+<p>Note: The <a href="https://liquidjs.com/">LiquidJS templating language</a> used by Eleventy is a port of the very same Liquid language that Jekyll uses. Direct migrations from Jekyll to Eleventy are relatively seamless (with a few exceptions, of course).</p>
+</blockquote>
+<p>Once I switched to Eleventy, things got even easier. Working with Eleventy is a joy. For the most part, things just make sense. The community is vibrant and ready to help when things don’t make so much sense.</p>
+<h3 id="github-actions">GitHub Actions <a class="anchor-link" href="#github-actions">permalink</a></h3>
+<p>While a JavaScript SSG is pretty exciting, this site needed to build and deploy whenever the master branch was updated. Jekyll did this out of the box and it meant that organizers could update meetup details from their mobile devices and see the changes live on the site within minutes.</p>
+<p><a href="https://docs.github.com/en/actions">GitHub Actions</a> adds the ability to spin up a server to run builds, tests, deployments, etc. based on repo events such as pull requests or merges.</p>
+<p>Setting up the AustinJS workflow was absolutely painless (see <a href="/2020/04/29/make-the-jump-from-jekyll-to-javascript/">Make the Jump from Jekyll to JavaScript</a>) and has been running like a tank ever since.</p>
+<h3 id="enhancements">Enhancements <a class="anchor-link" href="#enhancements">permalink</a></h3>
+<p>Once the basics were nailed down, there was time to add even more value.</p>
+<ul>
+<li><a href="https://austinjavascript.com/">home</a> page: add an Austin skyline hero (to make a place connection) and a roll-call of past speakers/presentations (to make a people connection)</li>
+<li><a href="https://austinjavascript.com/contributing/">contributing</a> page: add a page to help presenters, sponsors, hosts, and others get more involved</li>
+<li><a href="https://austinjavascript.com/posts/meetups/">meetup</a> posts: add videos and slide decks from past presentations</li>
+<li><a href="https://austinjavascript.com/feed.xml">RSS feed</a></li>
+<li>SSL/CI/CDN services: switch to GitHub and remove Cloudflare and Travis dependencies</li>
+</ul>
+<figure class="image browser-chrome">
+  <img src="/assets/img/posts/austinjs-2020.png" alt="Austin JavaScript, 2020">
+  <figcaption>AustinJavaScript.com, circa 2020</figcaption>
+  <i class="browser-parts"></i>
+</figure>
+<h3 id="goals-review">Goals review <a class="anchor-link" href="#goals-review">permalink</a></h3>
+<p>I reviewed the <a href="#goals">goals</a> one last time:</p>
+<ol>
+<li>✅ maintain content parity</li>
+<li>✅ keep all of Jekyll’s ease of use</li>
+<li>✅ keep the lightweight and responsive static pages</li>
+<li>✅ keep GitHub Pages’ auto build and deploys</li>
+<li>✅ improve the contributor experience</li>
+<li>✅ improve the user experience</li>
+<li>✅ reduce dependencies</li>
+</ol>
+<p>With all the boxes checked, it was time to launch.</p>
+<h2 id="4.-the-launch">4. The Launch <a class="anchor-link" href="#4.-the-launch">permalink</a></h2>
+<p>This launch called for the development branch to be merged into the main branch and then setting up the Actions workflow to automate future build/deployments. Simple tasks, but replacing engines while the old one still works is always a scary move. I pressed the buttons and hoped for the best.</p>
+<p>I saw source code.</p>
+<p>All that showed up on the AustinJS site was source code for the index page. Was there something I missed in an Eleventy config? Was something wrong with the Actions workflow?</p>
+<p>Another hour of testing and research revealed that this repo didn’t have the same ability to deploy to <code>gh-pages</code> branch as my demo site. Huh? A bit <a href="https://help.github.com/en/github/working-with-github-pages/about-github-pages#publishing-sources-for-github-pages-sites">more research</a> revealed that <code>&lt;org_name&gt;.github.io</code> type repos can only deploy to <code>master</code>. There weren’t many options. Change the <code>austinjavascript.github.io</code> repo name or give up and return to Jekyll.</p>
+<p>I got on a short call with Aaron and went through the options. We decided to rename the repo to <code>austinjavascript.com</code> and break the logjam. A few short moments later, the new site was live.</p>
+<h2 id="conclusion">Conclusion <a class="anchor-link" href="#conclusion">permalink</a></h2>
+<p>Since the launch, the site has run flawlessly. It builds a bit faster than the old Jekyll engine but you’d be hard-pressed to find any other deployment differences.</p>
+<p>I set out to improve the AustinJS user/contributor experience and bury the <a href="https://github.com/austinjavascript/austinjavascript.com/blob/v2-eol/README.md#previewing-changes">cruel Ruby joke</a>. With special thanks to Aaron Stacey and Kevin Kipp for their help, I believe I succeeded. At long last, Austin JavaScript can proudly say that, with regards to JavaScript, it is <a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food">eating it’s own dog food</a>.</p>
+
+  </div>
+</article>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer footer has-offset-top">
+    <div class="container">
+      <div class="navbar">
+        <div class="navbar-menu is-active">
+          <div class="navbar-start">
+            <span class="navbar-item is-inline-block-tablet">
+              &copy; 2020
+              <a class="h-card" rel="me" href="https://stedman.dev/">
+                Steve Stedman
+              </a>
+            </span>
+            <a class="navbar-item is-sr-only-desktop is-inline-block-tablet" href="/about/">
+              About
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item is-inline-block-tablet" href="https://linkedin.com/in/sstedman" rel="me">
+              <span class="icon tooltip" title="&ldquo;sstedman&rdquo; on LinkedIn">
+                <ion-icon class="is-size-3" src="/assets/icon/logo-linkedin.svg"></ion-icon>
+              </span>
+              <span class="is-sr-only-desktop">LinkedIn: sstedman</span>
+            </a>
+            <a class="navbar-item is-inline-block-tablet" href="https://twitter.com/stedman" rel="me">
+              <span class="icon tooltip" title="&ldquo;@stedman&rdquo; on Twitter">
+                <ion-icon class="is-size-3" src="/assets/icon/logo-twitter.svg"></ion-icon>
+              </span>
+              <span class="is-sr-only-desktop">Twitter: @stedman</span>
+            </a>
+            <a class="navbar-item is-inline-block-tablet" href="https://github.com/stedman" rel="me authn">
+              <span class="icon tooltip" title="&ldquo;stedman&rdquo; on GitHub">
+                <ion-icon class="is-size-3" src="/assets/icon/logo-github.svg"></ion-icon>
+              </span>
+              <span class="is-sr-only-desktop">GitHub: stedman</span>
+            </a>
+            <a class="navbar-item is-sr-only-desktop" href="https://github.com/stedman/stedman.dev/blob/master/./src/_posts/2020-07-23-austin-javascript-case-study.md">Edit this page on GitHub</a>
+          </div>
+        </div>
+      </div>
+      <p class="has-text-centered is-size-7 is-italic">
+        Powered by <a href="https://11ty.dev/">Eleventy</a>. See <a href="/about/#colophon">Colophon</a> for more details.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
