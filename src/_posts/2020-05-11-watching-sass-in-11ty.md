@@ -1,7 +1,7 @@
 ---
 title: Watching Sass in Eleventy
 meta:
-  description: Automatically kick-off Sass builds in 11ty with this workflow.
+  description: Automatically kick-off Sass builds in Eleventy development mode with this workflow.
 tags:
   - tutorial
   - 11ty

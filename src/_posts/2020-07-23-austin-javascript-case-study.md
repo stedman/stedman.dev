@@ -1,10 +1,10 @@
 ---
 title: "Austin JavaScript Case Study"
 meta:
-  description: "Case study: Migrating Austin JavaScript from Jekyll to Eleventy."
+  description: "Case study: Migrating Austin JavaScript from Jekyll to Eleventy on GitHub Pages."
 tags:
   - javascript
-  - eleventy
+  - 11ty
 ---
 
 [Austin JavaScript](https://austinjavascript.com/) (AustinJS) is a tech meetup organization with a proud history of involvement from local hackers to JavaScript industry giants. For over ten years, it's provided timely and relevant JavaScript knowledge while serving as a key social network for the Austin web development community. If it has *anything* to do with JavaScript, it's being talked about at AustinJS.

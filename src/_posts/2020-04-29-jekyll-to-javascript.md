@@ -1,7 +1,7 @@
 ---
 title: Make the Jump from Jekyll to JavaScript
 meta:
-  description: Standing up a website with GitHub Pages was always pretty quick and easy. Now it's even easier and more enjoyable with Eleventy (11ty) and GitHub Actions.
+  description: Fully replace Jekyll with Eleventy (a JavaScript static site generator) on GitHub Pages. Learn how to set up the application, automatic deployments, and a custom domain.
 tags:
   - tutorial
   - 11ty
@@ -12,9 +12,9 @@ With the recent addition of [Actions](https://github.com/features/actions) to Gi
 
 ## Back story
 
-[GitHub Pages](https://pages.github.com/), for the uninitiated, allows you to create websites from the source code stored in a GitHub repo. There are no databases to set up, no servers to provision, and no file transfers (at least not in the traditional sense). Better yet, it allows you to transform plain text into static websites and blogs with the help of Jekyll.
+[GitHub Pages](https://pages.github.com/), for the uninitiated, are public web pages automatically generated from your GitHub source files and freely hosted on github.io or your custom domain. There are no no servers to provision and no databases to set up.
 
-[Jekyll](https://jekyllrb.com/) is a pretty sweet static site generator. It's been around quite awhile, is battle tested, and is backed by a huge community. It's also simple enough for beginners and yet powerful enough for advanced users. Unfortunately, customizing it requires running it locally and this is where things get sticky. Jekyll is based on Ruby. For casual users, Ruby is a challenge to set up and maintain—especially on Windows. Scaling is also an issue for Jekyll/Ruby as bigger builds are notorious for taking a long time to compile.
+The automatic generation part is handled by [Jekyll](https://jekyllrb.com/), a pretty sweet static site generator. It's been around quite awhile, is battle tested, and is backed by a huge community. It's also simple enough for beginners and yet powerful enough for advanced users. Unfortunately, customizing it requires running it locally and this is where things get sticky. Jekyll is based on Ruby. For casual users, Ruby is a challenge to set up and maintain—especially on Windows. Scaling is also an issue for Jekyll/Ruby as bigger builds are notorious for taking a long time to compile.
 
 While there are plenty of competitive static site generators out there, the one piece that was missing was the integrated of build and deploy to GitHub's web server. Pages+Jekyll took care of that build and deploy mumbo-jumbo for you, automagically. Just commit to the `gh-pages` branch and **poof**, your site is updated.
 
