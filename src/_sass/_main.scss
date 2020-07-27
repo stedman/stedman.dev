@@ -157,13 +157,36 @@ code {
 /*
  * FAUX BROWSER CHROME FOR SCREENCAPS
  */
+ $desktop: 1024px;
+
+ .content {
+   max-width: 960px;
+ }
+
+ /*
+  * FAUX BROWSER CHROME FOR SCREEN CAPTURES
+  */
 
 .browser-chrome {
-  background-color: #bbb;
-  border-radius: 5px;
-  box-shadow: 5px 5px 2px hsla(0, 0%, 0%, 0.1);
-  margin-bottom: 3rem !important;
-  padding: 1.25rem 0.5rem 0.1rem;
+  background-color: #111;
+  border-radius: 0.4vw;
+  box-shadow: 3px 3px 6px hsla(0, 0%, 0%, 0.15);
+  margin-bottom: 3rem;
+  padding-top: 1.8vw;
+
+  @media screen and (min-width: $desktop) {
+    border-radius: 0.3rem;
+    padding-top: 1.2rem;
+  }
+
+  // increase specificity to override Bulma
+  &#{&} {
+    margin-bottom: 3rem;
+
+    img {
+      display: block;
+    }
+  }
 
   figcaption {
     font-size: 1rem;
@@ -174,32 +197,60 @@ code {
 }
 
 .browser-parts {
+  // top gap value
+  $top: 0.55vw;
+  $topMax: 0.4rem;
+  // dot height and width value
+  $dot: 0.7vw;
+  $dotMax: 0.45rem;
+  // left width value
+  $gap: 0.6vw;
+  $gapMax: 0.4rem;
+
   &,
   &:before,
   &:after {
     background-color: #ff5f55;
     border-radius: 1rem;
-    height: 0.5rem;
+    height: $dot;
     position: absolute;
-    top: 0.35rem;
-    width: 0.5rem;
+    top: $top;
+    width: $dot;
+
+    @media screen and (min-width: $desktop) {
+      height: $dotMax;
+      top: $topMax;
+      width: $dotMax;
+    }
   }
 
   & {
-    left: 0.5rem;
+    left: $gap;
+
+    @media screen and (min-width: $desktop) {
+      left: $gapMax;
+    }
   }
 
   &:before,
   &:after {
     background-color: #ffc332;
     content: '';
-    left: 0.75rem;
+    left: $gap * 2;
     top: 0;
+
+    @media screen and (min-width: $desktop) {
+      left: $gapMax * 2;
+    }
   }
 
   &:after {
     background-color: #28c841;
-    left: 1.5rem;
+    left: $gap * 4;
+
+    @media screen and (min-width: $desktop) {
+      left: $gapMax * 4;
+    }
   }
 }
 
