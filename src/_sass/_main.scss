@@ -146,20 +146,20 @@ code {
  */
 
 .browser-window {
-  $dot: 0.4%;
-  $dotIn: 0.35%;
+  $dot: 0.5%;
+  $dotIn: 0.45%;
 
   background:
     radial-gradient(
-      circle at 1.1% 2.2%, #ff5f55 0 $dotIn, transparent $dot
+      circle at 1.4% 2.2%, #ff5f55 0 $dotIn, transparent $dot
     ),
     radial-gradient(
-      circle at 2.6% 2.2%, #ffc322 0 $dotIn, transparent $dot
+      circle at 3.1% 2.2%, #ffc322 0 $dotIn, transparent $dot
     ),
     radial-gradient(
-      circle at 4.2% 2.2%, #28c841 0 $dotIn, transparent $dot
+      circle at 4.9% 2.2%, #28c841 0 $dotIn, transparent $dot
     ),
-    #222;
+    #111;
   border-radius: 0.4vw;
   box-shadow: 3px 3px 6px hsla(0, 0%, 0%, 0.15);
   padding-top: 1.8vw;
