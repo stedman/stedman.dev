@@ -96,29 +96,29 @@
             </a>
           </div>
           <div class="navbar-end">
-            <a class="navbar-item is-inline-block-tablet" href="https://linkedin.com/in/{{ site.author.linkedin }}" rel="me">
-              <span class="icon tooltip" title="&ldquo;{{ site.author.linkedin }}&rdquo; on LinkedIn">
-                <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-linkedin.svg' | url }}"></ion-icon>
+            <a class="navbar-item is-inline-block-tablet tooltip" href="https://linkedin.com/in/{{ site.author.linkedin }}" rel="me" title="&ldquo;{{ site.author.linkedin }}&rdquo; on LinkedIn">
+              <span class="icon">
+                <ion-icon src="{{ '/assets/icon/logo-linkedin.svg' | url }}"></ion-icon>
               </span>
-              <span class="is-sr-only-desktop">LinkedIn: {{ site.author.linkedin }}</span>
+              LinkedIn
             </a>
-            <a class="navbar-item is-inline-block-tablet" href="https://twitter.com/{{ site.author.twitter }}" rel="me">
-              <span class="icon tooltip" title="&ldquo;@{{ site.author.twitter }}&rdquo; on Twitter">
-                <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-twitter.svg' | url }}"></ion-icon>
+            <a class="navbar-item is-inline-block-tablet tooltip" href="https://twitter.com/{{ site.author.twitter }}" rel="me" title="&ldquo;@{{ site.author.twitter }}&rdquo; on Twitter">
+              <span class="icon">
+                <ion-icon src="{{ '/assets/icon/logo-twitter.svg' | url }}"></ion-icon>
               </span>
-              <span class="is-sr-only-desktop">Twitter: @{{ site.author.twitter }}</span>
+              Twitter
             </a>
-            <a class="navbar-item is-inline-block-tablet" href="https://github.com/{{ site.author.github }}" rel="me authn">
-              <span class="icon tooltip" title="&ldquo;{{ site.author.github }}&rdquo; on GitHub">
-                <ion-icon class="is-size-3" src="{{ '/assets/icon/logo-github.svg' | url }}"></ion-icon>
+            <a class="navbar-item is-inline-block-tablet tooltip" href="https://github.com/{{ site.author.github }}" rel="me authn" title="&ldquo;{{ site.author.github }}&rdquo; on GitHub">
+              <span class="icon">
+                <ion-icon src="{{ '/assets/icon/logo-github.svg' | url }}"></ion-icon>
               </span>
-              <span class="is-sr-only-desktop">GitHub: {{ site.author.github }}</span>
+              GitHub
             </a>
-            <a class="navbar-item is-sr-only-desktop" href="https://github.com/stedman/stedman.dev/blob/master/{{ page.inputPath }}">Edit this page on GitHub</a>
+            <a class="navbar-item is-sr-only-desktop is-size-7" href="https://github.com/stedman/stedman.dev/blob/master/{{ page.inputPath }}">View page source on GitHub</a>
           </div>
         </div>
       </div>
-      <p class="has-text-centered is-size-7 is-italic">
+      <p class="has-text-centered is-size-7 is-italic mt-5">
         Powered by <a href="https://11ty.dev/">Eleventy</a>. See <a href="/about/#colophon">Colophon</a> for more details.
       </p>
     </div>

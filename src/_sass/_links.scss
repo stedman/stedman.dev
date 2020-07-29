@@ -28,6 +28,18 @@
   }
 }
 
+a {
+  .footer & {
+    color: currentColor;
+    font-weight: 600;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 // Hide anchor links until parent is hovered
 .anchor-link {
   border: none !important;

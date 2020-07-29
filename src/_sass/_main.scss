@@ -97,18 +97,6 @@ $fullhd-enabled: false;
   vertical-align: bottom;
 }
 
-a {
-  .footer & {
-    color: currentColor;
-    font-weight: bold;
-
-    &:focus,
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
 code {
   border-radius: $radius;
 
