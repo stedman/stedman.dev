@@ -20,18 +20,20 @@
   "author": "Steve Stedman <steve@stedman.dev>",
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.0",
-    "@11ty/eleventy-plugin-rss": "^1.0.7",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
-    "bulma": "^0.8.2",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2",
-    "lodash": ">=4.17.19",
-    "markdown-it-anchor": "^5.2.7",
-    "markdownlint": "^0.20.2",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "markdownlint": "^0.20.4",
     "markdownlint-cli": "^0.22.0",
-    "node-sass": "^4.14.1",
     "prettier": "2.0.5"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^0.11.0",
+    "@11ty/eleventy-plugin-rss": "^1.0.9",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "bulma": "^0.9.0",
+    "markdown-it": "^11.0.0",
+    "markdown-it-anchor": "^5.3.0",
+    "node-sass": "^4.14.1"
   }
 }

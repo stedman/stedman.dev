@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-// eslint-disable-next-line import/no-extraneous-dependencies
 const sass = require('node-sass');
 
 /**

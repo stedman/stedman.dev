@@ -19,14 +19,14 @@ $widescreen-enabled: false;
 $fullhd-enabled: false;
 
 @import "../../node_modules/bulma/sass/utilities/functions.sass";
-@import "../../node_modules/bulma/sass/utilities/derived-variables.sass";
+@import "../../node_modules/bulma/sass/utilities/derived-variables.scss";
 // @import "../../node_modules/bulma/sass/utilities/animations.sass";
 @import "../../node_modules/bulma/sass/utilities/mixins.sass";
 @import "../../node_modules/bulma/sass/utilities/controls.sass";
 
 @import "../../node_modules/bulma/sass/base/minireset.sass";
 @import "../../node_modules/bulma/sass/base/generic.sass";
-@import "../../node_modules/bulma/sass/base/helpers.sass";
+@import "../../node_modules/bulma/sass/helpers/_all.sass";
 
 @import "../../node_modules/bulma/sass/elements/box.sass";
 // @import "../../node_modules/bulma/sass/elements/button.sass";
@@ -52,7 +52,6 @@ $fullhd-enabled: false;
 @import "../../node_modules/bulma/sass/components/card.sass";
 // @import "../../node_modules/bulma/sass/components/dropdown.sass";
 @import "../../node_modules/bulma/sass/components/level.sass";
-@import "../../node_modules/bulma/sass/components/list.sass";
 @import "../../node_modules/bulma/sass/components/media.sass";
 // @import "../../node_modules/bulma/sass/components/menu.sass";
 @import "../../node_modules/bulma/sass/components/message.sass";
