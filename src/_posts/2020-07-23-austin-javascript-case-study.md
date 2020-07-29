@@ -11,20 +11,18 @@ tags:
 
 So it was always a bit ironic that JavaScript as a technology didn't play a bigger role in the AustinJS website. Granted, a key consideration was performance on mobile devices and client-side JavaScript can degrade rendering speeds and battery life if not crafted properly. But even on the server-side, there wasn't a contribution model in the [Node](https://nodejs.org/) world that quite fit AustinJS's needs. This volunteer organization's content management system needed to be simple, deployments needed to be effortless, and whatever was chosen needed to be free.
 
-<figure class="image browser-chrome">
+<figure class="image browser-window">
   <img src="/assets/img/posts/austinjs-2013.png" alt="Austin JavaScript (WordPress), 2013">
   <figcaption>AustinJavaScript.com, circa 2013</figcaption>
-  <i class="browser-parts"></i>
 </figure>
 
 The site was initially set up in 2010 on [WordPress](https://wordpress.org/) (PHP) and then moved to [GitHub Pages](https://pages.github.com/) and [Jekyll](https://jekyllrb.com/) (Ruby) in 2015. As a publishing platform, the GitHub Pages + Jekyll duo is a hard combination to beat. It's rock-solid, easy to update (even with a mobile device), deployments are invisible, and it's free.
 
 But it's not JavaScript. Worse, Jekyll runs on Ruby which is a challenging ecosystem for the uninitiated to set up locally. This impeded layout and design contributions, so not much evolved on the site beyond 2015.
 
-<figure class="image browser-chrome">
+<figure class="image browser-window">
   <img src="/assets/img/posts/austinjs-2016.png" alt="Austin JavaScript (Jekyll), 2016">
   <figcaption>AustinJavaScript.com, circa 2016</figcaption>
-  <i class="browser-parts"></i>
 </figure>
 
 Fast-forward to 2020. The JavaScript community now has a wide variety of capable Jekyll alternatives. Better yet, the automated build and deploy process that Jekyll enjoys on GitHub Pages can be replicated with the recently released [GitHub Actions](https://github.com/features/actions).
@@ -220,10 +218,9 @@ Once the basics were nailed down, there was time to add even more value.
 * [RSS feed](https://austinjavascript.com/feed.xml)
 * SSL/CI/CDN services: switch to GitHub and remove Cloudflare and Travis dependencies
 
-<figure class="image browser-chrome">
+<figure class="image browser-window">
   <img src="/assets/img/posts/austinjs-2020.png" alt="Austin JavaScript, 2020">
   <figcaption>AustinJavaScript.com, circa 2020</figcaption>
-  <i class="browser-parts"></i>
 </figure>
 
 ### Goals review

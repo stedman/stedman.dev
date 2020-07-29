@@ -142,24 +142,28 @@ code {
 }
 
 /*
- * FAUX BROWSER CHROME FOR SCREENCAPS
+ * faux browser wrap for screen captures
  */
- $desktop: 1024px;
 
- .content {
-   max-width: 960px;
- }
+.browser-window {
+  $dot: 0.4%;
+  $dotIn: 0.35%;
 
- /*
-  * FAUX BROWSER CHROME FOR SCREEN CAPTURES
-  */
-
-.browser-chrome {
-  background-color: #111;
+  background:
+    radial-gradient(
+      circle at 1.1% 2.2%, #ff5f55 0 $dotIn, transparent $dot
+    ),
+    radial-gradient(
+      circle at 2.6% 2.2%, #ffc322 0 $dotIn, transparent $dot
+    ),
+    radial-gradient(
+      circle at 4.2% 2.2%, #28c841 0 $dotIn, transparent $dot
+    ),
+    #222;
   border-radius: 0.4vw;
   box-shadow: 3px 3px 6px hsla(0, 0%, 0%, 0.15);
-  margin-bottom: 3rem;
   padding-top: 1.8vw;
+  position: relative;
 
   @media screen and (min-width: $desktop) {
     border-radius: 0.3rem;
@@ -175,69 +179,16 @@ code {
     }
   }
 
+  img {
+    height: auto;
+    width: 100%;
+  }
+
   figcaption {
     font-size: 1rem;
     margin-top: 0.5rem;
     position: absolute;
     right: 0;
-  }
-}
-
-.browser-parts {
-  // top gap value
-  $top: 0.55vw;
-  $topMax: 0.4rem;
-  // dot height and width value
-  $dot: 0.7vw;
-  $dotMax: 0.45rem;
-  // left width value
-  $gap: 0.6vw;
-  $gapMax: 0.4rem;
-
-  &,
-  &:before,
-  &:after {
-    background-color: #ff5f55;
-    border-radius: 1rem;
-    height: $dot;
-    position: absolute;
-    top: $top;
-    width: $dot;
-
-    @media screen and (min-width: $desktop) {
-      height: $dotMax;
-      top: $topMax;
-      width: $dotMax;
-    }
-  }
-
-  & {
-    left: $gap;
-
-    @media screen and (min-width: $desktop) {
-      left: $gapMax;
-    }
-  }
-
-  &:before,
-  &:after {
-    background-color: #ffc332;
-    content: '';
-    left: $gap * 2;
-    top: 0;
-
-    @media screen and (min-width: $desktop) {
-      left: $gapMax * 2;
-    }
-  }
-
-  &:after {
-    background-color: #28c841;
-    left: $gap * 4;
-
-    @media screen and (min-width: $desktop) {
-      left: $gapMax * 4;
-    }
   }
 }
 
