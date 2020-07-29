@@ -4,7 +4,7 @@
   <subtitle>The @stedman home range.</subtitle>
   <link rel="self" href="https://stedman.dev/atom.xml"/>
   <link href="https://stedman.dev/"/>
-  <updated>2020-07-29T19:00:11+00:00</updated>
+  <updated>2020-07-29T22:15:25+00:00</updated>
   <id>https://stedman.dev/</id>
   <author>
     <name>Steve Stedman</name>
@@ -13,21 +13,19 @@
     <title>Austin JavaScript Case Study</title>
     <link href="https://stedman.dev/2020/07/23/austin-javascript-case-study/"/>
     <id>https://stedman.dev/2020/07/23/austin-javascript-case-study/</id>
-    <published>2020-07-29T19:00:11+00:00</published>
-    <updated>2020-07-29T19:00:11+00:00</updated>
+    <published>2020-07-29T22:15:25+00:00</published>
+    <updated>2020-07-29T22:15:25+00:00</updated>
     <content type="html">&lt;p&gt;&lt;a href=&quot;https://austinjavascript.com/&quot;&gt;Austin JavaScript&lt;/a&gt; (AustinJS) is a tech meetup organization with a proud history of involvement from local hackers to JavaScript industry giants. For over ten years, it’s provided timely and relevant JavaScript knowledge while serving as a key social network for the Austin web development community. If it has &lt;em&gt;anything&lt;/em&gt; to do with JavaScript, it’s being talked about at AustinJS.&lt;/p&gt;
 &lt;p&gt;So it was always a bit ironic that JavaScript as a technology didn’t play a bigger role in the AustinJS website. Granted, a key consideration was performance on mobile devices and client-side JavaScript can degrade rendering speeds and battery life if not crafted properly. But even on the server-side, there wasn’t a contribution model in the &lt;a href=&quot;https://nodejs.org/&quot;&gt;Node&lt;/a&gt; world that quite fit AustinJS’s needs. This volunteer organization’s content management system needed to be simple, deployments needed to be effortless, and whatever was chosen needed to be free.&lt;/p&gt;
-&lt;figure class=&quot;image browser-chrome&quot;&gt;
+&lt;figure class=&quot;image browser-window&quot;&gt;
   &lt;img src=&quot;https://stedman.dev/assets/img/posts/austinjs-2013.png&quot; alt=&quot;Austin JavaScript (WordPress), 2013&quot;&gt;
   &lt;figcaption&gt;AustinJavaScript.com, circa 2013&lt;/figcaption&gt;
-  &lt;i class=&quot;browser-parts&quot;&gt;&lt;/i&gt;
 &lt;/figure&gt;
 &lt;p&gt;The site was initially set up in 2010 on &lt;a href=&quot;https://wordpress.org/&quot;&gt;WordPress&lt;/a&gt; (PHP) and then moved to &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; and &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; (Ruby) in 2015. As a publishing platform, the GitHub Pages + Jekyll duo is a hard combination to beat. It’s rock-solid, easy to update (even with a mobile device), deployments are invisible, and it’s free.&lt;/p&gt;
 &lt;p&gt;But it’s not JavaScript. Worse, Jekyll runs on Ruby which is a challenging ecosystem for the uninitiated to set up locally. This impeded layout and design contributions, so not much evolved on the site beyond 2015.&lt;/p&gt;
-&lt;figure class=&quot;image browser-chrome&quot;&gt;
+&lt;figure class=&quot;image browser-window&quot;&gt;
   &lt;img src=&quot;https://stedman.dev/assets/img/posts/austinjs-2016.png&quot; alt=&quot;Austin JavaScript (Jekyll), 2016&quot;&gt;
   &lt;figcaption&gt;AustinJavaScript.com, circa 2016&lt;/figcaption&gt;
-  &lt;i class=&quot;browser-parts&quot;&gt;&lt;/i&gt;
 &lt;/figure&gt;
 &lt;p&gt;Fast-forward to 2020. The JavaScript community now has a wide variety of capable Jekyll alternatives. Better yet, the automated build and deploy process that Jekyll enjoys on GitHub Pages can be replicated with the recently released &lt;a href=&quot;https://github.com/features/actions&quot;&gt;GitHub Actions&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;It was time to rebuild AustinJS on JavaScript.&lt;/p&gt;
@@ -108,10 +106,9 @@
 &lt;li&gt;&lt;a href=&quot;https://austinjavascript.com/feed.xml&quot;&gt;RSS feed&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;SSL/CI/CDN services: switch to GitHub and remove Cloudflare and Travis dependencies&lt;/li&gt;
 &lt;/ul&gt;
-&lt;figure class=&quot;image browser-chrome&quot;&gt;
+&lt;figure class=&quot;image browser-window&quot;&gt;
   &lt;img src=&quot;https://stedman.dev/assets/img/posts/austinjs-2020.png&quot; alt=&quot;Austin JavaScript, 2020&quot;&gt;
   &lt;figcaption&gt;AustinJavaScript.com, circa 2020&lt;/figcaption&gt;
-  &lt;i class=&quot;browser-parts&quot;&gt;&lt;/i&gt;
 &lt;/figure&gt;
 &lt;h3 id=&quot;goals-review&quot;&gt;Goals review &lt;/h3&gt;
 &lt;p&gt;I reviewed the &lt;a href=&quot;#goals&quot;&gt;goals&lt;/a&gt; one last time:&lt;/p&gt;
@@ -140,8 +137,8 @@
     <title>Watching Sass in Eleventy</title>
     <link href="https://stedman.dev/2020/05/11/watching-sass-in-eleventy/"/>
     <id>https://stedman.dev/2020/05/11/watching-sass-in-eleventy/</id>
-    <published>2020-07-29T19:00:11+00:00</published>
-    <updated>2020-07-29T19:00:11+00:00</updated>
+    <published>2020-07-29T22:15:25+00:00</published>
+    <updated>2020-07-29T22:15:25+00:00</updated>
     <content type="html">&lt;p&gt;I’ve been using &lt;a href=&quot;https://github.com/sass/node-sass&quot;&gt;node-sass&lt;/a&gt; in my &lt;a href=&quot;https://11ty.dev/&quot;&gt;11ty&lt;/a&gt; workflow for awhile now but, for whatever reason, couldn’t get the &lt;code&gt;--watch&lt;/code&gt; flag to work. This meant that, for any SCSS update, I’d have to toggle back to the command line and manually run &lt;code&gt;npx node-sass src/_sass/_main.scss dist/css/main.css&lt;/code&gt; or an npm script shortcut for the same.&lt;/p&gt;
 &lt;p&gt;Well, I finally had enough and came up with something that works for me. It might just work for you so I’m sharing the details here.&lt;/p&gt;
 &lt;ol&gt;
@@ -182,8 +179,8 @@
     <title>Make the Jump from Jekyll to JavaScript</title>
     <link href="https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/"/>
     <id>https://stedman.dev/2020/04/29/make-the-jump-from-jekyll-to-javascript/</id>
-    <published>2020-07-29T19:00:11+00:00</published>
-    <updated>2020-07-29T19:00:11+00:00</updated>
+    <published>2020-07-29T22:15:25+00:00</published>
+    <updated>2020-07-29T22:15:25+00:00</updated>
     <content type="html">&lt;p&gt;With the recent addition of &lt;a href=&quot;https://github.com/features/actions&quot;&gt;Actions&lt;/a&gt; to GitHub’s product lineup, we now have the ability to create a &lt;em&gt;100% Pure, Unfiltered™&lt;/em&gt; JavaScript alternative to Jekyll (and Ruby) in GitHub Pages. This is a big deal. Really.&lt;/p&gt;
 &lt;h2 id=&quot;back-story&quot;&gt;Back story &lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;, for the uninitiated, are public web pages automatically generated from your GitHub source files and freely hosted on &lt;a href=&quot;http://github.io/&quot;&gt;github.io&lt;/a&gt; or your custom domain. There are no no servers to provision and no databases to set up.&lt;/p&gt;
