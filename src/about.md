@@ -13,7 +13,7 @@ I am an avid learner, deeply involved with the Austin tech community, and eager 
 
 ### Colophon
 
-The current tech stack has me pretty excited. I'll dive into more details soon. Until then, here's the spec sheet.
+Here's the spec sheet for my current tech stack:
 
 * Static site generator: [Eleventy (11ty)](https://11ty.dev/)
 * Templating language: [LiquidJS](https://liquidjs.com/)
