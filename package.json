@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build:css": "node-sass src/_sass/_main.scss dist/assets/css/main.css --output-style compressed",
-    "build": "npm run clean && eleventy && npm run build:css",
+    "build": "npm run clean && eleventy && npm run build:css && npm run purgecss",
     "clean": "rm -rf ./dist",
     "lint:js": "npx eslint --fix .eleventy.js ./src/_includes/*.js",
     "lint:md": "npx markdownlint --fix ./src/_posts/*.md",
     "lint": "npm run lint:js && npm run lint:md",
+    "purgecss": "npx purgecss --css dist/assets/css/main.css --content dist/index.html,dist/about/index.html,dist/2020/**/*.html --output dist/assets/css/main.css",
     "start": "ELEVENTY_ENV=dev eleventy --serve --watch",
     "test": "npm run lint"
   },
@@ -25,7 +26,8 @@
     "eslint-plugin-import": "^2.22.0",
     "markdownlint": "^0.20.4",
     "markdownlint-cli": "^0.22.0",
-    "prettier": "2.0.5"
+    "prettier": "2.0.5",
+    "purgecss": "^2.3.0"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.11.0",
