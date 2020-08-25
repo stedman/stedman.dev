@@ -42,7 +42,7 @@ module.exports = function (eleventyConfig) {
     anchor: {
       permalink: true,
       permalinkClass: 'anchor-link',
-      permalinkSymbol: 'permalink',
+      permalinkSymbol: '#',
       level: [2, 3],
     },
   };
