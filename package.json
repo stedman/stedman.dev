@@ -11,7 +11,7 @@
     "lint:md": "npx markdownlint --fix ./src/_posts/*.md",
     "lint": "npm run lint:js && npm run lint:md",
     "purgecss": "npx purgecss --css dist/assets/css/main.css --content dist/index.html,dist/about/index.html,dist/2020/**/*.html --output dist/assets/css/main.css",
-    "start": "ELEVENTY_ENV=dev eleventy --serve --watch",
+    "start": "eleventy --serve --watch",
     "test": "npm run lint"
   },
   "repository": {

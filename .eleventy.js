@@ -22,10 +22,12 @@ const addFileDates = (posts) => posts.map((post) => {
 });
 
 module.exports = function (eleventyConfig) {
-  // Watch Sass directory for styling changes.
-  // Works only in dev mode. Though it throws and error and then continues on.
-  if (process.env.ELEVENTY_ENV === 'dev') {
+  // Works only in `--watch` mode.
+  if (process.argv.includes('--watch')) {
+    // Watch Sass directory for styling changes.
     sassWatch('./src/_sass/_main.scss', './dist/assets/css/main.css');
+    // Refresh browsersync after update
+    eleventyConfig.addWatchTarget('./src/_sass/');
   }
 
   // PLUGIN: PrismJS

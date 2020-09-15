@@ -1,4 +1,4 @@
 module.exports = {
-  environment: process.env.ELEVENTY_ENV,
+  environment: process.argv.includes('--watch') ? 'dev' : '',
   now: new Date(),
 };

@@ -42,18 +42,9 @@ a {
 }
 
 // for anchor links
-.content {
-  h2,
-  h3 {
-    position: relative;
-  }
-}
-
 .anchor-link {
   color: darken($grey-light, 13%);
   font-size: 70%;
   font-weight: 300;
-  left: -1.4rem;
-  line-height: 180%;
-  position: absolute;
+  vertical-align: 10%;
 }

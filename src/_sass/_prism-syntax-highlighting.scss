@@ -36,8 +36,8 @@ $txt-shdw: 0 0 2px hsla(0, 0%, 0%, 0.8);
   background-color: #222;
 }
 .highlight-line-active {
-  background-color: #444;
-  background-color: hsla(0, 0%, 27%, 0.8);
+  background-color: #000;
+  // background-color: hsla(0, 0%, 0%, 0.8);
   text-shadow: $txt-shdw;
 }
 .highlight-line-add {
