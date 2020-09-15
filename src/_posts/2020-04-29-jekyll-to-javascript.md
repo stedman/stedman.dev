@@ -1,7 +1,7 @@
 ---
 title: Make the Jump from Jekyll to JavaScript
 meta:
-  description: Fully replace Jekyll with Eleventy (a JavaScript static site generator) on GitHub Pages. Learn how to set up the application, automatic deployments, and a custom domain.
+  description: Fully replace Jekyll with Eleventy on GitHub Pages. Learn how to set up the application, automatic deployments, and a custom domain.
 tags:
   - tutorial
   - 11ty

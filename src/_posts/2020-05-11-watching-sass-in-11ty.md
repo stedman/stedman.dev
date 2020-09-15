@@ -1,16 +1,18 @@
 ---
 title: Watching Sass in Eleventy
 meta:
-  description: Automatically kick-off Sass builds in Eleventy development mode with this workflow.
+  description: Automatically kick-off Sass builds in Eleventy watch mode with this workflow.
 tags:
   - tutorial
   - 11ty
   - sass
 ---
 
-I've been using [node-sass](https://github.com/sass/node-sass) in my [11ty](https://11ty.dev/) workflow for awhile now but, for whatever reason, couldn't get the `--watch` flag to work. This meant that, for any SCSS update, I'd have to toggle back to the command line and manually run `npx node-sass src/_sass/_main.scss dist/css/main.css` or an npm script shortcut for the same.
+I've been using [node-sass](https://github.com/sass/node-sass) in my [11ty](https://11ty.dev/) workflow for awhile now but haven't been able to get the `--watch` flag to work. So while Browsersync automatically refreshes the browser for content and template changes, I needed to manually rebuild the Sass files and refresh the browser.
 
-Well, I finally had enough and came up with something that works for me. It might just work for you so I'm sharing the details here.
+Well, I finally had enough and hacked a solution that works for me. It might just work for you so I'm sharing the details here.
+
+> UPDATE (2020-09-15): I recently came across an [Egghead tutorial on Sass compiling](https://egghead.io/lessons/11ty-add-sass-compiling-and-watch-for-changes-in-eleventy-11ty) that may have a better solution. They are using pure [Sass](https://www.npmjs.com/package/sass) instead of the `node-sass` (LibSass wrapper) package that I've been using. I will test this approach soon and post an update here.
 
 1. Make sure `node-sass` is installed.
 
@@ -71,26 +73,30 @@ Well, I finally had enough and came up with something that works for me. It migh
     const sassWatch = require('./_includes/sass-watch');
 
     module.exports = function (eleventyConfig) {
-      // Watch Sass directory for styling changes.
-      // Works only if you set the ELEVENTY_ENV to 'dev'.
-      if (process.env.ELEVENTY_ENV === 'dev') {
+      // Works only in watch mode.
+      if (process.argv.includes('--watch')) {
+         // Watch Sass directory for styling changes.
         sassWatch('./src/_sass/_main.scss', './dist/css/main.css');
+        // Refresh the browser when Sass changes.
+        eleventyConfig.addWatchTarget('./src/_sass/');
       }
       ..
     };
     ```
 
-    Sharp-eyed folks will notice that the script above won't run unless there's an `ELEVENTY_ENV` environment variable set. This is to prevent sass-watch from running in production where it isn't needed and might just cause mischief.
+    Sharp-eyed folks will notice that `sassWatch` only runs when the `--watch` flag is present in the process arguments—that is, when we run `node eleventy --serve --watch`. This prevents sass-watch from running in production where it isn't needed and might just cause mischief.
 
-    For local development, I set the `ELEVENTY_ENV` variable to `dev` in two places but mostly rely on the VSCode debugger for daily use.
+    > UPDATE (2020-09-15): To simplify things, I stopped adding and using the `ELEVENTY_ENV` environment flag. Relying on the already present `--watch` argument removed a few extra steps.
 
-    1. Command line: `package.json` start script:
+    The config for the command line and VSCode is no different from the standard setup:
+
+    * Command line: `package.json` start script:
 
         ```json
-        "start": "ELEVENTY_ENV=dev eleventy --serve --watch"
+        "start": "eleventy --serve --watch"
         ```
 
-    2. VSCode: `.vscode/launch.json` script:
+    * VSCode: `.vscode/launch.json` script:
 
         ```json
         {
@@ -100,14 +106,9 @@ Well, I finally had enough and came up with something that works for me. It migh
               "type": "node",
               "request": "launch",
               "name": "Launch 11ty",
-              "program": "${workspaceFolder}/node_modules/@11ty/eleventy/cmd.js",
-              "args": [
-                "--serve",
-                "--watch"
-              ],
-              "env": {
-                "ELEVENTY_ENV": "dev"
-              }
+              "cwd": "${workspaceFolder}",
+              "runtimeExecutable": "npm",
+              "runtimeArgs": ["start"],
             }
           ]
         }
@@ -117,6 +118,6 @@ Well, I finally had enough and came up with something that works for me. It migh
 
 ## Conclusion
 
-I sincerely hope there's a better solution for kicking-off Sass builds from file changes. If you can enlighten me, please reach out on [Twitter @stedman](https://twitter.com/stedman).
+I sincerely hope there's a better solution for kicking-off Sass builds on file change events. If you know of a better way, please reach out on [Twitter @stedman](https://twitter.com/stedman).
 
 Until then, I'll be happily updating Sass and watching the changes show up in my browser.
