@@ -3,49 +3,55 @@ const path = require('path');
 const sass = require('node-sass');
 
 /**
- * Generate and save CSS.
+ * Render and save the Sass to CSS.
  *
- * @param {string} _scssPath Path to SCSS src file.
- * @param {string} _cssPath  Path to CSS dist files.
+ * @param  {string}  sassPath     The Sass input path.
+ * @param  {string}  cssFilePath  The CSS output file path.
+ *
  */
-const generateCss = (_scssPath, _cssPath) => {
-  // Encapsulate rendered css from _scssPath into renderedCss variable
-  const renderedCss = sass.renderSync({ file: _scssPath });
+const buildCss = (sassPath, cssFilePath) => {
+  // Render CSS from Sass source path.
+  const rendered = sass.renderSync({ file: sassPath });
 
-  // Then write result css string to _cssPath file
-  fs.writeFile(_cssPath, renderedCss.css.toString(), (writeErr) => {
+  // Save CSS to output path.
+  fs.writeFile(cssFilePath, rendered.css.toString(), (writeErr) => {
     if (writeErr) throw writeErr;
 
     // eslint-disable-next-line no-console
-    console.log(`CSS file saved: ${_cssPath}`);
+    console.log(`CSS file saved: ${cssFilePath} (in ${rendered.stats.duration}ms)`);
   });
 };
 
-module.exports = (scssPath, cssPath) => {
-  // If cssPath directory doesn't exist...
-  if (!fs.existsSync(path.dirname(cssPath))) {
+/**
+ * Initialize and watch Sass for changes requiring a build.
+ *
+ * @param  {string}  sassPath     The Sass input path.
+ * @param  {string}  cssFilePath  The CSS output file path.
+ */
+module.exports = (sassPath, cssFilePath) => {
+  // If CSS output directory doesn't already exist, make it.
+  if (!fs.existsSync(path.dirname(cssFilePath))) {
     // eslint-disable-next-line no-console
-    console.log(`Creating new CSS directory: ${path.dirname(cssPath)}/`);
+    console.log(`Creating new CSS directory: ${path.dirname(cssFilePath)}/`);
 
-    // Create cssPath directory recursively
-    fs.mkdir(path.dirname(cssPath), { recursive: true }, (mkdirErr) => {
+    // Create output directory.
+    fs.mkdir(path.dirname(cssFilePath), { recursive: true }, (mkdirErr) => {
       if (mkdirErr) throw mkdirErr;
 
       // eslint-disable-next-line no-console
       console.log('CSS directory created.');
-
-      generateCss(scssPath, cssPath);
     });
   }
 
-  // Compile CSS on startup
-  generateCss(scssPath, cssPath);
+  // Build CSS on startup.
+  buildCss(sassPath, cssFilePath);
 
-  // Watch for changes to scssPath directory...
-  fs.watch(path.dirname(scssPath), (evType, filename) => {
+  // Watch for changes to Sass directory.
+  fs.watch(path.dirname(sassPath), (evType, filename) => {
     // eslint-disable-next-line no-console
-    console.log(`SCSS file changed: ${path.dirname(scssPath)}/${filename}`);
+    console.log(`SCSS file changed: ${path.dirname(sassPath)}/${filename}`);
 
-    generateCss(scssPath, cssPath);
+    // Rebuild the CSS.
+    buildCss(sassPath, cssFilePath);
   });
 };

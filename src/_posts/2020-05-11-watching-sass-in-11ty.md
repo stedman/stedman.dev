@@ -8,11 +8,16 @@ tags:
   - sass
 ---
 
-I've been using [node-sass](https://github.com/sass/node-sass) in my [11ty](https://11ty.dev/) workflow for awhile now but haven't been able to get the `--watch` flag to work. So while Browsersync automatically refreshes the browser for content and template changes, I needed to manually rebuild the Sass files and refresh the browser.
+I've been using [node-sass](https://github.com/sass/node-sass) in my [11ty](https://11ty.dev/) workflow for awhile now but haven't been able to get the `--watch` flag to work to my satisfaction. For instance, while Browsersync automatically refreshes the browser for content and template changes, it didn't rebuild my Sass files and then refresh the browser.
 
-Well, I finally had enough and hacked a solution that works for me. It might just work for you so I'm sharing the details here.
+Well, I finally had enough of the manual labor and found [a Mathieu Huot solution](https://dev.to/mathieuhuot/processing-sass-with-11ty-5a09) that sorta worked for me. I made a few tweaks that I hope he doesn't mind:
 
-> UPDATE (2020-09-15): I recently came across an [Egghead tutorial on Sass compiling](https://egghead.io/lessons/11ty-add-sass-compiling-and-watch-for-changes-in-eleventy-11ty) that may have a better solution. They are using pure [Sass](https://www.npmjs.com/package/sass) instead of the `node-sass` (LibSass wrapper) package that I've been using. I will test this approach soon and post an update here.
+* I don't have a lot of Sass files to process and my render times were in the 125ms range. So I chose the simplicity of a synchronous process instead of a promise-based one. Bonus: I get to skip a dependency (`fs-extra`).
+* Rather than introduce an environment variable (e.g., `dev`) to toggle the start of this script (and prevent it running it in production), I look for the `--watch` process argument. It's present when Eleventy is fired up in dev mode: `node eleventy --serve --watch`.
+
+> UPDATE (2020-09-15): I recently came across an [Egghead tutorial on Sass compiling](https://egghead.io/lessons/11ty-add-sass-compiling-and-watch-for-changes-in-eleventy-11ty) that may work better for you.
+
+## Let's go
 
 1. Make sure `node-sass` is installed.
 
@@ -27,42 +32,43 @@ Well, I finally had enough and hacked a solution that works for me. It might jus
     const path = require('path');
     const sass = require('node-sass');
 
-    // Generate and save CSS.
-    const generateCss = (_scssPath, _cssPath) => {
-      // Encapsulate rendered css from _scssPath into renderedCss variable
-      const renderedCss = sass.renderSync({ file: _scssPath });
-
-      // Then write result css string to _cssPath file
-      fs.writeFile(_cssPath, renderedCss.css.toString(), (writeErr) => {
+    /**
+     * Render and save the Sass to CSS.
+     * @param  {string}  sassPath     The Sass input path.
+     * @param  {string}  cssFilePath  The CSS output file path.
+     */
+    const buildCss = (sassPath, cssFilePath) => {
+      // Render CSS from Sass source path.
+      const rendered = sass.renderSync({ file: sassPath });
+      // Save CSS to output path.
+      fs.writeFile(cssFilePath, rendered.css.toString(), (writeErr) => {
         if (writeErr) throw writeErr;
-
-        console.log(`CSS file saved: ${_cssPath}`);
+        console.log(`CSS file saved: ${cssFilePath} (in ${rendered.stats.duration}ms)`);
       });
     };
 
-    module.exports = (scssPath, cssPath) => {
-      // If cssPath directory doesn't already exist, add it...
-      if (!fs.existsSync(path.dirname(cssPath))) {
-        console.log(`Creating new CSS directory: ${path.dirname(cssPath)}/`);
-
-        // Create cssPath directory recursively
-        fs.mkdir(path.dirname(cssPath), { recursive: true }, (mkdirErr) => {
+    /**
+     * Initialize and watch Sass for changes requiring a build.
+     * @param  {string}  sassPath     The Sass input path.
+     * @param  {string}  cssFilePath  The CSS output file path.
+     */
+    module.exports = (sassPath, cssFilePath) => {
+      // If CSS output directory doesn't already exist, make it.
+      if (!fs.existsSync(path.dirname(cssFilePath))) {
+        console.log(`Creating new CSS directory: ${path.dirname(cssFilePath)}/`);
+        // Create output directory.
+        fs.mkdir(path.dirname(cssFilePath), { recursive: true }, (mkdirErr) => {
           if (mkdirErr) throw mkdirErr;
-
           console.log('CSS directory created.');
-
-          generateCss(scssPath, cssPath);
         });
       }
-
-      // Generate CSS on startup
-      generateCss(scssPath, cssPath);
-
-      // Use Node's fs.watch to catch subsequent changes to scssPath directory
-      fs.watch(path.dirname(scssPath), (evType, filename) => {
-        console.log(`SCSS file changed: ${path.dirname(scssPath)}/${filename}`);
-
-        generateCss(scssPath, cssPath);
+      // Build CSS on startup.
+      buildCss(sassPath, cssFilePath);
+      // Watch for changes to Sass directory.
+      fs.watch(path.dirname(sassPath), (evType, filename) => {
+        console.log(`SCSS file changed: ${path.dirname(sassPath)}/${filename}`);
+        // Rebuild the CSS.
+        buildCss(sassPath, cssFilePath);
       });
     };
     ```
@@ -73,20 +79,16 @@ Well, I finally had enough and hacked a solution that works for me. It might jus
     const sassWatch = require('./_includes/sass-watch');
 
     module.exports = function (eleventyConfig) {
-      // Works only in watch mode.
+      // Run only when 11ty is in watch mode.
       if (process.argv.includes('--watch')) {
-         // Watch Sass directory for styling changes.
+         // Watch Sass directory for updates.
         sassWatch('./src/_sass/_main.scss', './dist/css/main.css');
-        // Refresh the browser when Sass changes.
+        // Refresh the browser when there are updates in the Sass directory.
         eleventyConfig.addWatchTarget('./src/_sass/');
       }
       ..
     };
     ```
-
-    Sharp-eyed folks will notice that `sassWatch` only runs when the `--watch` flag is present in the process arguments—that is, when we run `node eleventy --serve --watch`. This prevents sass-watch from running in production where it isn't needed and might just cause mischief.
-
-    > UPDATE (2020-09-15): To simplify things, I stopped adding and using the `ELEVENTY_ENV` environment flag. Relying on the already present `--watch` argument removed a few extra steps.
 
     The config for the command line and VSCode is no different from the standard setup:
 
