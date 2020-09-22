@@ -12,7 +12,7 @@ $primary: hsl(12, 70%, 45%);
 $scheme-main: $white-ter;
 $footer-background-color: $white-ter;
 $code: $black-ter;
-$code-background: transparent;
+$code-background: hsl(210, 80%, 94%);
 $code-padding: 0.1em 0.3em;
 $pre-code-font-size: 0.875em;
 
@@ -105,10 +105,6 @@ $fullhd-enabled: false;
 
 code {
   border-radius: $radius;
-
-  &:not([class*='language-']) {
-    border: 1px solid #ddd;
-  }
 
   pre & {
     // does not play well with content width
