@@ -12,7 +12,7 @@ With the recent addition of [Actions](https://github.com/features/actions) to Gi
 
 ## Back story
 
-[GitHub Pages](https://pages.github.com/), for the uninitiated, are public web pages automatically generated from your GitHub source files and freely hosted on github.io or your custom domain. There are no no servers to provision and no databases to set up.
+[GitHub Pages](https://pages.github.com/), for the uninitiated, are public web pages automatically generated from your GitHub source files and freely hosted on github.io or your custom domain. There are no servers to provision and no databases to set up.
 
 The automatic generation part is handled by [Jekyll](https://jekyllrb.com/), a pretty sweet static site generator. It's been around quite awhile, is battle tested, and is backed by a huge community. It's also simple enough for beginners and yet powerful enough for advanced users. Unfortunately, customizing it requires running it locally and this is where things get sticky. Jekyll is based on Ruby. For casual users, Ruby is a challenge to set up and maintain—especially on Windows. Scaling is also an issue for Jekyll/Ruby as bigger builds are notorious for taking a long time to compile.
 
