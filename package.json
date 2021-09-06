@@ -10,7 +10,7 @@
     "lint:js": "npx eslint --fix .eleventy.js ./src/_includes/*.js",
     "lint:md": "npx markdownlint --fix ./src/_posts/*.md",
     "lint": "npm run lint:js && npm run lint:md",
-    "purgecss": "npx purgecss --css dist/assets/css/main.css --content dist/index.html,dist/about/index.html,dist/2020/**/*.html --output dist/assets/css/main.css",
+    "purgecss": "npx purgecss --config ./purgecss.config.js",
     "start": "eleventy --serve --watch",
     "test": "npm run lint"
   },
@@ -36,6 +36,6 @@
     "markdown-it": "^12.2.0",
     "markdown-it-anchor": "^5.3.0",
     "node-sass": "^4.14.1",
-    "purgecss": "^2.3.0"
+    "purgecss": "^4.0.3"
   }
 }
