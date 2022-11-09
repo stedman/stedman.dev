@@ -8,12 +8,12 @@ layout: base
   <p class="is-sr-only">By <em class="p-author">Steve Stedman</em></p>
 
   <p class="has-text-grey is-size-6">
-    <time class="dt-published" datetime="{{ page.date | rssDate }}">
+    <time class="dt-published" datetime="{{ page.date | dateToRfc3339 }}">
       {{ page.date | date: '%B %e, %Y' }}
     </time>
   </p>
 
   <div class="e-content mt-6">
-    {{ content | safe }}
+    {{ content }}
   </div>
 </article>

@@ -51,7 +51,7 @@ module.exports = function (eleventyConfig) {
 
   // LIBRARY: markdown-it with markdown-it-anchor
   eleventyConfig.setLibrary('md', markdownIt(mdItOptions.main)
-    .use(markdownItAnchor, mdItOptions.anchor));
+  .use(markdownItAnchor, mdItOptions.anchor));
 
   // PASSTHRU: Copy un-compiled files to the dist folder
   eleventyConfig.addPassthroughCopy('src/assets');
@@ -65,8 +65,11 @@ module.exports = function (eleventyConfig) {
     return addFileDates(posts);
   });
 
-  // FILTERS
+  // FILTERS:
+  // ...Custom filter
   eleventyConfig.addFilter('regexReplace', filters.regexReplace);
+  // ...RSS filter for Atom date
+  eleventyConfig.addLiquidFilter("dateToRfc3339", pluginRss.dateToRfc3339);
 
   return {
     dir: {
