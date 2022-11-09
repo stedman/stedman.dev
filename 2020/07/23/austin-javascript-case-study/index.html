@@ -71,7 +71,7 @@
   <p class="is-sr-only">By <em class="p-author">Steve Stedman</em></p>
 
   <p class="has-text-grey is-size-6">
-    <time class="dt-published" datetime="Thu Jul 23 2020 00:00:00 GMT+0000 (Coordinated Universal Time)">
+    <time class="dt-published" datetime="2020-07-23T00:00:00Z">
       July 23, 2020
     </time>
   </p>
@@ -94,9 +94,9 @@
 <blockquote>
 <p>On this page: <a href="#1-the-prep">The prep</a> &gt; <a href="#2-the-pitch">The pitch</a> &gt; <a href="#3-the-pivot">The pivot</a> &gt; <a href="#4-the-launch">The launch</a> &gt; <a href="#conclusion">Conclusion</a></p>
 </blockquote>
-<h2 id="1.-the-prep">1. The prep <a class="anchor-link" href="#1.-the-prep">#</a></h2>
+<h2 id="1.-the-prep" tabindex="-1">1. The prep <a class="anchor-link" href="#1.-the-prep">#</a></h2>
 <p>Before approaching the AustinJS organizers, I wanted to have a decent proof of concept to share. I figured I’d push some of the current content through a JavaScript engine, throw a fresh coat of paint on it, and see what folks thought.</p>
-<h3 id="discovery">Discovery <a class="anchor-link" href="#discovery">#</a></h3>
+<h3 id="discovery" tabindex="-1">Discovery <a class="anchor-link" href="#discovery">#</a></h3>
 <p>Before starting, I put on my project management hat and did some fieldwork. Their GitHub repo had been up for five years, so there was plenty of material to research:</p>
 <ol>
 <li>Content: patterns of use (and evolutions in those patterns)</li>
@@ -104,7 +104,7 @@
 <li>GitHub Issues: issues that need to be addressed</li>
 <li>Templates/other code: comments, FIXMEs, and TODOs</li>
 </ol>
-<h3 id="goals">Goals <a class="anchor-link" href="#goals">#</a></h3>
+<h3 id="goals" tabindex="-1">Goals <a class="anchor-link" href="#goals">#</a></h3>
 <p>After the research, my initial goals were simple:</p>
 <ol>
 <li>maintain content parity (while the engine and the design might change, the content should remain the same)</li>
@@ -115,7 +115,7 @@
 <li>improve the user experience with a visual design refresh</li>
 <li>reduce dependencies (especially those requiring additional services and logins; Travis and Cloudflare, for example)</li>
 </ol>
-<h3 id="proof-of-concept">Proof of concept <a class="anchor-link" href="#proof-of-concept">#</a></h3>
+<h3 id="proof-of-concept" tabindex="-1">Proof of concept <a class="anchor-link" href="#proof-of-concept">#</a></h3>
 <h4>Generator</h4>
 <p><a href="https://gatsbyjs.com/">Gatsby</a> seemed like a solid JavaScript static site generator (SSG) choice. Based on ReactJS, it has tons of documentation, a good Jekyll migration path, and a supportive community.</p>
 <h4>Style</h4>
@@ -138,7 +138,7 @@
 <p>The <code>categories</code> front matter field generates the site sub-folders—at least in the AustinJS Jekyll setup. Using our example from above, the output file path looks like:</p>
 <pre class="language-html"><code class="language-html">/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cat-1</span><span class="token punctuation">></span></span>/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cat-2</span><span class="token punctuation">></span></span>/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>date</span><span class="token punctuation">></span></span>/    # format<br>/posts/meetups/2020/02/18/  # actual</code></pre>
 <p>With Gatsby, the permalink format is defined in the <code>gatsby-node.js</code> file, so the <code>categories</code> front matter fields are completely unnecessary.</p>
-<h2 id="2.-the-pitch">2. The pitch <a class="anchor-link" href="#2.-the-pitch">#</a></h2>
+<h2 id="2.-the-pitch" tabindex="-1">2. The pitch <a class="anchor-link" href="#2.-the-pitch">#</a></h2>
 <p>After wrangling Gatsby, Bulma, and a sample of content for a few days, I soon had a <a href="https://github.com/austinjavascript/austinjavascript.com/issues/105">proof of concept</a> to share with AustinJS leadership.</p>
 <p>Aaron Stacey, long-time AustinJS organizer and developer of the second gen site, was pleased with the idea of it all but added that an MVP (minimal viable product) would include the following:</p>
 <ol>
@@ -149,17 +149,17 @@
 <p>Hooray! We agreed on goals. But then Aaron pointed out the page weight. My Gatsby-powered home page had ballooned to 30 times the size of the Jekyll-powered version. It now weighed-in at over 3GB. What the heck? Sure it was speedy on my desktop, but there were valid concerns about load times for mobile devices.</p>
 <p>Gatsby hydrates the initial page after the static bits load and subsequent page loads are routed through ReactJS. So, as you can imagine, you’re getting a large upfront JS payload followed by smaller GraphQL data transfers to navigate additional pages. For a site that typically only experiences one page view per session (to view details about an upcoming meetup), it’s important to maintain a trim initial page weight.</p>
 <p>Aaron kindly mentioned that <a href="https://11ty.dev/">Eleventy (11ty)</a> might be a better fit.</p>
-<h2 id="3.-the-pivot">3. The pivot <a class="anchor-link" href="#3.-the-pivot">#</a></h2>
+<h2 id="3.-the-pivot" tabindex="-1">3. The pivot <a class="anchor-link" href="#3.-the-pivot">#</a></h2>
 <p>Changing horses from Gatsby to Eleventy was relatively uneventful. I quickly ported over the Bulma CSS and the posts with the newly standardized YAML front matter. Migrating the Gatsby guts was a bit more delicate but once on Eleventy, everything was gravy.</p>
 <blockquote>
 <p>Note: The <a href="https://liquidjs.com/">LiquidJS templating language</a> used by Eleventy is a port of the very same Liquid language that Jekyll uses. Direct migrations from Jekyll to Eleventy are relatively seamless (with a few exceptions, of course).</p>
 </blockquote>
 <p>Once I switched to Eleventy, things got even easier. Working with Eleventy is a joy. For the most part, things just make sense. The community is vibrant and ready to help when things don’t make so much sense.</p>
-<h3 id="github-actions">GitHub Actions <a class="anchor-link" href="#github-actions">#</a></h3>
+<h3 id="github-actions" tabindex="-1">GitHub Actions <a class="anchor-link" href="#github-actions">#</a></h3>
 <p>While a JavaScript SSG is pretty exciting, this site needed to build and deploy whenever the master branch was updated. Jekyll did this out of the box and it meant that organizers could update meetup details from their mobile devices and see the changes live on the site within minutes.</p>
 <p><a href="https://docs.github.com/en/actions">GitHub Actions</a> adds the ability to spin up a server to run builds, tests, deployments, etc. based on repo events such as pull requests or merges.</p>
 <p>Setting up the AustinJS workflow was absolutely painless (see <a href="/2020/04/29/make-the-jump-from-jekyll-to-javascript/">Make the Jump from Jekyll to JavaScript</a>) and has been running like a tank ever since.</p>
-<h3 id="enhancements">Enhancements <a class="anchor-link" href="#enhancements">#</a></h3>
+<h3 id="enhancements" tabindex="-1">Enhancements <a class="anchor-link" href="#enhancements">#</a></h3>
 <p>Once the basics were nailed down, there was time to add even more value.</p>
 <ul>
 <li><a href="https://austinjavascript.com/">home</a> page: add an Austin skyline hero (to make a place connection) and a roll-call of past speakers/presentations (to make a people connection)</li>
@@ -172,7 +172,7 @@
   <img src="/assets/img/posts/austinjs-2020.png" alt="Austin JavaScript, 2020">
   <figcaption>AustinJavaScript.com, circa 2020</figcaption>
 </figure>
-<h3 id="goals-review">Goals review <a class="anchor-link" href="#goals-review">#</a></h3>
+<h3 id="goals-review" tabindex="-1">Goals review <a class="anchor-link" href="#goals-review">#</a></h3>
 <p>I reviewed the <a href="#goals">goals</a> one last time:</p>
 <ol>
 <li>✅ maintain content parity</li>
@@ -184,13 +184,13 @@
 <li>✅ reduce dependencies</li>
 </ol>
 <p>With all the boxes checked, it was time to launch.</p>
-<h2 id="4.-the-launch">4. The Launch <a class="anchor-link" href="#4.-the-launch">#</a></h2>
+<h2 id="4.-the-launch" tabindex="-1">4. The Launch <a class="anchor-link" href="#4.-the-launch">#</a></h2>
 <p>This launch called for the development branch to be merged into the main branch and then setting up the Actions workflow to automate future build/deployments. Simple tasks, but replacing engines while the old one still works is always a scary move. I pressed the buttons and hoped for the best.</p>
 <p>I saw source code.</p>
 <p>All that showed up on the AustinJS site was source code for the index page. Was there something I missed in an Eleventy config? Was something wrong with the Actions workflow?</p>
 <p>Another hour of testing and research revealed that this repo didn’t have the same ability to deploy to <code>gh-pages</code> branch as my demo site. Huh? A bit <a href="https://help.github.com/en/github/working-with-github-pages/about-github-pages#publishing-sources-for-github-pages-sites">more research</a> revealed that <code>&lt;org_name&gt;.github.io</code> type repos can only deploy to <code>master</code>. There weren’t many options. Change the <code>austinjavascript.github.io</code> repo name or give up and return to Jekyll.</p>
 <p>I got on a short call with Aaron and went through the options. We decided to rename the repo to <code>austinjavascript.com</code> and break the logjam. A few short moments later, the new site was live.</p>
-<h2 id="conclusion">Conclusion <a class="anchor-link" href="#conclusion">#</a></h2>
+<h2 id="conclusion" tabindex="-1">Conclusion <a class="anchor-link" href="#conclusion">#</a></h2>
 <p>Since the launch, the site has run flawlessly. It builds a bit faster than the old Jekyll engine but you’d be hard-pressed to find any other deployment differences.</p>
 <p>I set out to improve the AustinJS user/contributor experience and bury the <a href="https://github.com/austinjavascript/austinjavascript.com/blob/v2-eol/README.md#previewing-changes">cruel Ruby joke</a>. With special thanks to Aaron Stacey and Kevin Kipp for their help, I believe I succeeded. At long last, Austin JavaScript can proudly say that, with regards to JavaScript, it is <a href="https://en.wikipedia.org/wiki/Eating_your_own_dog_food">eating it’s own dog food</a>.</p>
 
@@ -207,7 +207,7 @@
         <div class="navbar-menu is-active">
           <div class="navbar-start">
             <span class="navbar-item is-inline-block-tablet">
-              &copy; 2021
+              &copy; 2022
               <a class="h-card" rel="me" href="https://stedman.dev/">
                 Steve Stedman
               </a>
