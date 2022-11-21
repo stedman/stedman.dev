@@ -6,9 +6,28 @@
   "feedUrl": "https://stedman.dev/atom.xml",
   "repo": "https://github.com/stedman/stedman.dev",
   "author": {
-    "name": "Steve Stedman",
-    "github": "stedman",
-    "linkedin": "sstedman",
-    "twitter": "stedman"
+    "name": "Steve Stedman"
+  },
+  "social": {
+    "linkedin": {
+      "title": "LinkedIn",
+      "url": "https://linkedin.com/in/",
+      "user": "sstedman"
+    },
+    "mastodon": {
+      "title": "Mastodon",
+      "url": "https://mastodon.social/",
+      "user": "@stedman"
+    },
+    "twitter": {
+      "title": "Twitter",
+      "url": "https://twitter.com/",
+      "user": "@stedman"
+    },
+    "github": {
+      "title": "GitHub",
+      "url": "https://github.com/",
+      "user": "stedman"
+    }
   }
 }
